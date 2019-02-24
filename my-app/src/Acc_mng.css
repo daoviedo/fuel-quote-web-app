@@ -1,0 +1,10 @@
+@media all and (min-width: 480px) {
+    .Acc_mng {
+      padding: 60px 0;
+    }
+  
+    .Acc_mng form {
+      margin: 0 auto;
+      max-width: 500px;
+    }
+  }
