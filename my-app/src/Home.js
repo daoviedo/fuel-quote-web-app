@@ -13,14 +13,15 @@ export default class Home extends Component{
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
-                    <Nav.Link href="#home">Home</Nav.Link>
-                    <Nav.Link href="/login">Link</Nav.Link>
+                    <Nav.Link href="/">Home</Nav.Link>
+                    <Nav.Link href="/login">Log-in</Nav.Link>
+                    <Nav.Link href="/userlist">Admin</Nav.Link>
                     </Nav>
                     <NavDropdown title="My Account" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#action/3.1">Edit Profile</NavDropdown.Item>
+                        <NavDropdown.Item href="manage_account">Edit Profile</NavDropdown.Item>
                         <NavDropdown.Item href="#action/3.2">Quote History</NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action/3.4">Log out</NavDropdown.Item>
+                        <NavDropdown.Item href="/">Log out</NavDropdown.Item>
                     </NavDropdown>
                     <Form inline>
                     <FormControl type="text" placeholder="Search" className="mr-sm-2" />

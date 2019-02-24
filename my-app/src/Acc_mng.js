@@ -49,7 +49,7 @@ export default class Acc_mng extends Component{
                         </Form.Group>
                     </Form.Row>
 
-                    <Button variant="primary" type="submit">
+                    <Button variant="primary" type="submit" href="/">
                         Submit
                     </Button>
                     </Form>
