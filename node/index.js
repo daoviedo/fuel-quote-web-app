@@ -9,13 +9,15 @@ const selectAll = 'SELECT * FROM sys.user';
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'coogs123',
+    password: 'Coogs123',
     database: 'sys'
 });
 
 connection.connect(err => {
-    if(err) {
+    if (err) {
         return err;
+    } else {
+        console.log('Connected to the MySQL server');
     }
 });
 
@@ -29,10 +31,10 @@ app.get('/users/add', (req, res) => {
     const { username, pass } = req.query;
     const insertQuery = `INSERT INTO sys.user (username, password) VALUES('${username}','${pass}')`;
     connection.query(insertQuery, (err, results) => {
-        if(err){
+        if (err) {
             return res.send(err)
         }
-        else{
+        else {
             return res.send('Successfully Added User')
         }
     });
@@ -40,10 +42,10 @@ app.get('/users/add', (req, res) => {
 
 app.get('/users', (req, res) => {
     connection.query(selectAll, (err, results) => {
-        if(err){
+        if (err) {
             return res.send(err)
         }
-        else{
+        else {
             return res.json({
                 data: results
             })

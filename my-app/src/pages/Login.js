@@ -57,11 +57,11 @@ export default class Login extends Component {
           </Button>
           <br></br>
           <p>Don't Have an Account?&ensp;
-              <Button 
+              <Button
               href="/register"
-              variant="outline-primary" 
+              variant="outline-primary"
               size="sm"
-              >Register</Button></p>
+            >Register</Button></p>
         </form>
       </div>
     );

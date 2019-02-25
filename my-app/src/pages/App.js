@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import {BrowserRouter} from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import Route from 'react-router-dom/Route';
 import Login from './Login';
 import Home from './Home';
@@ -14,11 +14,13 @@ class App extends Component {
       <BrowserRouter>
         <div className="App">
 
-        <Route path="/" exact component={Home} />
-        <Route path="/login" exact component={Login} />
-        <Route path="/register" exact component={Register} />
-        <Route path="/manage_account" exact component={Acc_mng} />
-        <Route path="/userlist" exact component={UserList} />
+          <Route path="/" exact component={Home} />
+          <Route path="/login" exact component={Login} />
+          <Route path="/register" exact component={Register} />
+          <Route path="/manage_account" exact component={Acc_mng} />
+          <Route path="/userlist" exact component={UserList} />
+          <Route path="/fuel_history" exact component={UserList} />
+
 
         </div>
       </BrowserRouter>
