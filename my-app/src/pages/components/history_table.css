@@ -1,0 +1,42 @@
+.table-container {
+    padding: 0px 20px;
+}
+.scroll {
+    border: 0;
+    border-collapse: collapse;
+    -moz-box-shadow: 3px 3px 5px 6px #ccc;
+    -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+    box-shadow: 3px 3px 5px 6px #ccc;
+}
+  
+.scroll tr {
+    display: flex;
+}
+  
+.scroll td {
+    padding: 3px;
+    flex: 1 auto;
+    border: 1px solid #aaa;
+    width: 1px;
+    word-wrap: break;
+}
+  
+.scroll thead tr:after {
+    content: '';
+    overflow-y: scroll;
+    visibility: hidden;
+    height: 0;
+}
+  
+.scroll thead th {
+    flex: 1 auto;
+    display: block;
+    width: 100%;
+}
+  
+.scroll tbody {
+    display: block;
+    width: 100%;
+    overflow-y: auto;
+    height: 500px;
+}

@@ -13,6 +13,7 @@ export default class Home extends Component {
                 <div className='carousel'>
                     <Home_Carousel />
                 </div>
+
             </div>
         );
     }
