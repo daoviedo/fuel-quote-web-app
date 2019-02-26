@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {Button,Form,Col} from "react-bootstrap";
 import "./Acc_mng.css";
-
+//checking a change
 export default class Acc_mng extends Component{
     render(){
         return(
