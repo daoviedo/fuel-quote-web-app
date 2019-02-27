@@ -16,7 +16,7 @@ export default class Home extends Component {
                             width="800"
                             height="500"
                             src={image1}
-                            fluid
+                            fluid="true"
                             alt="First slide"
                         />
                         <Carousel.Caption>
@@ -28,7 +28,7 @@ export default class Home extends Component {
                         <img
                             className="d-block w-100"
                             src={image2}
-                            fluid
+                            fluid="true"
                             width="800"
                             height="500"
                             alt="second slide"
@@ -43,7 +43,7 @@ export default class Home extends Component {
                         <img
                             className="d-block w-100"
                             src={image3}
-                            fluid
+                            fluid="true"
                             width="800"
                             height="500"
                             alt="Third slide"

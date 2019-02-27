@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
+import { Button, FormGroup, FormControl, FormLabel, Alert } from "react-bootstrap";
 import "./Login.css";
+import {Redirect} from "react-router-dom";
 
 export default class Login extends Component {
   constructor(props) {
@@ -8,8 +9,17 @@ export default class Login extends Component {
 
     this.state = {
       username: "",
-      password: ""
+      password: "",
+      auth: false,
+      submitted: false
     };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    this.fetchAuth();
   }
 
   validateForm() {
@@ -22,13 +32,53 @@ export default class Login extends Component {
     });
   }
 
+  fetchAuth = async () => {
+    const response = await fetch(`http://localhost:4000/users/lookup?username=${this.state.username}&pass=${this.state.password}`);
+    const json = await response.json();
+    if(json.data.length===0){
+    }
+    else{
+      if((this.state.username === json.data[0].username) && (this.state.password === json.data[0].password)){
+        localStorage.setItem('username', json.data[0].username);
+        localStorage.setItem('password', json.data[0].password);
+        localStorage.setItem('authen', "true");
+        this.setState({auth: true});
+      }
+      else{
+      }
+    }
+    
+  }
+
   handleSubmit = event => {
+    this.setState({submitted: true});
     event.preventDefault();
+    this.fetchAuth();
+  }
+
+  isAuthenticated(){
+    const tokenU = localStorage.getItem('username');
+    const tokenP = localStorage.getItem('password');
+    if(tokenU===this.state.username && tokenP===this.state.password){
+      console.log(true);
+      return true;
+      
+    }
+    else{
+      console.log(false);
+      return false;
+      
+    }
   }
 
   render() {
+    const returnAuth = this.isAuthenticated();
+    const isSub = this.state.submitted;
     return (
+      
       <div className="Login">
+      
+      {returnAuth ? <Redirect to={{pathname: '/'}}/> : (
         <form onSubmit={this.handleSubmit}>
           <FormGroup controlId="username" bsSize="large">
             <FormLabel>Username</FormLabel>
@@ -47,6 +97,7 @@ export default class Login extends Component {
               type="password"
             />
           </FormGroup>
+          {isSub ? (<p style={{color:"red"}}>Invalid Credentials</p>): <div/>}
           <Button
             block
             bsSize="large"
@@ -57,12 +108,13 @@ export default class Login extends Component {
           </Button>
           <br></br>
           <p>Don't Have an Account?&ensp;
-              <Button
+              <Button 
               href="/register"
-              variant="outline-primary"
+              variant="outline-primary" 
               size="sm"
-            >Register</Button></p>
+              >Register</Button></p>
         </form>
+      )}
       </div>
     );
   }
