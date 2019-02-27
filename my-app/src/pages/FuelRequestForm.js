@@ -3,6 +3,7 @@ import './FuelRequestForm.css'
 import { Button, Form, Row, Col } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import Navbar from './components/nav_bar';
 
 export default class FuelRequestForm extends React.Component{
 
@@ -43,6 +44,7 @@ export default class FuelRequestForm extends React.Component{
     render() {
         return (
             <div className="FuelRequestForm">
+            <div><Navbar /></div>
                 <header className="FuelRequestForm-header">
                     <Form>
                         <Form.Group as={Row} controlId="formGallonsRequested">

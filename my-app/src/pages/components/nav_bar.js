@@ -29,6 +29,7 @@ export default class Home extends Component {
                     <Nav className="mr-auto">
                         <Nav.Link href="/"><h5>Home</h5></Nav.Link>
                         {finalLogged ? <Nav.Link href="/userlist"><h5>Admin</h5></Nav.Link>: <div/>}
+                        {finalLogged ? <Nav.Link href="/req_fuel_quote"><h5>Request Fuel Quote</h5></Nav.Link>: <div/>}
                     </Nav>
                     {finalLogged ? (<NavDropdown title="My Account" id="basic-nav-dropdown">
                         <NavDropdown.Item href="manage_account">Edit Profile</NavDropdown.Item>
