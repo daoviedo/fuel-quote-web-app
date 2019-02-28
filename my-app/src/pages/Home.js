@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Navbar from './components/nav_bar';
 import Home_Carousel from './components/home_carousel';
+import News_Cards from './components/news_cards';
 import './css/Home.css';
 
 export default class Home extends Component {
@@ -13,8 +14,8 @@ export default class Home extends Component {
                 <div className='carousel'>
                     <Home_Carousel />
                 </div>
-                <div className="myTest"><h1>This is a Test</h1></div>
-
+                <div className="myTest"><h1>Oil News</h1></div>
+                <div><News_Cards /></div>
             </div>
         );
     }

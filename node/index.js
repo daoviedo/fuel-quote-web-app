@@ -8,6 +8,7 @@ const selectAll = 'SELECT * FROM sys.user';
 
 const connection = mysql.createConnection({
     host: 'localhost',
+    port: '3306',
     user: 'root',
     password: 'coogs123',
     database: 'sys'
@@ -15,7 +16,10 @@ const connection = mysql.createConnection({
 
 connection.connect(err => {
     if(err) {
+        console.log(err);
         return err;
+    } else {
+        console.log("Success");
     }
 });
 
