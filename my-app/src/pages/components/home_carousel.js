@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Carousel } from 'react-bootstrap';
 import image1 from './images/image1.jpg';
 import image2 from './images/image2.jpg';
-import image3 from './images/image3.png';
+import image3 from './images/image3.jpg';
 
 
 export default class Home extends Component {
@@ -39,12 +39,12 @@ export default class Home extends Component {
                             <p>Insert Caption Here</p>
                         </Carousel.Caption>
                     </Carousel.Item>
-                    <Carousel.Item>
+                    <Carousel.Item >
                         <img
                             className="d-block w-100"
                             src={image3}
                             fluid="true"
-                            width="800"
+                            width="1500"
                             height="500"
                             alt="Third slide"
                         />
