@@ -10,9 +10,8 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import AddressForm from './AddressForm';
-import PaymentForm from './PaymentForm';
-import Review from './Review';
+import LoginDetailsForm from './LoginDetailsForm';
+import AccDetailsForm from './AccDetailsForm';
 
 const styles = theme => ({
   appBar: {
@@ -40,6 +39,8 @@ const styles = theme => ({
   },
   stepper: {
     padding: `${theme.spacing.unit * 3}px 0 ${theme.spacing.unit * 5}px`,
+    marginLeft: theme.spacing.unit * 10,
+    marginRight: theme.spacing.unit * 10,
   },
   buttons: {
     display: 'flex',
@@ -51,26 +52,38 @@ const styles = theme => ({
   },
 });
 
-const steps = ['Credentials', 'Account Info', 'Review your order'];
+const steps = ['Login Info', 'Account Info',];
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <AddressForm />;
-    case 1:
-      return <PaymentForm />;
-    case 2:
-      return <Review />;
-    default:
-      throw new Error('Unknown step');
-  }
-}
+
 
 class Checkout extends React.Component {
   state = {
     activeStep: 0,
-    stateDrop: null,
+    username: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+    address1: "",
+    address2: "",
+    city: "",
+    dropSelection: "",
+    zip:""
   };
+
+  getStepContent(step) {
+    switch (step) {
+      case 0:
+        return <LoginDetailsForm onSelLan={this.handleLan} val={this.state}/>;
+      case 1:
+        return <AccDetailsForm onSelLan={this.handleLan} val={this.state}/>;
+      default:
+        throw new Error('Unknown step');
+    }
+  }
+
+  handleLan = (name,lanV) => {
+    this.setState({[name]: lanV});
+  }
 
   handleChange = name => value => {
     this.setState({
@@ -99,7 +112,8 @@ class Checkout extends React.Component {
   render() {
     const { classes } = this.props;
     const { activeStep } = this.state;
-
+    console.log(this.state);
+    
     return (
       <React.Fragment>
         <CssBaseline />
@@ -126,16 +140,15 @@ class Checkout extends React.Component {
               {activeStep === steps.length ? (
                 <React.Fragment>
                   <Typography variant="h5" gutterBottom>
-                    Thank you for your order.
+                    Thank you for Signing Up.
                   </Typography>
                   <Typography variant="subtitle1">
-                    Your order number is #2001539. We have emailed your order confirmation, and will
-                    send you an update when your order has shipped.
+                    You will be redirected to the login page where you can login with your new account.
                   </Typography>
                 </React.Fragment>
               ) : (
                 <React.Fragment>
-                  {getStepContent(activeStep)}
+                  {this.getStepContent(activeStep)}
                   <div className={classes.buttons}>
                     {activeStep !== 0 && (
                       <Button onClick={this.handleBack} className={classes.button}>
@@ -148,7 +161,7 @@ class Checkout extends React.Component {
                       onClick={this.handleNext}
                       className={classes.button}
                     >
-                      {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
+                      {activeStep === steps.length - 1 ? 'Create Account' : 'Next'}
                     </Button>
                   </div>
                 </React.Fragment>

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, FormGroup, FormControl, FormLabel, Alert } from "react-bootstrap";
+import { Button, FormGroup, FormControl, FormLabel} from "react-bootstrap";
 import "./Login.css";
 import {Redirect} from "react-router-dom";
 
@@ -19,7 +19,6 @@ export default class Login extends Component {
   }
 
   componentDidMount() {
-    this.fetchAuth();
   }
 
   validateForm() {
