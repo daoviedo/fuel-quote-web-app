@@ -1,0 +1,43 @@
+This will be a to-do list for us to check things off or add things as we need.
+H-> means High priority
+L-> means Low priority
+
+DATABASE
+    H-> Update/add columns(ask Daniel for exact var names)
+    L-> Create a table for the Fuel Request History
+
+HOMEPAGE
+    L-> Remake/redesign using Material-UI Components
+    L-> Fix the layout of the News Cards
+    L-> If possible, filter out the News by languague(English), or find an API that only uses English News
+
+FUEL REQUEST FORM
+    H-> Pull data from DB for that user and auto fill the fields in the form
+    H-> See how we're going to manage to actually calculate cost
+    L-> Remake/Redesign using Material-UI Components
+    L-> Fix Date-picker (just use the Material-UI one)
+
+REGISTER PAGE
+    H-> Send the data to the DB with the new fields(ex. firstName, address...)
+    L-> Password requirements(ex. length, uppercase...)
+    L-> Validate Address using some Library or package
+    L-> Finalize any bugs or improve visually
+
+LOGIN PAGE
+    L-> Remake/Redesign for looks
+    L-> If theres time, learn about authentication tokens/cookies(possibly implement)
+
+FUEL REQUEST HISTORY
+    L-> Redesign(If theres extra time)
+    L-> Pull actual data after history table is made in DB
+
+ADMIN PAGE
+    H-> Implement account priveledges so that all users don't see admin tab
+    L-> Redesign-- Put userlist into a table for organization purposes
+
+SERVER
+    H-> Pick a service to run our server on
+    L-> Start learning how to setup everything on the server
+    L-> Get the Domain name/address that we want and API address for our backend
+
+###Last Edited By Daniel###
