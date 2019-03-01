@@ -67,7 +67,8 @@ class Checkout extends React.Component {
     address2: "",
     city: "",
     dropSelection: "",
-    zip:""
+    zip:"",
+    isAvail: false
   };
 
   getStepContent(step) {
@@ -79,6 +80,14 @@ class Checkout extends React.Component {
       default:
         throw new Error('Unknown step');
     }
+  }
+
+  validateButton(){
+    return this.state.username.length > 0 && this.state.password.length > 0 && this.state.isAvail;
+  }
+
+  validateComplete(){
+    return this.state.username.length > 0 && this.state.password.length > 0 && this.state.firstName.length > 0 && this.state.lastName.length > 0 && this.state.address1.length > 0 && this.state.city.length > 0 && this.state.dropSelection.length > 0 && this.state.zip.length > 0 && this.state.isAvail;
   }
 
   handleLan = (name,lanV) => {
@@ -155,14 +164,19 @@ class Checkout extends React.Component {
                         Back
                       </Button>
                     )}
-                    <Button
+                    {activeStep === steps.length - 1 ? (<Button
                       variant="contained"
                       color="primary"
+                      disabled={!this.validateComplete()}
                       onClick={this.handleNext}
                       className={classes.button}
-                    >
-                      {activeStep === steps.length - 1 ? 'Create Account' : 'Next'}
-                    </Button>
+                    >Create Account</Button>) : (<Button
+                      variant="contained"
+                      color="primary"
+                      disabled={!this.validateButton()}
+                      onClick={this.handleNext}
+                      className={classes.button}
+                    >Next</Button>)}
                   </div>
                 </React.Fragment>
               )}

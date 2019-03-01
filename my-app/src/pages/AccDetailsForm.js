@@ -147,7 +147,7 @@ export default class AccDetailsForm extends Component{
                 </Grid>
                 <Grid item xs={12} sm={4}>
                 <FormControl>
-                    <InputLabel>State</InputLabel>
+                    <InputLabel required>State</InputLabel>
                     <Select
                         value={this.props.val.dropSelection}
                         onChange={this.handleLAN}

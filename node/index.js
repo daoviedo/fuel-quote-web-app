@@ -42,6 +42,19 @@ app.get('/users/add', (req, res) => {
     });
 });
 
+app.get('/users/adduser', (req, res) => {
+    const { username, pass, fname, lname, ad1, ad2, city, st, zip, priv } = req.query;
+    const insertQuery = `INSERT INTO sys.user (username, password, firstname, lastname, ad1, ad2, city, st, zip, priv) VALUES('${username}','${pass}','${fname}','${lname}','${ad1}','${ad2}','${city}','${st}','${zip}','${priv}')`;
+    connection.query(insertQuery, (err, results) => {
+        if(err){
+            return res.send(err)
+        }
+        else{
+            return res.send('Successfully Added User')
+        }
+    });
+});
+
 app.get('/users/remove', (req, res) => {
     const { username, pass } = req.query;
     const removeQuery = `DELETE FROM sys.user WHERE username='${username}' AND password = '${pass}'`;
@@ -58,6 +71,21 @@ app.get('/users/remove', (req, res) => {
 app.get('/users/lookup', (req, res) => {
     const { username, pass } = req.query;
     const lookQuery = `SELECT * FROM sys.user WHERE username='${username}' AND password = '${pass}'`;
+    connection.query(lookQuery, (err, results) => {
+        if(err){
+            return res.send(err)
+        }
+        else{
+            return res.json({
+                data: results
+            })
+        }
+    });
+});
+
+app.get('/users/check', (req, res) => {
+    const { username } = req.query;
+    const lookQuery = `SELECT username FROM sys.user WHERE username='${username}'`;
     connection.query(lookQuery, (err, results) => {
         if(err){
             return res.send(err)
