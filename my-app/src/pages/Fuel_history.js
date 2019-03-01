@@ -8,7 +8,7 @@ export default class Fuel_history extends Component {
         return (
             <div className="App">
                 <Navbar />
-                <p className="Table-header">Fuel Quote History</p>
+                <p className="Table-header"><h2>Fuel Quote History</h2></p>
                 <HistoryTable />
             </div>
         );
