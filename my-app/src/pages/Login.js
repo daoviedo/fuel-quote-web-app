@@ -59,12 +59,10 @@ export default class Login extends Component {
     const tokenU = localStorage.getItem('username');
     const tokenP = localStorage.getItem('password');
     if(tokenU===this.state.username && tokenP===this.state.password){
-      console.log(true);
       return true;
       
     }
     else{
-      console.log(false);
       return false;
       
     }
@@ -79,7 +77,7 @@ export default class Login extends Component {
       
       {returnAuth ? <Redirect to={{pathname: '/'}}/> : (
         <form onSubmit={this.handleSubmit}>
-          <FormGroup controlId="username" bsSize="large">
+          <FormGroup controlId="username" >
             <FormLabel>Username</FormLabel>
             <FormControl
               autoFocus
@@ -88,7 +86,7 @@ export default class Login extends Component {
               onChange={this.handleChange}
             />
           </FormGroup>
-          <FormGroup controlId="password" bsSize="large">
+          <FormGroup controlId="password" >
             <FormLabel>Password</FormLabel>
             <FormControl
               value={this.state.password}
@@ -99,7 +97,6 @@ export default class Login extends Component {
           {isSub ? (<p style={{color:"red"}}>Invalid Credentials</p>): <div/>}
           <Button
             block
-            bsSize="large"
             disabled={!this.validateForm()}
             type="submit"
           >

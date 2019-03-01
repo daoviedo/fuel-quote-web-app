@@ -22,6 +22,7 @@ export default class LoginDetailsForm extends Component{
     validateBut(){
         return this.props.val.username.length > 0;
     }
+    
     checkUser(){
         fetch(`http://localhost:4000/users/check?username=${this.props.val.username}`)
         .then(response => response.json())
