@@ -18,7 +18,6 @@ FUEL REQUEST FORM
     L-> Fix Date-picker (just use the Material-UI one)
 
 REGISTER PAGE
-    H-> Send the data to the DB with the new fields(ex. firstName, address...)
     L-> Password requirements(ex. length, uppercase...)
     L-> Validate Address using some Library or package
     L-> Finalize any bugs or improve visually(BUG: state change after the check username and hitting next really fast)
