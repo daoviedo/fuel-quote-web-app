@@ -3,7 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Fab from '@material-ui/core/Fab';
 import DoneIcon from '@material-ui/icons/Done';
-import ClearIcon from '@material-ui/icons/Clear';
+import ErrorIcon from '@material-ui/icons/Error';
 
 export default class LoginDetailsForm extends Component{
     state = {
@@ -32,10 +32,10 @@ export default class LoginDetailsForm extends Component{
     returnOut(){
         if(this.state.timer){
             if(this.props.val.isAvail){
-                return <Typography variant="body2" style={{color: "green"}}>Username is Available!<DoneIcon/></Typography>
+                return <Typography variant="body2" style={{color: "green"}}><DoneIcon/>Username is Available!</Typography>
             }
             else{
-                return <Typography variant="body2" color="error">Username is Taken<ClearIcon/></Typography>
+                return <Typography variant="body2" color="error"><ErrorIcon/>Username is Taken</Typography>
             }
         }
         
