@@ -37,7 +37,7 @@ class news_cards_test extends Component {
 
     getData = _ => {
         const API_KEY = 'a822076091e14f77a0ef87bc40c8aaf6';
-        let url = 'https://newsapi.org/v2/everything?q=petroleum&from=2019-01-28&sortBy=publishedAt&apiKey=' + API_KEY;
+        let url = 'https://newsapi.org/v2/everything?q=petroleum&from=2019-02-28&sortBy=publishedAt&apiKey=' + API_KEY;
         fetch(url)
             .then((response) => response.json())
             .then((responseJson) => {
