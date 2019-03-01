@@ -20,8 +20,7 @@ export default class Home extends Component {
                             alt="First slide"
                         />
                         <Carousel.Caption>
-                            <h3>First slide label</h3>
-                            <p>Insert Caption Here</p>
+                            <h3>Devry Energy is the lead fuel distributor in Texas</h3>
                         </Carousel.Caption>
                     </Carousel.Item>
                     <Carousel.Item>
@@ -35,8 +34,7 @@ export default class Home extends Component {
                         />
 
                         <Carousel.Caption>
-                            <h3>Second slide label</h3>
-                            <p>Insert Caption Here</p>
+                            <h3>Our algorithms provide better rates than our competitors</h3>
                         </Carousel.Caption>
                     </Carousel.Item>
                     <Carousel.Item >
@@ -50,8 +48,7 @@ export default class Home extends Component {
                         />
 
                         <Carousel.Caption>
-                            <h3>Third slide label</h3>
-                            <p>Insert Caption Here</p>
+                            <h3>Create an account and get a fuel quote today!</h3>
                         </Carousel.Caption>
                     </Carousel.Item>
                 </Carousel>
