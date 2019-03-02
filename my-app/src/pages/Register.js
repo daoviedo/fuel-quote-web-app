@@ -118,7 +118,7 @@ class Register extends React.Component {
   redirectUser(){
     setTimeout(() =>{
       this.setState({isComplete: true});
-    },5000);
+    },4000);
     if(this.state.isComplete){
       return <Redirect to={{pathname: '/login'}}/>;
     }
