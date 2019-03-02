@@ -14,6 +14,8 @@ import Exit from '@material-ui/icons/ExitToApp'
 import Logo from '@material-ui/icons/Camera';
 import AdminLogo from '@material-ui/icons/VerifiedUser';
 import UserLogo from '@material-ui/icons/AccountCircle';
+import HomeLogo from '@material-ui/icons/Home';
+import ReqLogo from '@material-ui/icons/NoteAdd';
 
 import {Link} from 'react-router-dom';
 
@@ -60,7 +62,7 @@ class AppBar extends Component {
         const finalLogged = this.state.loggedInn;
         return (
             <div className={classes.root}>
-                <AppBar1 position="static" className={classes.bar}>
+                <AppBar1 position="fixed" className={classes.bar}>
                     <Toolbar>
                         <Logo style={{fontSize:"250%", marginRight:4}}/>
                         <Typography variant="h4" style={{marginBottom:2}} align="left" color="inherit" className={classes.grow}>Devry Energy</Typography>
@@ -68,6 +70,21 @@ class AppBar extends Component {
                         (<div>
                             <Drawer anchor="right" open={this.state.openUserMenu} onClose={()=>this.setState({openUserMenu: false})}>
                                 <div onClick={()=> this.setState({openUserMenu: false})}>
+                                    <List>
+                                        <Link to="/" style={{ textDecoration: 'none'}}>
+                                        <ListItem button>
+                                            <HomeLogo style={{color: "#00897b"}}/>
+                                            <ListItemText primary='Home' />
+                                        </ListItem>
+                                        </Link>
+                                        <Link to="/req_fuel_quote" style={{ textDecoration: 'none'}}>
+                                        <ListItem button>
+                                            <ReqLogo style={{color: "#00897b"}}/>
+                                            <ListItemText primary='Request Fuel' />
+                                        </ListItem>
+                                        </Link>
+                                    </List>
+                                    <Divider/>
                                     <List>
                                         <Link to="/manage_account" style={{ textDecoration: 'none'}}>
                                         <ListItem button>
@@ -89,7 +106,6 @@ class AppBar extends Component {
                                         </Link>
                                     </List>
                                     <Divider/>
-                                    
                                     <List>
                                         <Link to="/" style={{ textDecoration: 'none'}}>
                                         <ListItem button onClick={this.logOff.bind(this)}>

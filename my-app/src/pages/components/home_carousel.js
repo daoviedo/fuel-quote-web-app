@@ -9,11 +9,11 @@ export default class Home extends Component {
     render() {
         return (
             <div>
-                <Carousel>
+                <Carousel style={{marginTop: 70}}>
                     <Carousel.Item>
                         <img
                             className="d-block w-100"
-                            width="800"
+                            width="400"
                             height="500"
                             src={image1}
                             fluid="true"
