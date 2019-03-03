@@ -8,12 +8,24 @@ import Paper from '@material-ui/core/Paper';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
+import IconButton from '@material-ui/core/IconButton';
+
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import LoginDetailsForm from './LoginDetailsForm';
 import AccDetailsForm from './AccDetailsForm';
 import {Redirect} from "react-router-dom";
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import teal from '@material-ui/core/colors/teal';
+import Logo from '@material-ui/icons/Camera';
+import HomeLogo from '@material-ui/icons/Home';
+
+const theme1 = createMuiTheme({
+  palette: {
+    primary: {main: teal[600]},
+  },
+});
 
 const styles = theme => ({
   appBar: {
@@ -39,11 +51,18 @@ const styles = theme => ({
       padding: theme.spacing.unit * 3,
     },
   },
+  grow: {
+    flexGrow: 1,
+  },
+  bar: {
+    backgroundColor: "#00897b"
+  },
   stepper: {
     padding: `${theme.spacing.unit * 3}px 0 ${theme.spacing.unit * 5}px`,
     marginLeft: theme.spacing.unit * 10,
     marginRight: theme.spacing.unit * 10,
   },
+
   buttons: {
     display: 'flex',
     justifyContent: 'flex-end',
@@ -52,7 +71,10 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 3,
     marginLeft: theme.spacing.unit,
   },
-
+  button2: {
+    marginTop: theme.spacing.unit * 3,
+    marginLeft: theme.spacing.unit,
+  },
 });
 
 const steps = ['Login Info', 'Account Info',];
@@ -131,14 +153,15 @@ class Register extends React.Component {
     
     return (
       <React.Fragment>
-        <CssBaseline />
-        <AppBar position="absolute" color="default" className={classes.appBar}>
+        <AppBar position="relative" className={classes.bar}>
           <Toolbar>
-            <Typography variant="h6" color="inherit" noWrap>
-              Devry Energy
-            </Typography>
+            <Logo style={{fontSize:"250%", marginRight:4}}/>
+            <Typography variant="h4" style={{marginBottom:2}} align="left" color="inherit" className={classes.grow}>Devry Energy</Typography>
+            <IconButton color="inherit" style={{textDecoration: "none", outline: 0, color: "inherit"}} href="/"><HomeLogo/></IconButton>
           </Toolbar>
         </AppBar>
+        <MuiThemeProvider theme={theme1}>
+        <CssBaseline />
         <main className={classes.layout}>
           <Paper className={classes.paper}>
             <Typography component="h1" variant="h4" align="center">
@@ -147,7 +170,7 @@ class Register extends React.Component {
             <Stepper activeStep={activeStep} className={classes.stepper}>
               {steps.map(label => (
                 <Step key={label}>
-                  <StepLabel>{label}</StepLabel>
+                  <StepLabel >{label}</StepLabel>
                 </Step>
               ))}
             </Stepper>
@@ -168,7 +191,7 @@ class Register extends React.Component {
                   {this.getStepContent(activeStep)}
                   <div className={classes.buttons}>
                     {activeStep !== 0 && (
-                      <Button onClick={this.handleBack} className={classes.button}>
+                      <Button onClick={this.handleBack} className={classes.button2}>
                         Back
                       </Button>
                     )}
@@ -191,6 +214,7 @@ class Register extends React.Component {
             </React.Fragment>
           </Paper>
         </main>
+        </MuiThemeProvider>
       </React.Fragment>
     );
   }
