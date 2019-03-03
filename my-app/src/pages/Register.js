@@ -52,6 +52,7 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 3,
     marginLeft: theme.spacing.unit,
   },
+
 });
 
 const steps = ['Login Info', 'Account Info',];
