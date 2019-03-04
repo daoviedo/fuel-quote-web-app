@@ -9,12 +9,12 @@ export default class Home extends Component {
     render() {
         return (
             <div>
-                <Carousel style={{marginTop: 70}}>
+                <Carousel style={{marginTop: 60}}>
                     <Carousel.Item>
                         <img
                             className="d-block w-100"
                             width="400"
-                            height="500"
+                            height="600"
                             src={image1}
                             fluid="true"
                             alt="First slide"
@@ -29,7 +29,7 @@ export default class Home extends Component {
                             src={image2}
                             fluid="true"
                             width="800"
-                            height="500"
+                            height="600"
                             alt="second slide"
                         />
 
@@ -43,7 +43,7 @@ export default class Home extends Component {
                             src={image3}
                             fluid="true"
                             width="1500"
-                            height="500"
+                            height="600"
                             alt="Third slide"
                         />
 
