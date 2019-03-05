@@ -19,12 +19,12 @@ export default class HistoryTable extends Component {
     
     renderUser = ({GallonsRequested, PricePerGallon, TotalPrice, DeliveryAddress, DeliveryCity, DeliveryState, DeliveryZip, DeliveryDate, DateOfRequest}) =>
     <tr> 
+        <td>{DateOfRequest}</td>
         <td>{GallonsRequested}</td>
+        <td>{DeliveryAddress}, {DeliveryCity}, {DeliveryState} {DeliveryZip}</td>
+        <td>{DeliveryDate}</td>
         <td>{PricePerGallon}</td>
-        <td>{TotalPrice}</td> 
-        <td>{DeliveryAddress}, {DeliveryCity}, {DeliveryState} {DeliveryZip}</td> 
-        <td>{DateOfRequest}</td> 
-        <td>{DeliveryDate}</td> 
+        <td>{TotalPrice}</td>
     </tr>
 
     render() {
