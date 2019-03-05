@@ -18,12 +18,6 @@ export default class HistoryTable extends Component {
         .then(Response => this.setState({Requests: Response.data}))
         .catch(err => console.log(err))
     }
-    getDataFromUser = () =>{
-        fetch(`http://localhost:4000/users/fuelrequestinfo?username=${this.state.username}`)
-        .then(Response => Response.json())
-        .then(Response => this.setState({Ad1: Response.data[0].DeliveryAddress}))
-        .catch(err => console.log(err))
-    }
     
     renderUser = ({GallonsRequested, PricePerGallon, TotalPrice, DeliveryAddress, DeliveryCity, DeliveryState, DeliveryZip, DeliveryDate, DateOfRequest}) =>
     <tr> 
