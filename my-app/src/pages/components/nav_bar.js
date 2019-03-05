@@ -32,7 +32,7 @@ const styles = _ =>({
     bar: {
         backgroundColor: "#00897b",
         minHeight: '40px',
-        maxHeight: '60px',
+        maxHeight: '56px',
         height: '100%'
     },
     tool:{
