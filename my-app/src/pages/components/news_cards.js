@@ -8,19 +8,32 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import '../css/news_card.css'
+import Grid from '@material-ui/core/Grid';
+import { Paper } from '@material-ui/core';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
+
+
+const theme1 = createMuiTheme({
+    palette: {
+      primary: {main: 'rgb(255,255,255)'},
+    },
+  });
 
 const styles = {
     card: {
-        maxWidth: 345,
+        width: '80%',
         height: '400px',
-        float: 'left',
-        margin: '20px',
+        marginTop: '20px',
+        marginBottom: '20px',
+
     },
     media: {
         height: 140,
     },
+    content: {
+        height: 360,
+    }
 };
 
 class news_cards_test extends Component {
@@ -48,41 +61,39 @@ class news_cards_test extends Component {
     render() {
         const { classes } = this.props;
         const { articles } = this.state;
-        console.log(articles);
         return (
-            <div className="news-cards-container">
-                <div className='news-cards-row'>
-                    {articles.map(({ title, description, urlToImage }) =>
-                        <div>
-                            <Card className={classes.card}>
-                                <CardActionArea>
-                                    <CardMedia
-                                        className={classes.media}
-                                        image={urlToImage}
-                                        title={title}
-                                    />
-                                    <CardContent>
-                                        <Typography gutterBottom variant="h5" component="h2">
-                                            {title}
-                                        </Typography>
-                                        <Typography component="p">
-                                            {description}
-                                        </Typography>
-                                    </CardContent>
-                                </CardActionArea>
-                                <CardActions>
-                                    <Button size="small" color="primary">
-                                        Share
-                            </Button>
-                                    <Button size="small" color="primary">
-                                        Learn More
-                            </Button>
-                                </CardActions>
-                            </Card>
-                        </div>
-                    )}
-                </div>
-            </div >
+            
+            <Grid container justify='center' style={{maxWidth: '60%', margin: 'auto'}}>
+                {articles.map(({ title, description, urlToImage }) =>
+                    <Grid container sm={4} justify='center'>
+                        <Card className={classes.card}>
+                            <CardActionArea className={classes.content} style={{overflow: 'hidden'}}>
+                                <CardMedia
+                                    className={classes.media}
+                                    image={urlToImage}
+                                    title={title}
+                                />
+                                <CardContent>
+                                    <Typography gutterBottom variant="h5" component="h2">
+                                        {title}
+                                    </Typography>
+                                    <Typography component="p">
+                                        {description}
+                                    </Typography>
+                                </CardContent>
+                            </CardActionArea>
+                            <Paper style={{height: 40,backgroundColor: "#00897b"}}>
+                                <MuiThemeProvider theme={theme1}>
+                                <Button variant="outlined" size="small" color="primary" style={{ margin: 'auto', marginTop: 4, marginBottom: 4,textTransform: 'none', outline: 0}}>
+                                Learn More
+                                </Button>
+                                </MuiThemeProvider>
+                            </Paper>
+                        </Card>
+                    </Grid>
+                )}
+            </Grid>
+            
         );
     }
 }
