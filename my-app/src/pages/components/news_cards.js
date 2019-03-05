@@ -22,8 +22,7 @@ const theme1 = createMuiTheme({
 
 const styles = {
     card: {
-        width: '80%',
-        height: '450px',
+        width:'90%',
         marginTop: '20px',
         marginBottom: '20px',
 
@@ -36,7 +35,8 @@ const styles = {
     },
     paper: {
         height: 50,
-        backgroundColor: "#00897b"
+        backgroundColor: "#00897b",
+
     }
 };
 
@@ -67,7 +67,7 @@ class news_cards_test extends Component {
         const { articles } = this.state;
         return (
             
-            <Grid container justify='center' style={{maxWidth: '70%', margin: 'auto'}}>
+            <Grid container justify='center' style={{maxWidth: '1000px', margin: 'auto'}}>
                 {articles.map(({ title, description, urlToImage }) =>
                     <Grid container sm={4} justify='center'>
                         <Card className={classes.card}>
@@ -89,7 +89,7 @@ class news_cards_test extends Component {
                             <MuiThemeProvider theme={theme1}>
                             <Paper className={classes.paper}>
                                 
-                                <Button variant="outlined" size="small" color="primary" style={{ margin: 'auto', textTransform: 'none', outline: 0}}>
+                                <Button variant="outlined" size="small" color="primary" style={{ margin: 'auto',marginTop: 9,marginBottom: 9, textTransform: 'none', outline: 0, }}>
                                 Learn More
                                 </Button>
                                 
