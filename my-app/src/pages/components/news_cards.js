@@ -11,7 +11,7 @@ import Grid from '@material-ui/core/Grid';
 import { Paper } from '@material-ui/core';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
-
+window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true;
 
 
 
