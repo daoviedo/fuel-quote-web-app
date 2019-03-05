@@ -72,7 +72,7 @@ export default class FuelRequestForm extends React.Component{
                 <header className="FuelRequestForm-header">
                     <Form>
                         <Form.Group as={Row} controlId="formGallonsRequested">
-                            <Form.Label sm={5} >
+                            <Form.Label sm={3} >
                                 Gallons Requested
                             </Form.Label>
                             <Form.Control 

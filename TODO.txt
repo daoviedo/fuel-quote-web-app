@@ -11,10 +11,10 @@ HOMEPAGE
     L-> If possible, filter out the News by languague(English), or find an API that only uses English News
 
 FUEL REQUEST FORM
-    H-> Pull data from DB for that user and auto fill the fields in the form
     H-> See how we're going to manage to actually calculate cost
-    L-> Remake/Redesign using Material-UI Components
-    L-> Fix Date-picker (just use the Material-UI one)
+    H-> Remake/Redesign using Material-UI Components
+    H-> Fix Date-picker (just use the Material-UI one)
+    L-> Create a Confirmation Pop-up Submission Page
 
 REGISTER PAGE
     L-> Password requirements(ex. length, uppercase...)
@@ -27,7 +27,6 @@ LOGIN PAGE
 
 FUEL REQUEST HISTORY
     L-> Redesign(If theres extra time)
-    L-> Pull actual data after history table is made in DB
 
 ADMIN PAGE
     H-> Implement account priveledges so that all users don't see admin tab
@@ -38,4 +37,4 @@ SERVER
     L-> Start learning how to setup everything on the server
     L-> Get the Domain name/address that we want and API address for our backend
 
-###Last Edited By Daniel###
+###Last Edited By Joel###
