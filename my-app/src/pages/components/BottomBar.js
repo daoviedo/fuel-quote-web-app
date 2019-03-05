@@ -27,7 +27,7 @@ class BottomBar extends Component {
             <React.Fragment>
                 <Paper className={classes.paper}>
                     <Typography style={{opacity: 0.5,marginTop: 5}}>
-                        Created by: Daniel Oviedo, Joel Jijo, and Shahzib Ali
+                        Created by: Daniel Oviedo, Joel Jijo, and Shahzaib Ali
                     </Typography>
                     <Divider style={{width: "50%", margin: 'auto'}}/>
                     <Typography style={{opacity: 0.5}}>
