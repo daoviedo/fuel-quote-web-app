@@ -164,7 +164,7 @@ class Register extends React.Component {
         <CssBaseline />
         <main className={classes.layout}>
           <Paper className={classes.paper}>
-            <Typography component="h1" variant="h4" align="center">
+            <Typography variant="h4" align="center">
               Registration
             </Typography>
             <Stepper activeStep={activeStep} className={classes.stepper}>

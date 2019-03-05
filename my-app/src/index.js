@@ -5,6 +5,7 @@ import App from './pages/App';
 import * as serviceWorker from './pages/serviceWorker';
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
 
+
 ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

@@ -22,6 +22,8 @@ import {Link} from 'react-router-dom';
 
 import { Drawer, List, ListItem, ListItemText, Divider,} from "@material-ui/core";
 
+window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true;
+
 const styles = _ =>({
     root: {
       flexGrow: 1,

@@ -34,7 +34,7 @@ export default class Register extends Component{
     renderUser = ({username, password}) => <div className="output">{username}:{password}&ensp;<Button size='sm' variant="outline-danger" onClick={() => this.delUser(username,password)} >Remove Account</Button></div>
 
     render(){
-        const {users, user} = this.state;
+        const {users,user} = this.state;
         return(
             <div>
                 <Navbar />

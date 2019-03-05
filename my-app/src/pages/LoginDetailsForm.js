@@ -33,10 +33,10 @@ export default class LoginDetailsForm extends Component{
     returnOut(){
         if(this.state.timer){
             if(this.props.val.isAvail){
-                return <Typography variant="body2" style={{color: "green"}}><DoneIcon/>Username is Available!</Typography>
+                return <Typography style={{color: "green"}}><DoneIcon/>Username is Available!</Typography>
             }
             else{
-                return <Typography variant="body2" color="error"><ErrorIcon/>Username is Taken</Typography>
+                return <Typography color="error"><ErrorIcon/>Username is Taken</Typography>
             }
         }
         

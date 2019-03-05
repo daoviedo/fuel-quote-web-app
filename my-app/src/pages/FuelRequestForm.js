@@ -62,7 +62,7 @@ export default class FuelRequestForm extends React.Component{
         fetch(`http://localhost:4000/users/addRequest?username=${this.state.username}&GallonsRequested=${this.state.GallonsRequested}
         &PricePerGallon=${this.state.SuggestedPrice}&DeliveryDate=${this.state.DeliveryDate}&ad1=${this.state.DeliveryAddress1}
         &city=${this.state.DeliveryCity}&st=${this.state.DeliveryState}&zip=${this.state.DeliveryZip}`)
-        this.state.DeliveryDate=new Date();
+        this.setState({DeliveryDate: new Date()});
     }
 
     render() {
