@@ -100,7 +100,7 @@ app.get('/users/check', (req, res) => {
 
 app.get('/users/fuelrequestinfo', (req, res) => {
     const { username } = req.query;
-    const addressQuery = `SELECT DeliveryAddress, DeliveryCity, DeliveryState, DeliveryZip FROM sys.history WHERE username='${username}'`;
+    const addressQuery = `SELECT ad1, ad2, city, st, zip FROM sys.user WHERE username='${username}'`;
     connection.query(addressQuery, (err, results) => {
         if(err){
             return res.send(err)
@@ -145,13 +145,9 @@ app.get('/users/addRequest', (req, res) => {
     var date= new Date();
     date = date.getUTCFullYear() + '-' +
     ('00' + (date.getUTCMonth()+1)).slice(-2) + '-' +
-    ('00' + date.getUTCDate()).slice(-2) + ' ' + 
-    ('00' + date.getUTCHours()).slice(-2) + ':' + 
-    ('00' + date.getUTCMinutes()).slice(-2) + ':' + 
-    ('00' + date.getUTCSeconds()).slice(-2);
-    const { UserName, GallonsRequested, PricePerGallon } = req.query;
-    const insertQuery = `INSERT INTO sys.history (username, GallonsRequested, PricePerGallon, TotalPrice, DateOfRequest) 
-                        VALUES('${UserName}','${GallonsRequested}','${PricePerGallon}','${PricePerGallon*GallonsRequested}','${date}')`;
+    ('00' + date.getUTCDate()).slice(-2);
+    const { username, GallonsRequested, PricePerGallon, DeliveryDate, ad1, city, st, zip} = req.query;
+    const insertQuery = `INSERT INTO sys.history (username, GallonsRequested, PricePerGallon, TotalPrice, DateOfRequest, DeliveryDate, DeliveryAddress, DeliveryCity, DeliveryState, DeliveryZip) VALUES('${username}','${GallonsRequested}','${PricePerGallon}','${PricePerGallon*GallonsRequested}','${date}', '${DeliveryDate}', '${ad1}', '${city}', '${st}', '${zip}')`;
     connection.query(insertQuery, (err, results) => {
         if(err){
             return res.send(err)

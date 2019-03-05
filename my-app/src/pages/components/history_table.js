@@ -5,10 +5,12 @@ import Table from 'react-bootstrap/Table'
 export default class HistoryTable extends Component {
     componentDidMount(){
         this.getDataFromHistory();
+        this.getDataFromUser();
     }
     state = {
         username:localStorage.getItem("username"),
         Requests: [],
+        Ad1: "",
     }
     getDataFromHistory = () =>{
         fetch(`http://localhost:4000/users/history?username=${this.state.username}`)
@@ -19,7 +21,7 @@ export default class HistoryTable extends Component {
     getDataFromUser = () =>{
         fetch(`http://localhost:4000/users/fuelrequestinfo?username=${this.state.username}`)
         .then(Response => Response.json())
-        .then(Response => this.setState({ad1: Response.data[0].city}))
+        .then(Response => this.setState({Ad1: Response.data[0].DeliveryAddress}))
         .catch(err => console.log(err))
     }
     
@@ -49,6 +51,9 @@ export default class HistoryTable extends Component {
                     </thead>
                     <tbody className="react-bootstrap-table-body">
                         {this.state.Requests.map(this.renderUser)}
+                    </tbody>
+                    <tbody className="react-bootstrap-table-body">
+                        {this.state.Ad1}
                     </tbody>
                     <tbody className="react-bootstrap-table-body">
                         <tr>

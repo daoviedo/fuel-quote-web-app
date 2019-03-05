@@ -10,18 +10,23 @@ export default class FuelRequestForm extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            GallonsRequested: '',
-            DeliveryAddressStreet: "1234 Main Street",
-            DeliveryAddressCity: "Houston",
-            DeliveryAddressState: "Tx",
-            DeliveryAddressZip:"77577",
+            username:localStorage.getItem("username"),
+            GallonsRequested: 0,
+            DeliveryAddress1: "",
+            DeliveryAddress2: "",
+            DeliveryCity: "",
+            DeliveryState: "",
+            DeliveryZip: "",
             DeliveryDate: new Date(),
-            SuggestedPrice: '10',
-            TotalAmount: '100',
+            SuggestedPrice: 10,
+            TotalAmount: 0,
         };
         this.dateChanged = this.dateChanged.bind(this);
 
       }
+    componentDidMount(){
+        this.getDataFromUser();
+    }
 
     dateChanged = d => {
         this.setState({
@@ -40,6 +45,25 @@ export default class FuelRequestForm extends React.Component{
             
         //  });
     };
+
+    getDataFromUser = () =>{
+        fetch(`http://localhost:4000/users/fuelrequestinfo?username=${this.state.username}`)
+        .then(Response => Response.json())
+        .then(Response => this.setState({DeliveryAddress1: Response.data[0].ad1, DeliveryAddress2:Response.data[0].ad2,
+            DeliveryCity: Response.data[0].city, DeliveryState: Response.data[0].st, DeliveryZip: Response.data[0].zip}))
+        .catch(err => console.log(err))
+    }
+
+    
+    addRequestToHistory = () => {
+        this.state.DeliveryDate = this.state.DeliveryDate.getUTCFullYear() + '-' +
+        ('00' + (this.state.DeliveryDate.getUTCMonth()+1)).slice(-2) + '-' +
+        ('00' + this.state.DeliveryDate.getUTCDate()).slice(-2);
+        fetch(`http://localhost:4000/users/addRequest?username=${this.state.username}&GallonsRequested=${this.state.GallonsRequested}
+        &PricePerGallon=${this.state.SuggestedPrice}&DeliveryDate=${this.state.DeliveryDate}&ad1=${this.state.DeliveryAddress1}
+        &city=${this.state.DeliveryCity}&st=${this.state.DeliveryState}&zip=${this.state.DeliveryZip}`)
+        this.state.DeliveryDate=new Date();
+    }
 
     render() {
         return (
@@ -63,25 +87,29 @@ export default class FuelRequestForm extends React.Component{
                         <Form.Group as={Row} controlId="formStreetAddress">
                             <Form.Label>Delivery Address</Form.Label>
                             <Form.Control  
-                            value={this.state.DeliveryAddressStreet}
-                            disabled="true" />
+                            value={this.state.DeliveryAddress1}
+                            disabled />
+                            <Form.Label>Delivery Address2</Form.Label>
+                            <Form.Control  
+                            value={this.state.DeliveryAddress2}
+                            disabled />
                             <Form.Group as={Col} controlId="formAddressCity">
                                 <Form.Label>City</Form.Label>
-                                <Form.Control disabled="true" 
-                                placeholder={this.state.DeliveryAddressCity}/>
+                                <Form.Control disabled 
+                                placeholder={this.state.DeliveryCity}/>
                             </Form.Group>
 
 
                             <Form.Group as={Col} controlId="formGridState">
                                 <Form.Label>State</Form.Label>
-                                <Form.Control disabled="true" 
-                                placeholder={this.state.DeliveryAddressState}/>
+                                <Form.Control disabled 
+                                placeholder={this.state.DeliveryState}/>
                             </Form.Group>
 
                             <Form.Group as={Col} controlId="formGridZip">
                                 <Form.Label>Zip</Form.Label>
-                                <Form.Control disabled="true" 
-                                placeholder={this.state.DeliveryAddressZip}/>
+                                <Form.Control disabled 
+                                placeholder={this.state.DeliveryZip}/>
                             </Form.Group>
                         </Form.Group>
 
@@ -96,26 +124,28 @@ export default class FuelRequestForm extends React.Component{
                                 selected={this.state.DeliveryDate} 
                                 onChange={this.dateChanged} 
                                 onSelect={this.handleSelect} 
+                                value={this.state.DeliveryDate}
                             />
                         </Form.Group>
                         <Form.Group as={Row}>
                             <Form.Group as={Col}>
                                 <Form.Label>Suggested Price</Form.Label>
-                                <Form.Control disabled="true" type="number" value={this.state.SuggestedPrice}
+                                <Form.Control disabled type="number" value={this.state.SuggestedPrice}
                                 />
                             </Form.Group>
                             <Form.Group as={Col}>
                                 <Form.Label>Total Amount</Form.Label>
-                                <Form.Control disabled="true" type="number" value={this.state.TotalAmount}
+                                <Form.Control disabled type="number" value={this.state.GallonsRequested*this.state.SuggestedPrice}
                                 />
                             </Form.Group>
                         </Form.Group>
-                        <Button variant="primary" type="submit">
+                        <Button variant="primary" onClick={()=>this.addRequestToHistory()}>
                             Submit
                         </Button>
                     </Form>
                 </header>
             </div>
         )
+        
     }
 }
