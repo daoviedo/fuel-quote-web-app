@@ -23,7 +23,7 @@ const theme1 = createMuiTheme({
 const styles = {
     card: {
         width: '80%',
-        height: '400px',
+        height: '450px',
         marginTop: '20px',
         marginBottom: '20px',
 
@@ -32,7 +32,11 @@ const styles = {
         height: 140,
     },
     content: {
-        height: 360,
+        height: 400,
+    },
+    paper: {
+        height: 50,
+        backgroundColor: "#00897b"
     }
 };
 
@@ -63,7 +67,7 @@ class news_cards_test extends Component {
         const { articles } = this.state;
         return (
             
-            <Grid container justify='center' style={{maxWidth: '60%', margin: 'auto'}}>
+            <Grid container justify='center' style={{maxWidth: '70%', margin: 'auto'}}>
                 {articles.map(({ title, description, urlToImage }) =>
                     <Grid container sm={4} justify='center'>
                         <Card className={classes.card}>
@@ -82,13 +86,15 @@ class news_cards_test extends Component {
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>
-                            <Paper style={{height: 40,backgroundColor: "#00897b"}}>
-                                <MuiThemeProvider theme={theme1}>
-                                <Button variant="outlined" size="small" color="primary" style={{ margin: 'auto', marginTop: 4, marginBottom: 4,textTransform: 'none', outline: 0}}>
+                            <MuiThemeProvider theme={theme1}>
+                            <Paper className={classes.paper}>
+                                
+                                <Button variant="outlined" size="small" color="primary" style={{ margin: 'auto', textTransform: 'none', outline: 0}}>
                                 Learn More
                                 </Button>
-                                </MuiThemeProvider>
+                                
                             </Paper>
+                            </MuiThemeProvider>
                         </Card>
                     </Grid>
                 )}
