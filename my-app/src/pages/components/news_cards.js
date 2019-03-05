@@ -23,7 +23,7 @@ const theme1 = createMuiTheme({
 const styles = {
     card: {
         width: '80%',
-        height: '450px',
+        height: '400px',
         marginTop: '20px',
         marginBottom: '20px',
 
