@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import {Button,Form,Col} from "react-bootstrap";
-import "./Acc_mng.css";
+import "./css/Acc_mng.css";
 
 
 export default class Acc_mng extends Component{

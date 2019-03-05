@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import {Button} from 'react-bootstrap';
-import './UserList.css';
+import './css/UserList.css';
 import Navbar from './components/nav_bar';
 
 export default class Register extends Component{
