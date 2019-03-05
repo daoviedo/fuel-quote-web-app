@@ -1,3 +1,6 @@
-h5, h4{
-    color: aliceblue;
+.barr{
+    background-color: #00897b;
+    color: #00897b;
+    height: 30%;
+    vertical-align: middle;
 }

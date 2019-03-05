@@ -30,11 +30,16 @@ const styles = _ =>({
       flexGrow: 1,
     },
     bar: {
-        backgroundColor: "#00897b"
+        backgroundColor: "#00897b",
+        height: '5%'
+    },
+    tool:{
+        minHeight: '100%'
     },
     menuButton: {
       marginLeft: -12,
       marginRight: 20,
+      
     },
 });
 
@@ -61,11 +66,11 @@ class AppBar extends Component {
         const { classes } = this.props;
         const finalLogged = this.state.loggedInn;
         return (
-            <div className={classes.root}>
-                <AppBar1 position="fixed" className={classes.bar}>
-                    <Toolbar>
-                        <Logo style={{fontSize:"250%", marginRight:4}}/>
-                        <Typography variant="h4" style={{marginBottom:2}} align="left" color="inherit" className={classes.grow}>Devry Energy</Typography>
+            <div >
+                <AppBar1 position="fixed" classes={{root: classes.bar}}>
+                    <Toolbar classes={{root: classes.tool}}>
+                        <Logo style={{fontSize:"200%", marginRight:4, }}/>
+                        <Typography variant="h5" align="left" color="inherit" className={classes.grow}>Devry Energy</Typography>
                         {finalLogged ? 
                         (<div>
                             <Drawer anchor="right" open={this.state.openUserMenu} onClose={()=>this.setState({openUserMenu: false})}>
