@@ -24,12 +24,6 @@ export default class Register extends Component{
         .catch(err => console.log(err))
     }
 
-    addUser = _ => {
-        const {user} = this.state;
-        fetch(`http://localhost:4000/users/add?username=${user.username}&pass=${user.password}`)
-        .then(this.getUser)
-        .catch(err => console.log(err))
-    }
 
     delUser = (username,pass) => {
         fetch(`http://localhost:4000/users/remove?username=${username}&pass=${pass}`)
@@ -47,16 +41,8 @@ export default class Register extends Component{
                 <br/><br/>
                 <div className="UserList">
                     {users.map(this.renderUser)}
-                    <div>
-                        <input 
-                            value = {user.username} 
-                            onChange={e => this.setState({user: {...user, username: e.target.value}})} />
-                        <input 
-                            value = {user.password} 
-                            onChange={e => this.setState({user: {...user, password: e.target.value}})} />
-                        <button onClick={this.addUser}>Add User</button>
-                    </div>
                 </div>
+                
             </div>
         );
     }
