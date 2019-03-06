@@ -26,7 +26,6 @@ const styles = {
         width:'90%',
         marginTop: '20px',
         marginBottom: '20px',
-
     },
     media: {
         height: 140,
