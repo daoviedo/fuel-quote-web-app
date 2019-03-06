@@ -1,22 +1,21 @@
 import React, { Component } from "react";
 import { Carousel } from 'react-bootstrap';
-import image1 from './images/image1.jpg';
-import image2 from './images/image2.jpg';
-import image3 from './images/image3.jpg';
+
+import './car.css';
+import image1 from './images/image3.jpg';
+import image2 from './images/image4.jpg';
+import image3 from './images/image1.jpg';
 
 
 export default class Home extends Component {
     render() {
         return (
             <div>
-                <Carousel style={{marginTop: 60}}>
+                <Carousel style={{marginTop: 50}}>
                     <Carousel.Item>
                         <img
-                            className="d-block w-100"
-                            width="400"
-                            height="600"
+                            className="picture"
                             src={image1}
-                            fluid="true"
                             alt="First slide"
                         />
                         <Carousel.Caption>
@@ -25,12 +24,9 @@ export default class Home extends Component {
                     </Carousel.Item>
                     <Carousel.Item>
                         <img
-                            className="d-block w-100"
+                            className="picture"
                             src={image2}
-                            fluid="true"
-                            width="800"
-                            height="600"
-                            alt="second slide"
+                            alt="Second slide"
                         />
 
                         <Carousel.Caption>
@@ -39,11 +35,8 @@ export default class Home extends Component {
                     </Carousel.Item>
                     <Carousel.Item >
                         <img
-                            className="d-block w-100"
+                            className="picture"
                             src={image3}
-                            fluid="true"
-                            width="1500"
-                            height="600"
                             alt="Third slide"
                         />
 
