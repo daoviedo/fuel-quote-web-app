@@ -32,7 +32,7 @@ export default class Login extends Component {
   }
 
   fetchAuth = async () => {
-    const response = await fetch(`http://localhost:4000/users/lookup?username=${this.state.username}&pass=${this.state.password}`);
+    const response = await fetch(`http://138.197.221.30:4000/users/lookup?username=${this.state.username}&pass=${this.state.password}`);
     const json = await response.json();
     if(json.data.length===0){
     }

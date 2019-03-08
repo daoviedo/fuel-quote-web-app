@@ -46,7 +46,7 @@ class UserList extends Component{
     }
 
     getUser = _ => {
-        fetch('http://localhost:4000/users')
+        fetch('http://138.197.221.30:4000/users')
         .then(response => response.json())
         .then(response => this.setState({users: response.data}))
         .catch(err => console.log(err))
@@ -54,7 +54,7 @@ class UserList extends Component{
 
 
     delUser = (username,pass) => {
-        fetch(`http://localhost:4000/users/remove?username=${username}&pass=${pass}`)
+        fetch(`http://138.197.221.30:4000/users/remove?username=${username}&pass=${pass}`)
         .then(this.getUser)
         .catch(err => console.log(err))
     }
