@@ -3,7 +3,7 @@ H-> means High priority
 L-> means Low priority
 
 DATABASE
-    NONE CURRENTLY
+
 
 HOMEPAGE
     L-> Add new area(ex. About us)
@@ -16,10 +16,7 @@ FUEL REQUEST FORM
     L-> Create a Confirmation Pop-up Submission Page
 
 ACCOUNT SETTINGS PAGE
-    H-> Redesign using material-ui
-    H-> Import the user's data
-    H-> Add button to change any field
-    H-> After they submit new info, update their info in db
+
 
 REGISTER PAGE
     H-> field requirements(ex. length, uppercase...)
@@ -38,8 +35,9 @@ FUEL REQUEST HISTORY
     L-> Fix timestamp for when an entry was created
 
 ADMIN PAGE
-    L-> Redesign-- Put userlist into a table for organization purposes
+
 
 SERVER
 
-###Last Edited By Daniel 3/8/19###
+
+###Last Edited By Daniel 3/9/19###
