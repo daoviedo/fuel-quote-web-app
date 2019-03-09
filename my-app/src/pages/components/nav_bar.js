@@ -71,6 +71,7 @@ class AppBar extends Component {
         const { classes } = this.props;
         const finalLogged = this.state.loggedInn;
         const privel = (this.state.priv==="Admin");
+        console.log(privel);
         return (
             <div >
                 <AppBar1 position="fixed" classes={{root: classes.bar}}>
