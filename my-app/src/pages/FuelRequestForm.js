@@ -27,7 +27,7 @@ const styles = theme => ({
     },
 })
 
-export default class FuelRequestForm extends React.Component{
+class FuelRequestForm extends React.Component{
 
     constructor(props){
         super(props)
@@ -102,7 +102,12 @@ export default class FuelRequestForm extends React.Component{
                     </FormControl>
                 </Paper>
             </main>
-        )
+        );
         
     }
 }
+
+FuelRequestForm.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+export default withStyles(styles)(FuelRequestForm);
