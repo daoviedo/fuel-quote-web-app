@@ -20,7 +20,7 @@ const styles = theme => ({
         align: "center",
         margin: "auto",
         width: "50%",
-        marginTop: "15%",
+        marginTop: "50%",
     },
     margin: {
         margin: theme.spacing.unit,
