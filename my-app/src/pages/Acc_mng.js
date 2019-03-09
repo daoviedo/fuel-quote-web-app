@@ -135,7 +135,7 @@ class Acc_mng extends Component{
     }
 
     componentDidMount(){
-        this.fetchData;
+        this.fetchData();
     }
 
     handleChange = event => {
