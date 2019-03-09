@@ -11,7 +11,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import NavBar from './components/nav_bar';
-import { Navbar } from "react-bootstrap";
 
 const options = [
     'AL',
@@ -125,6 +124,21 @@ const styles = theme => ({
 
 
 class Acc_mng extends Component{
+    state={
+        firstName: "",
+        lastName: "",
+        address1: "",
+        address2: "",
+        city: "",
+        dropSelection: "",
+        zip:"",
+    }
+
+    handleChange = event => {
+        this.setState({
+          [event.target.name]: event.target.value
+        });
+    }
     
     render(){
         const { classes } = this.props;
@@ -142,7 +156,8 @@ class Acc_mng extends Component{
                 <Grid item xs={12} sm={6}>
                   <TextField
                     required
-                    
+                    value={this.state.firstName}
+                    onChange={this.handleChange}
                     id="firstName"
                     name="firstName"
                     label="First name"
@@ -153,7 +168,8 @@ class Acc_mng extends Component{
                 <Grid item xs={12} sm={6}>
                   <TextField
                     required
-                    
+                    value={this.state.lastName}
+                    onChange={this.handleChange}
                     id="lastName"
                     name="lastName"
                     label="Last name"
@@ -164,7 +180,8 @@ class Acc_mng extends Component{
                 <Grid item xs={12}>
                   <TextField
                     required
-                    
+                    value={this.state.address1}
+                    onChange={this.handleChange}
                     id="address1"
                     name="address1"
                     label="Address line 1"
@@ -174,7 +191,8 @@ class Acc_mng extends Component{
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                    
+                    value={this.state.address2}
+                    onChange={this.handleChange}
                     id="address2"
                     name="address2"
                     label="Address line 2"
@@ -184,7 +202,8 @@ class Acc_mng extends Component{
                 </Grid>
                 <Grid item xs={12} sm={4}>
                   <TextField
-                    
+                    value={this.state.city}
+                    onChange={this.handleChange}
                     required
                     id="city"
                     name="city"
@@ -198,12 +217,14 @@ class Acc_mng extends Component{
                     <InputLabel required>State</InputLabel>
                     <Select
                         style={{minWidth: 120}}
+                        value={this.state.dropSelection}
+                        onChange={this.handleChange}
                         MenuProps={MenuProps}
                         inputProps={{
                         name: 'dropSelection',
                         }}
                     >
-                        <MenuItem value="">
+                        <MenuItem value={this.state.dropSelection}>
                         <em>None</em>
                         </MenuItem >
                         {options.map(opp => (
@@ -215,7 +236,8 @@ class Acc_mng extends Component{
                 <Grid item xs={12} sm={4}>
                   <TextField
                     required
-                    
+                    value={this.state.zip}
+                    onChange={this.handleChange}
                     id="zip"
                     name="zip"
                     label="Zip / Postal code"
