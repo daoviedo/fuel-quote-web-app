@@ -4,6 +4,26 @@ import { Button, Form, Row, Col } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import Navbar from './components/nav_bar';
+import withStyles from '@material-ui/core/styles';
+
+const styles = theme => ({
+    root: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        align: "center",
+    },
+    layout: {
+        width: 'auto',
+        marginTop: theme.spacing.unit * 25,
+        marginLeft: theme.spacing.unit * 2,
+        marginRight: theme.spacing.unit * 2,
+        [theme.breakpoints.up(600 + theme.spacing.unit *4)]: {
+            width: 600,
+            marginLeft: 'auto',
+            marginRight: 'auto',
+        },
+    },
+})
 
 export default class FuelRequestForm extends React.Component{
 
@@ -69,7 +89,10 @@ export default class FuelRequestForm extends React.Component{
         const {classes}=this.props;
         return (
             <React.Fragment>
-                <main className={classes.layout}>
+                <main className={classes.layout}> 
+                    <Paper className={classes.root} elevation={1}>
+                    
+                    </Paper>
                 </main>
             </React.Fragment>
             // <div className="FuelRequestForm">
