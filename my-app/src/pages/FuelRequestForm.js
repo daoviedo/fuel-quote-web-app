@@ -5,6 +5,7 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import Navbar from './components/nav_bar';
 import withStyles from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 
 const styles = theme => ({
     root: {
