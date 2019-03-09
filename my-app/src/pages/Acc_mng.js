@@ -145,6 +145,11 @@ class Acc_mng extends Component{
     }
 
     fetchData = _ => {
+        const user = localStorage.getItem("username");
+        fetch(`http://138.197.221.30:4000/users/data/${user}`)
+        .then(response => response.json())
+        .then(res => this.setState({firstName: res.data[0].firstname}))
+        .catch(err => console.log(err))
     }
     
     render(){
