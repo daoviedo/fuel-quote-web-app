@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{Component} from 'react';
 import './css/FuelRequestForm.css'
 import { Button, Form, Row, Col } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
@@ -29,9 +29,12 @@ const styles = theme => ({
             marginRight: 'auto',
         },
     },
+    margin: {
+        margin: theme.spacing.unit,
+    }
 })
 
-class FuelRequestForm extends React.Component{
+class FuelRequestForm extends Component{
 
     constructor(props){
         super(props)
