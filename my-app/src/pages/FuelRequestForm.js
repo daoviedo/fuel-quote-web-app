@@ -47,7 +47,7 @@ export default class FuelRequestForm extends React.Component{
     };
 
     getDataFromUser = () =>{
-        fetch(`http://localhost:4000/users/fuelrequestinfo?username=${this.state.username}`)
+        fetch(`http://138.197.221.30:4000/users/fuelrequestinfo?username=${this.state.username}`)
         .then(Response => Response.json())
         .then(Response => this.setState({DeliveryAddress1: Response.data[0].ad1, DeliveryAddress2:Response.data[0].ad2,
             DeliveryCity: Response.data[0].city, DeliveryState: Response.data[0].st, DeliveryZip: Response.data[0].zip}))
@@ -59,7 +59,7 @@ export default class FuelRequestForm extends React.Component{
         this.state.DeliveryDate = this.state.DeliveryDate.getUTCFullYear() + '-' +
         ('00' + (this.state.DeliveryDate.getUTCMonth()+1)).slice(-2) + '-' +
         ('00' + this.state.DeliveryDate.getUTCDate()).slice(-2);
-        fetch(`http://localhost:4000/users/addRequest?username=${this.state.username}&GallonsRequested=${this.state.GallonsRequested}
+        fetch(`http://138.197.221.30:4000/users/addRequest?username=${this.state.username}&GallonsRequested=${this.state.GallonsRequested}
         &PricePerGallon=${this.state.SuggestedPrice}&DeliveryDate=${this.state.DeliveryDate}&ad1=${this.state.DeliveryAddress1}
         &city=${this.state.DeliveryCity}&st=${this.state.DeliveryState}&zip=${this.state.DeliveryZip}`)
         this.setState({DeliveryDate: new Date()});

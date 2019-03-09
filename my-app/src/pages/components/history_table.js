@@ -11,7 +11,7 @@ export default class HistoryTable extends Component {
         Requests: [],
     }
     getDataFromHistory = () =>{
-        fetch(`http://localhost:4000/users/history?username=${this.state.username}`)
+        fetch(`http://138.197.221.30:4000/users/history?username=${this.state.username}`)
         .then(Response => Response.json())
         .then(Response => this.setState({Requests: Response.data}))
         .catch(err => console.log(err))

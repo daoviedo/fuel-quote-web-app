@@ -36,7 +36,7 @@ class Test extends Component {
     }
 
     getData(){
-        fetch('http://localhost:4000/users')
+        fetch('http://138.197.221.30:4000/users')
         .then(response=> response.json())
         .then(res=> this.setState({users: res.data}))
         .catch(err => console.log(err))

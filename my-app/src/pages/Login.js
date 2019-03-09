@@ -32,7 +32,7 @@ export default class Login extends Component {
   }
 
   fetchAuth = async () => {
-    const response = await fetch(`http://localhost:4000/users/lookup?username=${this.state.username}&pass=${this.state.password}`);
+    const response = await fetch(`http://138.197.221.30:4000/users/lookup?username=${this.state.username}&pass=${this.state.password}`);
     const json = await response.json();
     if(json.data.length===0){
     }
@@ -40,6 +40,7 @@ export default class Login extends Component {
       if((this.state.username === json.data[0].username) && (this.state.password === json.data[0].password)){
         localStorage.setItem('username', json.data[0].username);
         localStorage.setItem('password', json.data[0].password);
+        localStorage.setItem('priv', json.data[0].priv);
         localStorage.setItem('authen', "true");
         this.setState({auth: true});
       }
