@@ -97,9 +97,9 @@ class FuelRequestForm extends Component{
     render() {
         const {classes}=this.props;
         return (
-            <div > 
-                <Paper elevation={1}>
-                    <FormControl fullWidth>
+            <div className={classes.layout}> 
+                <Paper className={classes.root} elevation={1}>
+                    <FormControl fullWidth className={classes.margin}>
                         <InputLabel>Amount of Fuel desired</InputLabel>
                         <Input
                         value={this.state.GallonsRequested}
