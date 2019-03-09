@@ -183,6 +183,7 @@ class Acc_mng extends Component{
               <Grid container spacing={24} style={{marginTop: 20, marginBottom: 20}}>
                 <Grid item xs={12} sm={6}>
                   <TextField
+                    style={{color: '#00897b'}}
                     required
                     value={this.state.firstName}
                     onChange={this.handleChange}
