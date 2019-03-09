@@ -6,6 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import Navbar from './components/nav_bar';
 import withStyles from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import PropTypes from 'prop-types';
 import { FormControl, InputLabel, Input, InputAdornment } from '@material-ui/core';
 
 const styles = theme => ({
