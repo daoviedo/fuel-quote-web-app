@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
+import { InputAdornment } from '@material-ui/core';
 
 
 const styles = theme => ({
@@ -104,6 +105,7 @@ class FuelRequestForm extends Component{
                         <Input
                         value={this.state.GallonsRequested}
                         onChange={e => this.change(e)}
+                        endAdornment={<InputAdornment position="end">Gallons</InputAdornment>}
                         />
                     </FormControl>
                 </Paper>
