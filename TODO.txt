@@ -41,8 +41,5 @@ ADMIN PAGE
     H-> Implement account priveledges so that all users don't see admin tab
 
 SERVER
-    H-> Pick a service to run our server on
-    L-> Start learning how to setup everything on the server
-    L-> Get the Domain name/address that we want and API address for our backend
 
 ###Last Edited By Daniel 3/8/19###

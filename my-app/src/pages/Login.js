@@ -40,6 +40,7 @@ export default class Login extends Component {
       if((this.state.username === json.data[0].username) && (this.state.password === json.data[0].password)){
         localStorage.setItem('username', json.data[0].username);
         localStorage.setItem('password', json.data[0].password);
+        localStorage.setItem('priv', json.data[0].priv);
         localStorage.setItem('authen', "true");
         this.setState({auth: true});
       }

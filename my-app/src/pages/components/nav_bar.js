@@ -55,7 +55,8 @@ class AppBar extends Component {
             loggedInn: (localStorage.getItem("authen")==="true"),
             user: {
                 username: localStorage.getItem("username"),
-                password: "ENCRYPTED"
+                password: "ENCRYPTED",
+                priv: localStorage.getItem("priv")
             },
             openUserMenu: false
         };
