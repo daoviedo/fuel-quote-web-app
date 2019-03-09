@@ -128,6 +128,20 @@ app.get('/users/data/:username', (req, res) => {
     });
 });
 
+app.get('/users/update/:username', (req, res) => {
+    const username  = req.params.username;
+    const { f,l,a1,a2,c,s,z } = req.query;
+    const addressQuery = `UPDATE sys.user SET firstname='${f}',lastname='${l}',ad1='${a1}',ad2='${a2}',city='${c}',st='${s}',zip='${z}' WHERE username='${username}'`;
+    connection.query(addressQuery, (err, results) => {
+        if(err){
+            return res.send(err)
+        }
+        else{
+            return res.send("Successfully Updated User")
+        }
+    });
+});
+
 app.get('/users', (req, res) => {
     connection.query(selectAll, (err, results) => {
         if(err){
