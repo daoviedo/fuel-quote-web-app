@@ -64,14 +64,13 @@ class AppBar extends Component {
 
     logOff = _ => {
         localStorage.clear();
-        this.setState({loggedInn: false, user: {username: "", password: ""}});
+        this.setState({loggedInn: false, user: {username: "", password: "", priv: ""}});
     }
     
     render() {
         const { classes } = this.props;
         const finalLogged = this.state.loggedInn;
-        const privel = (this.state.priv==="Admin");
-        console.log(privel);
+        const privel = (this.state.user.priv==="Admin");
         return (
             <div >
                 <AppBar1 position="fixed" classes={{root: classes.bar}}>
