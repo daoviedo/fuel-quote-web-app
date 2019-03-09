@@ -11,6 +11,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import NavBar from './components/nav_bar';
+import Button from "@material-ui/core/Button";
 
 const options = [
     'AL',
@@ -115,16 +116,12 @@ const styles = theme => ({
       marginTop: theme.spacing.unit * 3,
       marginLeft: theme.spacing.unit,
     },
-    button2: {
-      marginTop: theme.spacing.unit * 3,
-      marginLeft: theme.spacing.unit,
-    },
   });
 
 
 
 class Acc_mng extends Component{
-    state={
+    state = {
         firstName: "",
         lastName: "",
         address1: "",
@@ -132,6 +129,7 @@ class Acc_mng extends Component{
         city: "",
         dropSelection: "",
         zip:"",
+        needsUpdate: false,
     }
 
     componentDidMount(){
@@ -258,6 +256,12 @@ class Acc_mng extends Component{
                   />
                 </Grid>
               </Grid>
+              <div className={classes.buttons}>
+                <Button variant="contained"
+                      color="primary"
+                      disabled={!this.state.needsUpdate}
+                      className={classes.button}>Update Profile</Button>
+              </div>
               </Paper>
               </main>
             </React.Fragment>
