@@ -12,6 +12,14 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import NavBar from './components/nav_bar';
 import Button from "@material-ui/core/Button";
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import teal from '@material-ui/core/colors/teal';
+
+const theme1 = createMuiTheme({
+    palette: {
+      primary: {main: teal[600]},
+    },
+});
 
 const options = [
     'AL',
@@ -158,6 +166,7 @@ class Acc_mng extends Component{
             
             <React.Fragment>
                 <NavBar/>
+                <MuiThemeProvider theme={theme1}>
                 <CssBaseline/>
                 <main className={classes.layout}>
                 <Paper className={classes.paper}>
@@ -266,6 +275,7 @@ class Acc_mng extends Component{
               </div>
               </Paper>
               </main>
+              </MuiThemeProvider>
             </React.Fragment>
         );
     }
