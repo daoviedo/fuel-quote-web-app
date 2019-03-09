@@ -130,7 +130,7 @@ class Acc_mng extends Component{
         return(
             
             <React.Fragment>
-                <Navbar/>
+                <NavBar/>
                 <CssBaseline/>
                 <main className={classes.layout}>
                 <Paper className={classes.paper}>
