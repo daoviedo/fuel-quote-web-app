@@ -81,7 +81,7 @@ export default class Acc_mng extends Component{
         return(
             
             <React.Fragment>
-                <Paper style={{width: '60%', marginTop: 100, margin: 'auto'}}>
+                <Paper style={{width: '60%', marginTop: "100px", margin: 'auto'}}>
               <Typography variant="h6" gutterBottom>
                 Complete your profile
               </Typography>
@@ -89,6 +89,7 @@ export default class Acc_mng extends Component{
                 <Grid item xs={12} sm={6}>
                   <TextField
                     required
+                    style={{width: '60%'}}
                     id="firstName"
                     name="firstName"
                     label="First name"
@@ -99,6 +100,7 @@ export default class Acc_mng extends Component{
                 <Grid item xs={12} sm={6}>
                   <TextField
                     required
+                    style={{width: '60%'}}
                     id="lastName"
                     name="lastName"
                     label="Last name"
