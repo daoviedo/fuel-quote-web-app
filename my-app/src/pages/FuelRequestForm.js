@@ -90,13 +90,7 @@ export default class FuelRequestForm extends React.Component{
         const {classes}=this.props;
         return (
             
-            <React.Fragment>
-                <main className={classes.layout}> 
-                    <Paper className={classes.root} elevation={1}>
-                        <text>Hello</text>
-                    </Paper>
-                </main>
-            </React.Fragment>
+            <div>Hello</div>
         )
         
     }
