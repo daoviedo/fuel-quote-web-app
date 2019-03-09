@@ -85,11 +85,11 @@ export default class Acc_mng extends Component{
               <Typography variant="h6" gutterBottom>
                 Complete your profile
               </Typography>
-              <Grid container spacing={24}>
+              <Grid container spacing={0} style={{marginTop: '100px'}}>
                 <Grid item xs={12} sm={6}>
                   <TextField
                     required
-                    style={{width: '60%'}}
+                    style={{width: '40%'}}
                     id="firstName"
                     name="firstName"
                     label="First name"
@@ -100,7 +100,7 @@ export default class Acc_mng extends Component{
                 <Grid item xs={12} sm={6}>
                   <TextField
                     required
-                    style={{width: '60%'}}
+                    style={{width: '40%'}}
                     id="lastName"
                     name="lastName"
                     label="Last name"
@@ -111,6 +111,7 @@ export default class Acc_mng extends Component{
                 <Grid item xs={12}>
                   <TextField
                     required
+                    style={{width: '40%'}}
                     id="address1"
                     name="address1"
                     label="Address line 1"
@@ -120,6 +121,7 @@ export default class Acc_mng extends Component{
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
+                    style={{width: '40%'}}
                     id="address2"
                     name="address2"
                     label="Address line 2"
@@ -129,6 +131,7 @@ export default class Acc_mng extends Component{
                 </Grid>
                 <Grid item xs={12} sm={4}>
                   <TextField
+                    style={{width: '40%'}}
                     required
                     id="city"
                     name="city"
@@ -159,6 +162,7 @@ export default class Acc_mng extends Component{
                 <Grid item xs={12} sm={4}>
                   <TextField
                     required
+                    style={{width: '40%'}}
                     id="zip"
                     name="zip"
                     label="Zip / Postal code"
