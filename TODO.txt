@@ -41,3 +41,7 @@ SERVER
 
 
 ###Last Edited By Daniel 3/9/19###
+
+CHANGELOG
+    -> Fixed the login showing invalid credentials when credentials were correct
+    -> Fixed the popup rendering for username is taken/available(quick flicker problem)
