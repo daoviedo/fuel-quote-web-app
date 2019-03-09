@@ -31,7 +31,7 @@ const styles = theme => ({
     },
 })
 
-export default class FuelRequestForm extends React.Component{
+class FuelRequestForm extends React.Component{
 
     constructor(props){
         super(props)
@@ -92,11 +92,11 @@ export default class FuelRequestForm extends React.Component{
     }
 
     render() {
-        
+        const {classes}=this.props;
         return (
-            <div > 
-                <Paper elevation={1}>
-                    <FormControl fullWidth>
+            <div className={classes.layout}> 
+                <Paper className={classes.root} elevation={1}>
+                    <FormControl fullWidth className={classes.margin}>
                         <InputLabel>Amount of Fuel desired</InputLabel>
                         <Input
                         value={this.state.GallonsRequested}
@@ -109,5 +109,11 @@ export default class FuelRequestForm extends React.Component{
         
     }
 }
+
+FuelRequestForm.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+  
+export default withStyles(styles)(FuelRequestForm);
 
 
