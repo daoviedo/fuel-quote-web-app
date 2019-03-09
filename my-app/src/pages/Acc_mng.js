@@ -10,6 +10,8 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import NavBar from './components/nav_bar';
+import { Navbar } from "react-bootstrap";
 
 const options = [
     'AL',
@@ -77,9 +79,7 @@ const MenuProps = {
 };
 
 const styles = theme => ({
-    appBar: {
-      position: 'relative',
-    },
+    
     layout: {
       width: 'auto',
       marginLeft: theme.spacing.unit * 2,
@@ -106,11 +106,6 @@ const styles = theme => ({
     bar: {
       backgroundColor: "#00897b"
     },
-    stepper: {
-      padding: `${theme.spacing.unit * 3}px 0 ${theme.spacing.unit * 5}px`,
-      marginLeft: theme.spacing.unit * 10,
-      marginRight: theme.spacing.unit * 10,
-    },
   
     buttons: {
       display: 'flex',
@@ -135,6 +130,7 @@ class Acc_mng extends Component{
         return(
             
             <React.Fragment>
+                <Navbar/>
                 <CssBaseline/>
                 <main className={classes.layout}>
                 <Paper className={classes.paper}>
