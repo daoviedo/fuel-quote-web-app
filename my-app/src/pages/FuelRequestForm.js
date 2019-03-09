@@ -20,15 +20,10 @@ const styles = theme => ({
         align: "center",
     },
     layout: {
-        width: 'auto',
+        width: '50%',
         marginTop: theme.spacing.unit * 25,
         marginLeft: theme.spacing.unit * 2,
         marginRight: theme.spacing.unit * 2,
-        [theme.breakpoints.up(600 + theme.spacing.unit *4)]: {
-            width: 600,
-            marginLeft: 'auto',
-            marginRight: 'auto',
-        },
     },
     margin: {
         margin: theme.spacing.unit,
