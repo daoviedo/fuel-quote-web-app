@@ -98,7 +98,6 @@ class FuelRequestForm extends React.Component{
                         <Input
                         value={this.state.GallonsRequested}
                         onChange={e => this.change(e)}
-                        endAdornment={<InputAdornment position="end">Gallons</InputAdornment>}
                         />
                     </FormControl>
                 </Paper>
