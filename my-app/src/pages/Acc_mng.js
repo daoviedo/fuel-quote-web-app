@@ -81,7 +81,7 @@ export default class Acc_mng extends Component{
         return(
             
             <React.Fragment>
-                <Paper>
+                <Paper style={{width: '60%', marginTop: '30%'}}>
               <Typography variant="h6" gutterBottom>
                 Complete your profile
               </Typography>
