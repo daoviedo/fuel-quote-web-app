@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
+import withStyles from '@material-ui/core/styles/withStyles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -73,23 +76,76 @@ const MenuProps = {
     },
 };
 
+const styles = theme => ({
+    appBar: {
+      position: 'relative',
+    },
+    layout: {
+      width: 'auto',
+      marginLeft: theme.spacing.unit * 2,
+      marginRight: theme.spacing.unit * 2,
+      [theme.breakpoints.up(600 + theme.spacing.unit * 2 * 2)]: {
+        width: 600,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+      },
+    },
+    paper: {
+      marginTop: theme.spacing.unit * 3,
+      marginBottom: theme.spacing.unit * 3,
+      padding: theme.spacing.unit * 2,
+      [theme.breakpoints.up(600 + theme.spacing.unit * 3 * 2)]: {
+        marginTop: theme.spacing.unit * 6,
+        marginBottom: theme.spacing.unit * 6,
+        padding: theme.spacing.unit * 3,
+      },
+    },
+    grow: {
+      flexGrow: 1,
+    },
+    bar: {
+      backgroundColor: "#00897b"
+    },
+    stepper: {
+      padding: `${theme.spacing.unit * 3}px 0 ${theme.spacing.unit * 5}px`,
+      marginLeft: theme.spacing.unit * 10,
+      marginRight: theme.spacing.unit * 10,
+    },
+  
+    buttons: {
+      display: 'flex',
+      justifyContent: 'flex-end',
+    },
+    button: {
+      marginTop: theme.spacing.unit * 3,
+      marginLeft: theme.spacing.unit,
+    },
+    button2: {
+      marginTop: theme.spacing.unit * 3,
+      marginLeft: theme.spacing.unit,
+    },
+  });
 
 
-export default class Acc_mng extends Component{
+
+class Acc_mng extends Component{
     
     render(){
+        const { classes } = this.props;
         return(
             
             <React.Fragment>
-                <Paper style={{width: '60%', marginTop: "100px", margin: 'auto'}}>
+                <CssBaseline/>
+                <main className={classes.layout}>
+                <Paper className={classes.paper}>
               <Typography variant="h6" gutterBottom>
                 Complete your profile
               </Typography>
-              <Grid container spacing={0} style={{marginTop: '100px'}}>
+              <Grid container spacing={24} >
                 <Grid item xs={12} sm={6}>
                   <TextField
                     required
-                    style={{width: '40%'}}
+                    
                     id="firstName"
                     name="firstName"
                     label="First name"
@@ -100,7 +156,7 @@ export default class Acc_mng extends Component{
                 <Grid item xs={12} sm={6}>
                   <TextField
                     required
-                    style={{width: '40%'}}
+                    
                     id="lastName"
                     name="lastName"
                     label="Last name"
@@ -111,7 +167,7 @@ export default class Acc_mng extends Component{
                 <Grid item xs={12}>
                   <TextField
                     required
-                    style={{width: '40%'}}
+                    
                     id="address1"
                     name="address1"
                     label="Address line 1"
@@ -121,7 +177,7 @@ export default class Acc_mng extends Component{
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                    style={{width: '40%'}}
+                    
                     id="address2"
                     name="address2"
                     label="Address line 2"
@@ -131,7 +187,7 @@ export default class Acc_mng extends Component{
                 </Grid>
                 <Grid item xs={12} sm={4}>
                   <TextField
-                    style={{width: '40%'}}
+                    
                     required
                     id="city"
                     name="city"
@@ -162,7 +218,7 @@ export default class Acc_mng extends Component{
                 <Grid item xs={12} sm={4}>
                   <TextField
                     required
-                    style={{width: '40%'}}
+                    
                     id="zip"
                     name="zip"
                     label="Zip / Postal code"
@@ -172,7 +228,14 @@ export default class Acc_mng extends Component{
                 </Grid>
               </Grid>
               </Paper>
+              </main>
             </React.Fragment>
         );
     }
 }
+
+Acc_mng.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+  
+export default withStyles(styles)(Acc_mng);
