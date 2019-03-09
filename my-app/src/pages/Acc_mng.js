@@ -278,7 +278,7 @@ class Acc_mng extends Component{
                 <Button variant="contained"
                       color="primary"
                       disabled={!this.state.needsUpdate}
-                      onClick={()=> this.updateProfile}
+                      onClick={()=> this.updateProfile()}
                       className={classes.button}>Update Profile</Button>
               </div>
               </Paper>
