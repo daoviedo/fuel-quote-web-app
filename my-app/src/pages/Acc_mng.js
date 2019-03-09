@@ -162,9 +162,9 @@ class Acc_mng extends Component{
                 <main className={classes.layout}>
                 <Paper className={classes.paper}>
               <Typography variant="h6" gutterBottom>
-                Complete your profile
+                Account Details
               </Typography>
-              <Grid container spacing={24} >
+              <Grid container spacing={24} style={{marginTop: 10}}>
                 <Grid item xs={12} sm={6}>
                   <TextField
                     required
