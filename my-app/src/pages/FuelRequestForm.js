@@ -6,6 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import Navbar from './components/nav_bar';
 import withStyles from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import { FormControl, InputLabel, Input, InputAdornment } from '@material-ui/core';
 
 const styles = theme => ({
     root: {
@@ -89,8 +90,18 @@ export default class FuelRequestForm extends React.Component{
     render() {
         const {classes}=this.props;
         return (
-            
-            <div>Hello</div>
+            <main className={classes.layout}> 
+                <Paper className={classes.root} elevation={1}>
+                    <FormControl fullWidth className={classes.margin}>
+                        <InputLabel>Amount of Fuel desired</InputLabel>
+                        <Input
+                        value={this.state.GallonsRequested}
+                        onChange={e => this.change(e)}
+                        endAdornment={<InputAdornment position="end">Gallons</InputAdornment>}
+                        />
+                    </FormControl>
+                </Paper>
+            </main>
         )
         
     }
