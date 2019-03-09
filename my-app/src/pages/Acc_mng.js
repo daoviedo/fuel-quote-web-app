@@ -140,7 +140,7 @@ class Acc_mng extends Component{
 
     handleChange = event => {
         this.setState({
-          [event.target.name]: event.target.value
+          [event.target.name]: event.target.value, needsUpdate: true
         });
     }
 
