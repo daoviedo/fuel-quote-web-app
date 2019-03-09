@@ -92,11 +92,11 @@ export default class FuelRequestForm extends React.Component{
     }
 
     render() {
-        const {classes}=this.props;
+        
         return (
-            <div className={classes.layout}> 
-                <Paper className={classes.root} elevation={1}>
-                    <FormControl fullWidth className={classes.margin}>
+            <div > 
+                <Paper elevation={1}>
+                    <FormControl fullWidth>
                         <InputLabel>Amount of Fuel desired</InputLabel>
                         <Input
                         value={this.state.GallonsRequested}
