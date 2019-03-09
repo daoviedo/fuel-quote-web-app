@@ -29,7 +29,6 @@ FUEL REQUEST HISTORY
     L-> Redesign(If theres extra time)
 
 ADMIN PAGE
-    H-> Implement account priveledges so that all users don't see admin tab
     L-> Redesign-- Put userlist into a table for organization purposes
 
 SERVER
