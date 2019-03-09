@@ -139,7 +139,6 @@ export default class Acc_mng extends Component{
                 <FormControl>
                     <InputLabel required>State</InputLabel>
                     <Select
-                        value={this.props.val.dropSelection}
                         style={{minWidth: 120}}
                         MenuProps={MenuProps}
                         inputProps={{
