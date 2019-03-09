@@ -45,13 +45,13 @@ export default class Login extends Component {
         this.setState({auth: true});
       }
       else{
+        this.setState({submitted: true});
       }
     }
     
   }
 
   handleSubmit = event => {
-    this.setState({submitted: true});
     event.preventDefault();
     this.fetchAuth();
   }
