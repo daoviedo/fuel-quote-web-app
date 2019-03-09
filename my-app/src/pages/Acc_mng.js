@@ -115,6 +115,8 @@ const styles = theme => ({
     button: {
       marginTop: theme.spacing.unit * 3,
       marginLeft: theme.spacing.unit,
+      textTransform: 'none',
+      outline: 0,
     },
   });
 
@@ -162,7 +164,7 @@ class Acc_mng extends Component{
               <Typography variant="h6" gutterBottom>
                 Account Details
               </Typography>
-              <Grid container spacing={24} style={{marginTop: 10}}>
+              <Grid container spacing={24} style={{marginTop: 20, marginBottom: 20}}>
                 <Grid item xs={12} sm={6}>
                   <TextField
                     required
