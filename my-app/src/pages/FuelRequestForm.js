@@ -94,17 +94,7 @@ class FuelRequestForm extends React.Component{
     render() {
         const {classes}=this.props;
         return (
-            <main className={classes.layout}> 
-                <Paper className={classes.root} elevation={1}>
-                    <FormControl fullWidth className={classes.margin}>
-                        <InputLabel>Amount of Fuel desired</InputLabel>
-                        <Input
-                        value={this.state.GallonsRequested}
-                        onChange={e => this.change(e)}
-                        />
-                    </FormControl>
-                </Paper>
-            </main>
+            <div>hello</div>
         );
         
     }
