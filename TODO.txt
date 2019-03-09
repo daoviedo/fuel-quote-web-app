@@ -38,11 +38,7 @@ FUEL REQUEST HISTORY
     L-> Fix timestamp for when an entry was created
 
 ADMIN PAGE
-<<<<<<< HEAD
     L-> Redesign-- Put userlist into a table for organization purposes
-=======
-    H-> Implement account priveledges so that all users don't see admin tab
->>>>>>> d71b10ea83fd3ede0de8a0e6aef8fe52fd683211
 
 SERVER
 
