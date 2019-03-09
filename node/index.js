@@ -113,6 +113,21 @@ app.get('/users/fuelrequestinfo', (req, res) => {
     });
 });
 
+app.get('/users/data/:username', (req, res) => {
+    const username  = req.params.username;
+    const addressQuery = `SELECT firstname, lastname, ad1, ad2, city, st, zip FROM sys.user WHERE username='${username}'`;
+    connection.query(addressQuery, (err, results) => {
+        if(err){
+            return res.send(err)
+        }
+        else{
+            return res.json({
+                data: results
+            })
+        }
+    });
+});
+
 app.get('/users', (req, res) => {
     connection.query(selectAll, (err, results) => {
         if(err){

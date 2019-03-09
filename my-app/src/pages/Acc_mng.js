@@ -134,10 +134,17 @@ class Acc_mng extends Component{
         zip:"",
     }
 
+    componentDidMount(){
+        this.fetchData;
+    }
+
     handleChange = event => {
         this.setState({
           [event.target.name]: event.target.value
         });
+    }
+
+    fetchData = _ => {
     }
     
     render(){
