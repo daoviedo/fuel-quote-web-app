@@ -18,17 +18,9 @@ const styles = theme => ({
         display: 'flex',
         flexWrap: 'wrap',
         align: "center",
-    },
-    layout: {
-        width: 'auto',
-        marginTop: theme.spacing.unit * 25,
-        marginLeft: theme.spacing.unit * 2,
-        marginRight: theme.spacing.unit * 2,
-        [theme.breakpoints.up(600 + theme.spacing.unit *4)]: {
-            width: 600,
-            marginLeft: 'auto',
-            marginRight: 'auto',
-        },
+        margin: "auto",
+        width: "50%",
+        marginTop: "20%",
     },
     margin: {
         margin: theme.spacing.unit,
@@ -98,7 +90,7 @@ class FuelRequestForm extends Component{
     render() {
         const {classes}=this.props;
         return (
-            <div className={classes.layout}> 
+            <div> 
                 <Paper className={classes.root} elevation={1}>
                     <FormControl fullWidth className={classes.margin}>
                         <InputLabel>Amount of Fuel desired</InputLabel>
