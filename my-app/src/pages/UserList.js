@@ -14,7 +14,7 @@ import Navbar from './components/nav_bar';
 const styles = theme => ({
     root: {
       width: '90%',
-      height: 500,
+      maxHeight: 500,
       marginTop: 100,
       margin: 'auto',
       overflowX: 'auto',
