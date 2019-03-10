@@ -72,7 +72,7 @@ class AppBar extends Component {
     }
 
     verifyData(){
-        fetch(`http://138.197.221.30:4000/test1`,{
+        fetch(`http://138.197.221.30:4000/verify`,{
             method: "GET",
             headers: {
                 "Authorization": "Bearer "+ document.cookie.split('=')[1]

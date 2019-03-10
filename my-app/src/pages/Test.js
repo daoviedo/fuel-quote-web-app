@@ -26,7 +26,7 @@ class Test extends Component {
     }
 
     getData(){
-        fetch(`http://138.197.221.30:4000/test`,{
+        fetch(`http://138.197.221.30:4000/login`,{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -42,7 +42,7 @@ class Test extends Component {
     }
 
     verifyData(){
-        fetch(`http://138.197.221.30:4000/test1`,{
+        fetch(`http://138.197.221.30:4000/verify`,{
             method: "GET",
             headers: {
                 "Authorization": "Bearer "+ document.cookie.split('=')[1]

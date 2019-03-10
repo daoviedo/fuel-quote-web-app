@@ -29,7 +29,7 @@ export default class Login extends Component {
   }
 
   loginAuth(){
-    fetch(`http://138.197.221.30:4000/test`,{
+    fetch(`http://138.197.221.30:4000/login`,{
         method: "POST",
         headers: {
             "Content-Type": "application/json",

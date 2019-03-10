@@ -51,7 +51,7 @@ app.get('/', (req, res) => {
     res.send('Hello From servers')
 });
 
-app.post('/test', (req,res,next)=>{
+app.post('/login', (req,res,next)=>{
     const username = req.body.username;
     const password = req.body.password;
 
@@ -95,7 +95,7 @@ app.post('/test', (req,res,next)=>{
     });
 });
 
-app.get('/test1', checkAuth, (req,res,next)=>{
+app.get('/verify', checkAuth, (req,res,next)=>{
     res.json({
         authentication: true,
         userdata: req.userData
