@@ -97,8 +97,8 @@ app.post('/test', (req,res,next)=>{
 
 app.get('/test1', checkAuth, (req,res,next)=>{
     res.json({
-        auth: true,
-        data: req.userData
+        authentication: true,
+        userdata: req.userData
     });
 });
 
