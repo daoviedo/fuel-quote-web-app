@@ -18,9 +18,6 @@ export default class Login extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidMount() {
-  }
-
   validateForm() {
     return this.state.username.length > 0 && this.state.password.length > 0;
   }
@@ -29,6 +26,22 @@ export default class Login extends Component {
     this.setState({
       [event.target.id]: event.target.value
     });
+  }
+
+  getData(){
+    fetch(`http://138.197.221.30:4000/test`,{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            username: this.state.username,
+            password: this.state.password
+        }),
+    })
+    .then(res => res.json())
+    .then(result => {this.setState({auth: result.authentication}); document.cookie = "token="+result.token;})
+    .catch(err => console.log(err))
   }
 
   fetchAuth = async () => {
@@ -54,7 +67,7 @@ export default class Login extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.fetchAuth();
+    this.getData();
   }
 
   isAuthenticated(){
@@ -71,7 +84,7 @@ export default class Login extends Component {
   }
 
   render() {
-    const returnAuth = this.isAuthenticated();
+    const returnAuth = this.state.auth;
     const isSub = this.state.submitted;
     return (
       
