@@ -26,7 +26,7 @@ export default class LoginDetailsForm extends Component{
     checkUser(){
         fetch(`http://138.197.221.30:4000/users/check?username=${this.props.val.username}`)
         .then(response => response.json())
-        .then(response => {if(response.data.length===0){this.props.onSelLan("isAvail", true)}else{this.props.onSelLan("isAvail", false)}})
+        .then(response => {if(response.data.length===0){this.props.onSelLan("isAvail", true); this.openWindow()}else{this.props.onSelLan("isAvail", false); this.openWindow()}})
         .catch(err => console.log(err))
     }
 
@@ -73,7 +73,7 @@ export default class LoginDetailsForm extends Component{
                         disabled={!this.validateBut()}
                         color="primary"
                         style={{outline: 0}}
-                        onClick={() => {this.checkUser();this.openWindow()}}
+                        onClick={() => this.checkUser()}
                         >
                         Check Available
                     </Fab>

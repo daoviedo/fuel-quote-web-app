@@ -1,6 +1,13 @@
 const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql');
+const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
+var jwt = require('jsonwebtoken');
+const checkAuth = require('./check-auth');
+
+const saltRounds = 10;
+const privateKey = "ASLFJDGasdkdgasfsdlgkasdflgmpashlmh";
 
 const app = express();
 
@@ -23,11 +30,78 @@ connection.connect(err => {
     }
 });
 
+
 app.use(cors());
+app.use(bodyParser.json());
+
+app.use((req,res,next)=>{
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+
+    if(req.method==='OPTIONS'){
+        res.header('Access-Control-Allow-Methods','PUT, POST, PATCH, DELETE, GET');
+        return res.status(200).json({});
+    }
+    next();
+});
+
+
 
 app.get('/', (req, res) => {
     res.send('Hello From servers')
 });
+
+app.post('/login', (req,res,next)=>{
+    const username = req.body.username;
+    const password = req.body.password;
+
+
+    const lookQuery = `SELECT * FROM sys.user WHERE username='${username}'`;
+    connection.query(lookQuery, (err, results) => {
+        if(err){
+            return res.json({
+                error: err
+            })
+        }
+        else{
+            if(results.length===0){
+                return res.json({
+                    authentication: false,
+                    token: null 
+                });
+            }
+            else{
+                bcrypt.compare(password, results[0].password, function(err1, resu) {
+                    if(resu){
+                        jwt.sign({
+                            username: results[0].username,
+                            password: results[0].password,
+                            privelege: results[0].priv }, privateKey, { expiresIn: "1h" }, function(err2, token) {
+                                return res.json({
+                                    authentication: true,
+                                    token: token  
+                                });
+                        });
+                    }
+                    else{
+                        return res.json({
+                            authentication: false,
+                            token: null
+                        });
+                    }
+                }); 
+            }  
+        }
+    });
+});
+
+app.get('/verify', checkAuth, (req,res,next)=>{
+    res.json({
+        authentication: true,
+        userdata: req.userData
+    });
+});
+
 
 app.get('/users/add', (req, res) => {
     const { username, pass } = req.query;
@@ -44,15 +118,18 @@ app.get('/users/add', (req, res) => {
 
 app.get('/users/adduser', (req, res) => {
     const { username, pass, fname, lname, ad1, ad2, city, st, zip, priv } = req.query;
-    const insertQuery = `INSERT INTO sys.user (username, password, firstname, lastname, ad1, ad2, city, st, zip, priv) VALUES('${username}','${pass}','${fname}','${lname}','${ad1}','${ad2}','${city}','${st}','${zip}','${priv}')`;
-    connection.query(insertQuery, (err, results) => {
-        if(err){
-            return res.send(err)
-        }
-        else{
-            return res.send('Successfully Added User')
-        }
+    bcrypt.hash(pass, saltRounds, function(err, hash) {
+        const insertQuery = `INSERT INTO sys.user (username, password, firstname, lastname, ad1, ad2, city, st, zip, priv) VALUES('${username}','${hash}','${fname}','${lname}','${ad1}','${ad2}','${city}','${st}','${zip}','${priv}')`;
+        connection.query(insertQuery, (err1, results) => {
+            if(err1){
+                return res.send(err1)
+            }
+            else{
+                return res.send('Successfully Added User')
+            }
+        });
     });
+    
 });
 
 app.get('/users/remove', (req, res) => {
@@ -109,6 +186,35 @@ app.get('/users/fuelrequestinfo', (req, res) => {
             return res.json({
                 data: results
             })
+        }
+    });
+});
+
+app.get('/users/data/:username', (req, res) => {
+    const username  = req.params.username;
+    const addressQuery = `SELECT firstname, lastname, ad1, ad2, city, st, zip FROM sys.user WHERE username='${username}'`;
+    connection.query(addressQuery, (err, results) => {
+        if(err){
+            return res.send(err)
+        }
+        else{
+            return res.json({
+                data: results
+            })
+        }
+    });
+});
+
+app.get('/users/update/:username', (req, res) => {
+    const username  = req.params.username;
+    const { f,l,a1,a2,c,s,z } = req.query;
+    const addressQuery = `UPDATE sys.user SET firstname='${f}',lastname='${l}',ad1='${a1}',ad2='${a2}',city='${c}',st='${s}',zip='${z}' WHERE username='${username}'`;
+    connection.query(addressQuery, (err, results) => {
+        if(err){
+            return res.send(err)
+        }
+        else{
+            return res.send("Successfully Updated User")
         }
     });
 });

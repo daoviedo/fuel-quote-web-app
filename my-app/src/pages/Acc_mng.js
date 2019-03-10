@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
+import withStyles from '@material-ui/core/styles/withStyles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -7,6 +10,16 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import NavBar from './components/nav_bar';
+import Button from "@material-ui/core/Button";
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import teal from '@material-ui/core/colors/teal';
+
+const theme1 = createMuiTheme({
+    palette: {
+      primary: {main: teal[600]},
+    },
+});
 
 const options = [
     'AL',
@@ -73,22 +86,123 @@ const MenuProps = {
     },
 };
 
+const styles = theme => ({
+    
+    layout: {
+      width: 'auto',
+      marginLeft: theme.spacing.unit * 2,
+      marginRight: theme.spacing.unit * 2,
+      marginTop: 100,
+      [theme.breakpoints.up(600 + theme.spacing.unit * 2 * 2)]: {
+        width: 600,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+      },
+    },
+    paper: {
+      marginTop: theme.spacing.unit * 3,
+      marginBottom: theme.spacing.unit * 3,
+      padding: theme.spacing.unit * 2,
+      [theme.breakpoints.up(600 + theme.spacing.unit * 3 * 2)]: {
+        marginTop: theme.spacing.unit * 6,
+        marginBottom: theme.spacing.unit * 6,
+        padding: theme.spacing.unit * 3,
+      },
+    },
+    grow: {
+      flexGrow: 1,
+    },
+    bar: {
+      backgroundColor: "#00897b"
+    },
+  
+    buttons: {
+      display: 'flex',
+      justifyContent: 'flex-end',
+    },
+    button: {
+      marginTop: theme.spacing.unit * 3,
+      marginLeft: theme.spacing.unit,
+      textTransform: 'none',
+      outline: 0,
+    },
+  });
 
 
-export default class Acc_mng extends Component{
+
+class Acc_mng extends Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: "",
+      firstName: "",
+      lastName: "",
+      address1: "",
+      address2: "",
+      city: "",
+      dropSelection: "",
+      zip:"",
+      needsUpdate: false,
+  }
+  }
+    
+
+    componentDidMount(){
+        this.verifyData();
+    }
+
+    handleChange = event => {
+        this.setState({
+          [event.target.name]: event.target.value, needsUpdate: true
+        });
+    }
+
+    verifyData(){
+      fetch(`http://138.197.221.30:4000/verify`,{
+          method: "GET",
+          headers: {
+              "Authorization": "Bearer "+ document.cookie.split('=')[1]
+          }
+      })
+      .then(res => res.json())
+      .then(result => {this.setState({username: result.userdata.username});this.fetchData()})
+      .catch(err => console.log(err))
+    }
+
+    fetchData() {
+        const user = this.state.username;
+        fetch(`http://138.197.221.30:4000/users/data/${user}`)
+        .then(response => response.json())
+        .then(res => this.setState({firstName: res.data[0].firstname, lastName: res.data[0].lastname, address1: res.data[0].ad1, address2: res.data[0].ad2, city: res.data[0].city, dropSelection: res.data[0].st, zip: res.data[0].zip, needsUpdate: false}))
+        .catch(err => console.log(err))
+    }
+
+    updateProfile() {
+        const user = this.state.username;
+        fetch(`http://138.197.221.30:4000/users/update/${user}?f=${this.state.firstName}&l=${this.state.lastName}&a1=${this.state.address1}&a2=${this.state.address2}&c=${this.state.city}&s=${this.state.dropSelection}&z=${this.state.zip}`)
+        .then(this.fetchData())
+        .catch(err => console.log(err))
+    }
     
     render(){
+        const { classes } = this.props;
         return(
             
             <React.Fragment>
-                <Paper>
+                <NavBar/>
+                <MuiThemeProvider theme={theme1}>
+                <CssBaseline/>
+                <main className={classes.layout}>
+                <Paper className={classes.paper}>
               <Typography variant="h6" gutterBottom>
-                Complete your profile
+                Account Details
               </Typography>
-              <Grid container spacing={24}>
+              <Grid container spacing={24} style={{marginTop: 20, marginBottom: 20}}>
                 <Grid item xs={12} sm={6}>
                   <TextField
                     required
+                    value={this.state.firstName}
+                    onChange={this.handleChange}
                     id="firstName"
                     name="firstName"
                     label="First name"
@@ -99,6 +213,8 @@ export default class Acc_mng extends Component{
                 <Grid item xs={12} sm={6}>
                   <TextField
                     required
+                    value={this.state.lastName}
+                    onChange={this.handleChange}
                     id="lastName"
                     name="lastName"
                     label="Last name"
@@ -109,6 +225,8 @@ export default class Acc_mng extends Component{
                 <Grid item xs={12}>
                   <TextField
                     required
+                    value={this.state.address1}
+                    onChange={this.handleChange}
                     id="address1"
                     name="address1"
                     label="Address line 1"
@@ -118,6 +236,8 @@ export default class Acc_mng extends Component{
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
+                    value={this.state.address2}
+                    onChange={this.handleChange}
                     id="address2"
                     name="address2"
                     label="Address line 2"
@@ -127,6 +247,8 @@ export default class Acc_mng extends Component{
                 </Grid>
                 <Grid item xs={12} sm={4}>
                   <TextField
+                    value={this.state.city}
+                    onChange={this.handleChange}
                     required
                     id="city"
                     name="city"
@@ -140,12 +262,14 @@ export default class Acc_mng extends Component{
                     <InputLabel required>State</InputLabel>
                     <Select
                         style={{minWidth: 120}}
+                        value={this.state.dropSelection}
+                        onChange={this.handleChange}
                         MenuProps={MenuProps}
                         inputProps={{
                         name: 'dropSelection',
                         }}
                     >
-                        <MenuItem value="">
+                        <MenuItem value={this.state.dropSelection}>
                         <em>None</em>
                         </MenuItem >
                         {options.map(opp => (
@@ -157,6 +281,8 @@ export default class Acc_mng extends Component{
                 <Grid item xs={12} sm={4}>
                   <TextField
                     required
+                    value={this.state.zip}
+                    onChange={this.handleChange}
                     id="zip"
                     name="zip"
                     label="Zip / Postal code"
@@ -165,8 +291,23 @@ export default class Acc_mng extends Component{
                   />
                 </Grid>
               </Grid>
+              <div className={classes.buttons}>
+                <Button variant="contained"
+                      color="primary"
+                      disabled={!this.state.needsUpdate}
+                      onClick={()=> this.updateProfile()}
+                      className={classes.button}>Update Profile</Button>
+              </div>
               </Paper>
+              </main>
+              </MuiThemeProvider>
             </React.Fragment>
         );
     }
 }
+
+Acc_mng.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+  
+export default withStyles(styles)(Acc_mng);

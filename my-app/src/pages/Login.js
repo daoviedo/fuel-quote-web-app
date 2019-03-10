@@ -18,9 +18,6 @@ export default class Login extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidMount() {
-  }
-
   validateForm() {
     return this.state.username.length > 0 && this.state.password.length > 0;
   }
@@ -31,46 +28,29 @@ export default class Login extends Component {
     });
   }
 
-  fetchAuth = async () => {
-    const response = await fetch(`http://138.197.221.30:4000/users/lookup?username=${this.state.username}&pass=${this.state.password}`);
-    const json = await response.json();
-    if(json.data.length===0){
-    }
-    else{
-      if((this.state.username === json.data[0].username) && (this.state.password === json.data[0].password)){
-        localStorage.setItem('username', json.data[0].username);
-        localStorage.setItem('password', json.data[0].password);
-        localStorage.setItem('priv', json.data[0].priv);
-        localStorage.setItem('authen', "true");
-        this.setState({auth: true});
-      }
-      else{
-      }
-    }
-    
+  loginAuth(){
+    fetch(`http://138.197.221.30:4000/login`,{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            username: this.state.username,
+            password: this.state.password
+        }),
+    })
+    .then(res => res.json())
+    .then(result => {document.cookie = "token="+result.token;this.setState({auth: result.authentication});})
+    .catch(err => console.log(err))
   }
 
   handleSubmit = event => {
-    this.setState({submitted: true});
     event.preventDefault();
-    this.fetchAuth();
-  }
-
-  isAuthenticated(){
-    const tokenU = localStorage.getItem('username');
-    const tokenP = localStorage.getItem('password');
-    if(tokenU===this.state.username && tokenP===this.state.password){
-      return true;
-      
-    }
-    else{
-      return false;
-      
-    }
+    this.loginAuth();
   }
 
   render() {
-    const returnAuth = this.isAuthenticated();
+    const returnAuth = this.state.auth;
     const isSub = this.state.submitted;
     return (
       
