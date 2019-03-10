@@ -3,6 +3,7 @@ const cors = require('cors');
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 const app = express();
 
@@ -99,15 +100,18 @@ app.get('/users/add', (req, res) => {
 
 app.get('/users/adduser', (req, res) => {
     const { username, pass, fname, lname, ad1, ad2, city, st, zip, priv } = req.query;
-    const insertQuery = `INSERT INTO sys.user (username, password, firstname, lastname, ad1, ad2, city, st, zip, priv) VALUES('${username}','${pass}','${fname}','${lname}','${ad1}','${ad2}','${city}','${st}','${zip}','${priv}')`;
-    connection.query(insertQuery, (err, results) => {
-        if(err){
-            return res.send(err)
-        }
-        else{
-            return res.send('Successfully Added User')
-        }
-    });
+    bcrypt.hash(pass, saltRounds, function(err, hash) {
+        const insertQuery = `INSERT INTO sys.user (username, password, firstname, lastname, ad1, ad2, city, st, zip, priv) VALUES('${username}','${hash}','${fname}','${lname}','${ad1}','${ad2}','${city}','${st}','${zip}','${priv}')`;
+        connection.query(insertQuery, (err1, results) => {
+            if(err1){
+                return res.send(err1)
+            }
+            else{
+                return res.send('Successfully Added User')
+            }
+        });
+      });
+    
 });
 
 app.get('/users/remove', (req, res) => {
