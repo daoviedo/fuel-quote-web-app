@@ -165,12 +165,11 @@ class Acc_mng extends Component{
           }
       })
       .then(res => res.json())
-      .then(result => this.setState({username: result.userdata.username}))
-      .then(this.fetchData())
+      .then(result => {this.setState({username: result.userdata.username});this.fetchData()})
       .catch(err => console.log(err))
     }
 
-    fetchData = _ => {
+    fetchData() {
         const user = this.state.username;
         fetch(`http://138.197.221.30:4000/users/data/${user}`)
         .then(response => response.json())
