@@ -131,19 +131,24 @@ const styles = theme => ({
 
 
 class Acc_mng extends Component{
-    state = {
-        firstName: "",
-        lastName: "",
-        address1: "",
-        address2: "",
-        city: "",
-        dropSelection: "",
-        zip:"",
-        needsUpdate: false,
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: "",
+      firstName: "",
+      lastName: "",
+      address1: "",
+      address2: "",
+      city: "",
+      dropSelection: "",
+      zip:"",
+      needsUpdate: false,
+  }
+  }
+    
 
     componentDidMount(){
-        this.fetchData();
+        this.verifyData();
     }
 
     handleChange = event => {
@@ -152,8 +157,21 @@ class Acc_mng extends Component{
         });
     }
 
+    verifyData(){
+      fetch(`http://138.197.221.30:4000/test1`,{
+          method: "GET",
+          headers: {
+              "Authorization": "Bearer "+ document.cookie.split('=')[1]
+          }
+      })
+      .then(res => res.json())
+      .then(result => this.setState({username: result.userdata.username}))
+      .then(this.fetchData())
+      .catch(err => console.log(err))
+    }
+
     fetchData = _ => {
-        const user = localStorage.getItem("username");
+        const user = this.state.username;
         fetch(`http://138.197.221.30:4000/users/data/${user}`)
         .then(response => response.json())
         .then(res => this.setState({firstName: res.data[0].firstname, lastName: res.data[0].lastname, address1: res.data[0].ad1, address2: res.data[0].ad2, city: res.data[0].city, dropSelection: res.data[0].st, zip: res.data[0].zip, needsUpdate: false}))
@@ -161,7 +179,7 @@ class Acc_mng extends Component{
     }
 
     updateProfile = _ => {
-        const user = localStorage.getItem("username");
+        const user = this.state.username;
         fetch(`http://138.197.221.30:4000/users/update/${user}?f=${this.state.firstName}&l=${this.state.lastName}&a1=${this.state.address1}&a2=${this.state.address2}&c=${this.state.city}&s=${this.state.dropSelection}&z=${this.state.zip}`)
         .then(this.fetchData())
         .catch(err => console.log(err))
