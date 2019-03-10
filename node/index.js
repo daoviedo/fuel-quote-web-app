@@ -3,7 +3,10 @@ const cors = require('cors');
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
+var jwt = require('jsonwebtoken');
+
 const saltRounds = 10;
+const privateKey = "ASLFJDGasdkdgasf;sdlgk;asdflgmp;aslmh";
 
 const app = express();
 
@@ -63,27 +66,30 @@ app.post('/test', (req,res,next)=>{
             if(results.length===0){
                 return res.json({
                     data: {
-                        authentication: false
+                        token: null
                     }
                 });
             }
             else{
                 bcrypt.compare(password, results[0].password, function(err1, resu) {
                     if(resu){
-                        return res.json({
-                            data: {
-                                authentication: true,
-                                username: results[0].username,
-                                password: results[0].password,
-                                privelege: results[0].priv
-                            }
-                            
+                        jwt.sign({ authentication: true,
+                            username: results[0].username,
+                            password: results[0].password,
+                            privelege: results[0].priv }, "testeroo", { expiresIn: "1h" }, function(err, token) {
+                            console.log(token);
+                            return res.json({
+                                data: {
+                                    token: token
+                                }
+                                
+                            });
                         });
                     }
                     else{
                         return res.json({
                             data: {
-                                authentication: false
+                                token: null
                             }
                         });
                     }
