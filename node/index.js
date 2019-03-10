@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 
 const saltRounds = 10;
-const privateKey = "ASLFJDGasdkdgasf;sdlgk;asdflgmp;aslmh";
+const privateKey = "ASLFJDGasdkdgasfsdlgkasdflgmpaslmh";
 
 const app = express();
 
@@ -77,7 +77,7 @@ app.post('/test', (req,res,next)=>{
                         jwt.sign({
                             username: results[0].username,
                             password: results[0].password,
-                            privelege: results[0].priv }, "testeroo", { expiresIn: "1h" }, function(err, token) {
+                            privelege: results[0].priv }, privateKey, { expiresIn: "1h" }, function(err, token) {
                             console.log(token);
                             return res.json({
                                 data: {
