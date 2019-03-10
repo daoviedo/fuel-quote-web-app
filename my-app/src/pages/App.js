@@ -30,7 +30,8 @@ class App extends Component {
           <Route path="/userlist" exact component={UserList} />
           <Route path="/fuel_history" exact component={Fuel_History} />
           <Route path="/req_fuel_quote" exact component={Fuel_Quote} />
-          {this.state.testVar ? <Route path="/test" exact component={Test} /> : <Redirect to='/login'/>}
+          <Route path="/test" exact component={Test} />
+
         </div>
       </BrowserRouter>
     );
