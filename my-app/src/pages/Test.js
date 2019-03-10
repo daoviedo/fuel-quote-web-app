@@ -24,7 +24,6 @@ class Test extends Component {
         fetch(`http://138.197.221.30:4000/test`,{
             method: "POST",
             mode: "cors", // no-cors, cors, *same-origin
-            credentials: "same-origin", // include, *same-origin, omit
             headers: {
                 "Content-Type": "application/json",
             },
