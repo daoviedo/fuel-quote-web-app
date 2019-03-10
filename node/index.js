@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 
 const saltRounds = 10;
-const privateKey = "ASLFJDGasdkdgasfsdlgkasdflgmpaslmh";
+const privateKey = "ASLFJDGasdkdgasfsdlgkasdflgmpashlmh";
 
 const app = express();
 
