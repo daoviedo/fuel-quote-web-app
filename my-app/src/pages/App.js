@@ -15,6 +15,7 @@ import Test from './Test';
 
 class App extends Component {
   render() {
+    console.log(document.cookie)
     return (
       <BrowserRouter>
         <div className="App">
