@@ -20,7 +20,7 @@ class App extends Component {
     testVar: false
   }
   render() {
-
+    const varname1 = this.state.testVar;
     return (
       <BrowserRouter>
         <div className="App">
@@ -32,7 +32,15 @@ class App extends Component {
           <Route path="/userlist" exact component={UserList} />
           <Route path="/fuel_history" exact component={Fuel_History} />
           <Route path="/req_fuel_quote" exact component={Fuel_Quote} />
-          <Route path="/test" exact component={Test} />
+          
+
+          <Route exact path="/test" render={() => (
+            varname1 ? (
+              <Redirect to="/login"/>
+            ) : (
+              <Test/>
+            )
+          )}/>
 
         </div>
       </BrowserRouter>
