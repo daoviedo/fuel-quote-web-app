@@ -46,11 +46,22 @@ app.get('/', (req, res) => {
 });
 
 app.post('/test', (req,res,next)=>{
-    
-    console.log(req.body);
-    res.json({
-        data: req.body
-    })
+    const username = req.body.username;
+    const password = req.body.password;
+
+    const lookQuery = `SELECT * FROM sys.user WHERE username='${username}' AND password = '${password}'`;
+    connection.query(lookQuery, (err, results) => {
+        if(err){
+            return res.json({
+                error: err
+            })
+        }
+        else{
+            return res.json({
+                data: results
+            })
+        }
+    });
 });
 
 

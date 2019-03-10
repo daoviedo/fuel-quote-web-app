@@ -26,10 +26,13 @@ class Test extends Component {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({a: 1, b: 'test'}),
+            body: JSON.stringify({
+                username: 'Daniel',
+                password: '1234'
+            }),
         })
         .then(res => res.json())
-        .then(result => console.log(result.data.a))
+        .then(result => console.log(result.data.auth))
         .catch(err => console.log(err))
     }
 
