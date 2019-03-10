@@ -23,10 +23,10 @@ class Test extends Component {
     getData(){
         fetch(`http://138.197.221.30:4000/test`,{
             method: "POST",
-            body: JSON.stringify({
-                name: "Fish",
-                price: 12.00
-            })
+            body: {
+                "name": "Fish",
+                "price": "12.00"
+            }
         })
         .then(res => res.json())
         .then(result => console.log(result.data))
