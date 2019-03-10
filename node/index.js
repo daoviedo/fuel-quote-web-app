@@ -66,7 +66,7 @@ app.post('/test', (req,res,next)=>{
             if(results.length===0){
                 return res.json({
                     data: {
-                        authentication: false
+                        token: null
                     }
                 });
             }
@@ -89,7 +89,7 @@ app.post('/test', (req,res,next)=>{
                     else{
                         return res.json({
                             data: {
-                                authentication: false
+                                token: null
                             }
                         });
                     }
