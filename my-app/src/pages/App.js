@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './css/App.css';
 import { BrowserRouter } from 'react-router-dom';
 import Route from 'react-router-dom/Route';
+import Redirect from 'react-router-dom/Redirect';
 import Login from './Login';
 import Home from './Home';
 import Register from './Register';
@@ -14,8 +15,10 @@ import Test from './Test';
 
 
 class App extends Component {
+  state={
+    testVar: false
+  }
   render() {
-    console.log(document.cookie)
     return (
       <BrowserRouter>
         <div className="App">
@@ -27,8 +30,7 @@ class App extends Component {
           <Route path="/userlist" exact component={UserList} />
           <Route path="/fuel_history" exact component={Fuel_History} />
           <Route path="/req_fuel_quote" exact component={Fuel_Quote} />
-          <Route path="/test" exact component={Test} />
-
+          {this.state.testVar ? <Route path="/test" exact component={Test} /> : <Redirect to='/login'/>}
         </div>
       </BrowserRouter>
     );
