@@ -101,6 +101,7 @@ app.get('/users/add', (req, res) => {
 app.get('/users/adduser', (req, res) => {
     const { username, pass, fname, lname, ad1, ad2, city, st, zip, priv } = req.query;
     bcrypt.hash(pass, saltRounds, function(err, hash) {
+        console.log(hash)
         const insertQuery = `INSERT INTO sys.user (username, password, firstname, lastname, ad1, ad2, city, st, zip, priv) VALUES('${username}','${hash}','${fname}','${lname}','${ad1}','${ad2}','${city}','${st}','${zip}','${priv}')`;
         connection.query(insertQuery, (err1, results) => {
             if(err1){
