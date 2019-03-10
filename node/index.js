@@ -46,13 +46,10 @@ app.get('/', (req, res) => {
 });
 
 app.post('/test', (req,res,next)=>{
-    const product = {
-        name: req.body.name,
-        price: req.body.price
-    }
+    
     console.log(req.body);
     res.json({
-        data: product
+        data: req.body
     })
 });
 
