@@ -9,8 +9,11 @@ import './css/Home.css';
 
 
 export default class Home extends Component {
+    constructor(props){
+        super(props)
+    }
     render() {
-        console.log(document.cookie);
+        
         return (
             <div>
                 <div>
