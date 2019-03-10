@@ -26,10 +26,7 @@ class Test extends Component {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: {
-                "name": "Fish",
-                "price": "12.00"
-            }
+            body: JSON.stringify({a: 1, b: 'test'}),
         })
         .then(res => res.json())
         .then(result => console.log(result.data))
