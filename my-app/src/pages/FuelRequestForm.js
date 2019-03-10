@@ -1,6 +1,5 @@
 import React,{Component} from 'react';
 import './css/FuelRequestForm.css'
-import { Form, Row, Col } from 'react-bootstrap';
 import Button from '@material-ui/core/Button';
 import "react-datepicker/dist/react-datepicker.css";
 import Navbar from './components/nav_bar';
@@ -13,11 +12,9 @@ import Input from '@material-ui/core/Input';
 import { InputAdornment, TextField} from '@material-ui/core';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import teal from '@material-ui/core/colors/teal';
-import { MuiPickersUtilsProvider, TimePicker, DatePicker } from 'material-ui-pickers';
-import {Redirect} from "react-router-dom";
-import {withRouter} from 'react-router';
+import { MuiPickersUtilsProvider, DatePicker } from 'material-ui-pickers';
 import DateFnsUtils from '@date-io/date-fns';
-import { stringify } from 'querystring';
+
 
 
 const TealTheme = createMuiTheme({
@@ -92,7 +89,7 @@ class FuelRequestForm extends Component{
     constructor(props){
         super(props)
         this.state = {
-            username:localStorage.getItem("username"),
+            username:"",
             GallonsRequested: "",
             DeliveryAddress1: "",
             DeliveryAddress2: "",
@@ -107,7 +104,7 @@ class FuelRequestForm extends Component{
 
       }
     componentDidMount(){
-        this.getDataFromUser();
+        this.verifyData();
     }
 
     dateChanged = d => {
@@ -121,7 +118,17 @@ class FuelRequestForm extends Component{
             [e.target.name] : e.target.value
         });
     };
-
+    verifyData(){
+        fetch(`http://138.197.221.30:4000/verify`,{
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer "+ document.cookie.split('=')[1]
+            }
+        })
+        .then(res => res.json())
+        .then(result => {this.setState({username: result.userdata.username});this.getDataFromUser()})
+        .catch(err => console.log(err))
+      }
     getDataFromUser = () =>{
         fetch(`http://138.197.221.30:4000/users/fuelrequestinfo?username=${this.state.username}`)
         .then(Response => Response.json())
