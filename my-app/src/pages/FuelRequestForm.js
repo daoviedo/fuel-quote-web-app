@@ -123,7 +123,7 @@ class FuelRequestForm extends Component{
     };
 
     getDataFromUser = () =>{
-        fetch(`http://localhost:4000/users/fuelrequestinfo?username=${this.state.username}`)
+        fetch(`http://138.197.221.30:4000/users/fuelrequestinfo?username=${this.state.username}`)
         .then(Response => Response.json())
         .then(Response => this.setState({DeliveryAddress1: Response.data[0].ad1, DeliveryAddress2:Response.data[0].ad2,
             DeliveryCity: Response.data[0].city, DeliveryState: Response.data[0].st, DeliveryZip: Response.data[0].zip}))
@@ -132,7 +132,7 @@ class FuelRequestForm extends Component{
 
     
     addRequestToHistory = () => {
-        fetch(`http://localhost:4000/users/addRequest?username=${this.state.username}&GallonsRequested=${this.state.GallonsRequested}
+        fetch(`http://138.197.221.30:4000/users/addRequest?username=${this.state.username}&GallonsRequested=${this.state.GallonsRequested}
         &PricePerGallon=${this.state.SuggestedPrice}&DeliveryDate=${this.state.DeliveryDate}&ad1=${this.state.DeliveryAddress1}
         &city=${this.state.DeliveryCity}&st=${this.state.DeliveryState}&zip=${this.state.DeliveryZip}&OrderID=${this.state.OrderID}`)
         .then(this.redirectToHome)
