@@ -142,18 +142,18 @@ app.get('/users/history', (req, res) => {
 });
 
 app.get('/users/addRequest', (req, res) => {
-    var date= new Date();
-    date = date.getUTCFullYear() + '-' +
-    ('00' + (date.getUTCMonth()+1)).slice(-2) + '-' +
-    ('00' + date.getUTCDate()).slice(-2);
-    const { username, GallonsRequested, PricePerGallon, DeliveryDate, ad1, city, st, zip} = req.query;
-    const insertQuery = `INSERT INTO sys.history (username, GallonsRequested, PricePerGallon, TotalPrice, DateOfRequest, DeliveryDate, DeliveryAddress, DeliveryCity, DeliveryState, DeliveryZip) VALUES('${username}','${GallonsRequested}','${PricePerGallon}','${PricePerGallon*GallonsRequested}','${date}', '${DeliveryDate}', '${ad1}', '${city}', '${st}', '${zip}')`;
+    var date=new Date();
+    const { username, GallonsRequested, PricePerGallon, DeliveryDate, ad1, city, st, zip, OrderID} = req.query;
+    date = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ":" + date.getSeconds();
+    LoadingDate=new Date(DeliveryDate);
+    LoadingDate=LoadingDate.getFullYear() + '-' + (LoadingDate.getMonth()+1) + '-' + LoadingDate.getDate();
+    const insertQuery = `INSERT INTO sys.history (RequestID, username, GallonsRequested, PricePerGallon, TotalPrice, DateOfRequest, DeliveryDate, DeliveryAddress, DeliveryCity, DeliveryState, DeliveryZip) VALUES('${OrderID}','${username}','${GallonsRequested}','${PricePerGallon}','${PricePerGallon*GallonsRequested}','${date}', '${LoadingDate}', '${ad1}', '${city}', '${st}', '${zip}')`;
     connection.query(insertQuery, (err, results) => {
         if(err){
             return res.send(err)
         }
         else{
-            return res.send('Successfully Added History')
+            return res.send(date)
         }
     });
 });

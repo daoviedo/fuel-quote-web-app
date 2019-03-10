@@ -11,8 +11,6 @@ HOMEPAGE
 
 FUEL REQUEST FORM
     L-> See how we're going to manage to actually calculate cost
-    H-> Remake/Redesign using Material-UI Components
-    H-> Fix Date-picker (just use the Material-UI one)
     L-> Create a Confirmation Pop-up Submission Page
 
 ACCOUNT SETTINGS PAGE
