@@ -217,7 +217,7 @@ class FuelRequestForm extends Component{
                         label="Zip"
                         name= "DeliveryZip"
                         disabled
-                        value={this.state.zip}
+                        value={this.state.DeliveryZip}
                         className={classes.AddMargin}
                     />
                     <TextField
