@@ -33,7 +33,13 @@ app.get('/', (req, res) => {
 });
 
 app.post('/test', (req,res,next)=>{
-
+    const product = {
+        name: req.body.name,
+        price: req.body.price
+    }
+    res.json({
+        data: product
+    })
 });
 
 
