@@ -51,7 +51,8 @@ app.post('/test', (req,res,next)=>{
     const username = req.body.username;
     const password = req.body.password;
 
-    const lookQuery = `SELECT * FROM sys.user WHERE username='${username}' AND password = '${password}'`;
+
+    const lookQuery = `SELECT * FROM sys.user WHERE username='${username}'`;
     connection.query(lookQuery, (err, results) => {
         if(err){
             return res.json({
@@ -64,19 +65,30 @@ app.post('/test', (req,res,next)=>{
                     data: {
                         authentication: false
                     }
-                    
                 });
             }
             else{
-                return res.json({
-                    data: {
-                        authentication: true,
-                        username: results[0].username,
-                        password: results[0].password,
-                        privelege: results[0].priv
+                bcrypt.compare(password, results[0].password, function(err, res) {
+                    if(res){
+                        return res.json({
+                            data: {
+                                authentication: true,
+                                username: results[0].username,
+                                password: results[0].password,
+                                privelege: results[0].priv
+                            }
+                            
+                        });
                     }
-                    
+                    else{
+                        return res.json({
+                            data: {
+                                authentication: false
+                            }
+                        });
+                    }
                 });
+                
             }
             
         }
@@ -101,7 +113,6 @@ app.get('/users/add', (req, res) => {
 app.get('/users/adduser', (req, res) => {
     const { username, pass, fname, lname, ad1, ad2, city, st, zip, priv } = req.query;
     bcrypt.hash(pass, saltRounds, function(err, hash) {
-        console.log(hash)
         const insertQuery = `INSERT INTO sys.user (username, password, firstname, lastname, ad1, ad2, city, st, zip, priv) VALUES('${username}','${hash}','${fname}','${lname}','${ad1}','${ad2}','${city}','${st}','${zip}','${priv}')`;
         connection.query(insertQuery, (err1, results) => {
             if(err1){
@@ -111,7 +122,7 @@ app.get('/users/adduser', (req, res) => {
                 return res.send('Successfully Added User')
             }
         });
-      });
+    });
     
 });
 
