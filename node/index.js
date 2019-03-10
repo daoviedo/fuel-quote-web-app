@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql');
+const bodyParser = require('body-parser');
 
 const app = express();
 
@@ -24,13 +25,15 @@ connection.connect(err => {
 });
 
 app.use(cors());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
     res.send('Hello From servers')
 });
 
 app.post('/test', (req,res,next)=>{
-    
+
 });
 
 
