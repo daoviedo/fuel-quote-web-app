@@ -21,6 +21,10 @@ class App extends Component {
   }
 
   componentDidMount(){
+    this.verifyLogged();
+  }
+
+  verifyLogged(){
     fetch(`http://138.197.221.30:4000/verify`,{
             method: "GET",
             headers: {
