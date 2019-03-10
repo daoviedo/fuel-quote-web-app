@@ -22,23 +22,7 @@ class Test extends Component {
     }
 
     componentDidMount(){
-        this.getData();
-    }
-
-    getData(){
-        fetch(`http://138.197.221.30:4000/login`,{
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                username: this.state.username,
-                password: this.state.password
-            }),
-        })
-        .then(res => res.json())
-        .then(result => {this.setState({token: result.token}); document.cookie = "token="+result.token; console.log(result)})
-        .catch(err => console.log(err))
+        this.verifyData();
     }
 
     verifyData(){
