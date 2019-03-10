@@ -68,8 +68,8 @@ app.post('/test', (req,res,next)=>{
                 });
             }
             else{
-                bcrypt.compare(password, results[0].password, function(err, res) {
-                    if(res){
+                bcrypt.compare(password, results[0].password, function(err1, resu) {
+                    if(resu){
                         return res.json({
                             data: {
                                 authentication: true,
