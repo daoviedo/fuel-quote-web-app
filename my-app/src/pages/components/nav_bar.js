@@ -52,19 +52,34 @@ class AppBar extends Component {
         super(props);
 
         this.state = {
-            loggedInn: (localStorage.getItem("authen") === "true"),
+            loggedInn: false,
             user: {
-                username: localStorage.getItem("username"),
-                password: "ENCRYPTED",
-                priv: localStorage.getItem("priv")
+                username: "",
+                priv: ""
             },
             openUserMenu: false
         };
     }
 
+    componentDidMount(){
+        this.verifyData();
+    }
+
     logOff = _ => {
         localStorage.clear();
-        this.setState({ loggedInn: false, user: { username: "", password: "", priv: "" } });
+        this.setState({ loggedInn: false, user: { username: "", priv: "" } });
+    }
+
+    verifyData(){
+        fetch(`http://138.197.221.30:4000/test1`,{
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer "+ document.cookie.split('=')[1]
+            }
+        })
+        .then(res => res.json())
+        .then(result => console.log(result))
+        .catch(err => console.log(err))
     }
 
     render() {
