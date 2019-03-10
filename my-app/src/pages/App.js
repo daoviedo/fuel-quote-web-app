@@ -14,20 +14,6 @@ import Test from './Test';
 
 
 
-const PrivateRoute = ({component: Component, ...rest}) =>{
-  return(<Route {...rest} render={props => {
-    if(this.state.testVar){
-      return <Component{...props}/>;
-    }
-    else{
-      return <Redirect to='/login'/>;
-    }
-     
-  }
-}/>);
-}
-
-
 
 class App extends Component {
   state={
@@ -46,7 +32,7 @@ class App extends Component {
           <Route path="/userlist" exact component={UserList} />
           <Route path="/fuel_history" exact component={Fuel_History} />
           <Route path="/req_fuel_quote" exact component={Fuel_Quote} />
-          <PrivateRoute path="/test" exact component={Test} />
+          <Route path="/test" exact component={Test} />
 
         </div>
       </BrowserRouter>
