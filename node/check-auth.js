@@ -9,9 +9,7 @@ module.exports = (req,res,next) => {
         next();
     }catch (error) {
         return res.json({
-            data: {
-                authentication: false,
-            }
+            authentication: false,
         });
     }
 }

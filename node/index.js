@@ -66,10 +66,8 @@ app.post('/test', (req,res,next)=>{
         else{
             if(results.length===0){
                 return res.json({
-                    data: {
-                        authentication: false,
-                        token: null
-                    }
+                    authentication: false,
+                    token: null 
                 });
             }
             else{
@@ -80,25 +78,19 @@ app.post('/test', (req,res,next)=>{
                             password: results[0].password,
                             privelege: results[0].priv }, privateKey, { expiresIn: "1h" }, function(err2, token) {
                                 return res.json({
-                                    data: {
-                                        authentication: true,
-                                        token: token
-                                    }
+                                    authentication: true,
+                                    token: token  
                                 });
                         });
                     }
                     else{
                         return res.json({
-                            data: {
-                                authentication: false,
-                                token: null
-                            }
+                            authentication: false,
+                            token: null
                         });
                     }
-                });
-                
-            }
-            
+                }); 
+            }  
         }
     });
 });
