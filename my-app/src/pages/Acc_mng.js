@@ -187,6 +187,7 @@ class Acc_mng extends Component{
     
     render(){
         const { classes } = this.props;
+        console.log(this.state.username)
         return(
             
             <React.Fragment>
