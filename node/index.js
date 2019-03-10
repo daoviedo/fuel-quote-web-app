@@ -66,6 +66,7 @@ app.post('/test', (req,res,next)=>{
             if(results.length===0){
                 return res.json({
                     data: {
+                        authentication: false,
                         token: null
                     }
                 });
@@ -73,13 +74,14 @@ app.post('/test', (req,res,next)=>{
             else{
                 bcrypt.compare(password, results[0].password, function(err1, resu) {
                     if(resu){
-                        jwt.sign({ authentication: true,
+                        jwt.sign({
                             username: results[0].username,
                             password: results[0].password,
                             privelege: results[0].priv }, "testeroo", { expiresIn: "1h" }, function(err, token) {
                             console.log(token);
                             return res.json({
                                 data: {
+                                    authentication: true,
                                     token: token
                                 }
                                 
@@ -89,6 +91,7 @@ app.post('/test', (req,res,next)=>{
                     else{
                         return res.json({
                             data: {
+                                authentication: false,
                                 token: null
                             }
                         });
