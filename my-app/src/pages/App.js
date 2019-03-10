@@ -32,13 +32,13 @@ class App extends Component {
             }
         })
         .then(res => res.json())
-        .then(result => {this.setState({loggedIn: result.authentication}); console.log("authenticated")})
+        .then(result => {this.setState({loggedIn: result.authentication});})
         .catch(err => console.log(err))
   }
 
   render() {
-    this.verifyLogged();
     const {loggedIn} = this.state;
+    console.log(loggedIn);
     return (
       <BrowserRouter>
         <div className="App">
