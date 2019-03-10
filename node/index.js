@@ -59,15 +59,21 @@ app.post('/test', (req,res,next)=>{
         else{
             if(results.length===0){
                 return res.json({
-                    authentication: false
+                    data: {
+                        authentication: false
+                    }
+                    
                 });
             }
             else{
                 return res.json({
-                    authentication: true,
-                    username: results.username,
-                    password: results.password,
-                    privelege: results.priv
+                    data: {
+                        authentication: true,
+                        username: results.username,
+                        password: results.password,
+                        privelege: results.priv
+                    }
+                    
                 });
             }
             
