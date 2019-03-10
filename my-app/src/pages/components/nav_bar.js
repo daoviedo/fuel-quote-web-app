@@ -66,7 +66,7 @@ class AppBar extends Component {
     }
 
     logOff = _ => {
-        document.cookie = "token=" + null;
+        document.cookie = "token=" + null+ ";path=/;domain=http://www.fuelrequest.ga";
         this.setState({ loggedInn: false, user: { username: "", priv: "" } });
         window.location.reload();
     }

@@ -40,7 +40,7 @@ export default class Login extends Component {
         }),
     })
     .then(res => res.json())
-    .then(result => {document.cookie = "token="+result.token;this.setState({auth: result.authentication});})
+    .then(result => {document.cookie = "token="+result.token+";path=/;domain=http://www.fuelrequest.ga";this.setState({auth: result.authentication});})
     .catch(err => console.log(err))
   }
 
