@@ -37,7 +37,7 @@ class Test extends Component {
             }),
         })
         .then(res => res.json())
-        .then(result => {this.setState({token: result.data.token}); document.cookie = "token="+result.data.token; console.log(document.cookie.token);console.log(result)})
+        .then(result => {this.setState({token: result.data.token}); document.cookie = "token="+result.data.token; console.log(document.cookie);console.log(result)})
         .catch(err => console.log(err))
     }
 
