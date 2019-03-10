@@ -177,7 +177,8 @@ class Acc_mng extends Component{
         .catch(err => console.log(err))
     }
 
-    updateProfile = _ => {
+    updateProfile() {
+        console.log(this.state.username)
         const user = this.state.username;
         fetch(`http://138.197.221.30:4000/users/update/${user}?f=${this.state.firstName}&l=${this.state.lastName}&a1=${this.state.address1}&a2=${this.state.address2}&c=${this.state.city}&s=${this.state.dropSelection}&z=${this.state.zip}`)
         .then(this.fetchData())
@@ -186,7 +187,6 @@ class Acc_mng extends Component{
     
     render(){
         const { classes } = this.props;
-        console.log(this.state.username)
         return(
             
             <React.Fragment>
