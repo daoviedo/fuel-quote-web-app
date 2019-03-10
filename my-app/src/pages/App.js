@@ -37,8 +37,6 @@ class App extends Component {
   }
 
   render() {
-    const {loggedIn} = this.state;
-    console.log(loggedIn);
     return (
       <BrowserRouter>
         <div className="App">
@@ -52,7 +50,7 @@ class App extends Component {
           <Route path="/req_fuel_quote" exact component={Fuel_Quote} />
 
           <Route exact path="/test" render={() => (
-            loggedIn ? (
+            this.state.loggedIn ? (
               <Test/>
             ) : (
               <Redirect to="/login"/>
