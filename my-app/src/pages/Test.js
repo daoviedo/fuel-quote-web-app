@@ -29,7 +29,7 @@ class Test extends Component {
             body: JSON.stringify({a: 1, b: 'test'}),
         })
         .then(res => res.json())
-        .then(result => console.log(result.data))
+        .then(result => console.log(result.data.a))
         .catch(err => console.log(err))
     }
 
