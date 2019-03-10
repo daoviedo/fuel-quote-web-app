@@ -17,7 +17,7 @@ import Test from './Test';
 
 class App extends Component {
   state={
-    testVar: false
+    testVar: true
   }
   render() {
     const varname1 = this.state.testVar;
