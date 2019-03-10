@@ -32,7 +32,7 @@ class Test extends Component {
             }),
         })
         .then(res => res.json())
-        .then(result => console.log(result.data.auth))
+        .then(result => console.log(result))
         .catch(err => console.log(err))
     }
 
