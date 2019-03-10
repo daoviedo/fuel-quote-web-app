@@ -17,10 +17,22 @@ import Test from './Test';
 
 class App extends Component {
   state={
-    testVar: true
+    loggedIn: false
+  }
+
+  componentDidMount(){
+    fetch(`http://138.197.221.30:4000/verify`,{
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer "+ document.cookie.split('=')[1]
+            }
+        })
+        .then(res => res.json())
+        .then(result => this.setState({loggedIn: result.authentication}))
+        .catch(err => console.log(err))
   }
   render() {
-    const varname1 = this.state.testVar;
+    const {loggedIn} = this.state;
     return (
       <BrowserRouter>
         <div className="App">
@@ -35,10 +47,10 @@ class App extends Component {
           
 
           <Route exact path="/test" render={() => (
-            varname1 ? (
-              <Redirect to="/login"/>
-            ) : (
+            loggedIn ? (
               <Test/>
+            ) : (
+              <Redirect to="/login"/>
             )
           )}/>
 
