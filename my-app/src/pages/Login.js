@@ -28,7 +28,7 @@ export default class Login extends Component {
     });
   }
 
-  getData(){
+  loginAuth(){
     fetch(`http://138.197.221.30:4000/test`,{
         method: "POST",
         headers: {
@@ -44,43 +44,9 @@ export default class Login extends Component {
     .catch(err => console.log(err))
   }
 
-  fetchAuth = async () => {
-    const response = await fetch(`http://138.197.221.30:4000/users/lookup?username=${this.state.username}&pass=${this.state.password}`);
-    const json = await response.json();
-    if(json.data.length===0){
-      this.setState({submitted: true});
-    }
-    else{
-      if((this.state.username === json.data[0].username) && (this.state.password === json.data[0].password)){
-        localStorage.setItem('username', json.data[0].username);
-        localStorage.setItem('password', json.data[0].password);
-        localStorage.setItem('priv', json.data[0].priv);
-        localStorage.setItem('authen', "true");
-        this.setState({auth: true, submitted: false});
-      }
-      else{
-        this.setState({submitted: true});
-      }
-    }
-    
-  }
-
   handleSubmit = event => {
     event.preventDefault();
-    this.getData();
-  }
-
-  isAuthenticated(){
-    const tokenU = localStorage.getItem('username');
-    const tokenP = localStorage.getItem('password');
-    if(tokenU===this.state.username && tokenP===this.state.password){
-      return true;
-      
-    }
-    else{
-      return false;
-      
-    }
+    this.loginAuth();
   }
 
   render() {
