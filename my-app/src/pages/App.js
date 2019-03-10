@@ -15,9 +15,16 @@ import Test from './Test';
 
 
 const PrivateRoute = ({component: Component, ...rest}) =>{
-  <Route {...rest} render={(props) => (this.state.testVar === true ? 
-  <Component{...props}/> : <Redirect to='/login'/>)
-  }/>
+  return(<Route {...rest} render={props => {
+    if(this.state.testVar){
+      return <Component{...props}/>;
+    }
+    else{
+      return <Redirect to='/login'/>;
+    }
+     
+  }
+}/>);
 }
 
 
