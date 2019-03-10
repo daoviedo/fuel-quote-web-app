@@ -16,7 +16,8 @@ class Test extends Component {
         super(props);
         this.state = {
             username: "",
-            password: ""
+            password: "",
+            token: ""
         }
     }
 
@@ -34,6 +35,18 @@ class Test extends Component {
                 username: this.state.username,
                 password: this.state.password
             }),
+        })
+        .then(res => res.json())
+        .then(result => {this.setState({token: result.data.token});console.log(result)})
+        .catch(err => console.log(err))
+    }
+
+    verifyData(){
+        fetch(`http://138.197.221.30:4000/test1`,{
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer "+ this.state.token
+            }
         })
         .then(res => res.json())
         .then(result => console.log(result))
@@ -75,6 +88,7 @@ class Test extends Component {
                     />
                     <br/>
                     <Button onClick={()=>this.getData()}>Submit</Button>
+                    <Button onClick={()=>this.verifyData()}>Verify</Button>
             </div>
         );
     }

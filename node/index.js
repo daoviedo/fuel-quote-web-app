@@ -4,6 +4,7 @@ const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
+const checkAuth = require('./check-auth');
 
 const saltRounds = 10;
 const privateKey = "ASLFJDGasdkdgasfsdlgkasdflgmpashlmh";
@@ -102,6 +103,11 @@ app.post('/test', (req,res,next)=>{
     });
 });
 
+app.get('/test1', checkAuth, (req,res,next)=>{
+    res.json({
+        auth: true
+    });
+});
 
 
 app.get('/users/add', (req, res) => {
