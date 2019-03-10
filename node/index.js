@@ -29,6 +29,12 @@ app.get('/', (req, res) => {
     res.send('Hello From servers')
 });
 
+app.post('/test', (req,res,next)=>{
+    
+});
+
+
+
 app.get('/users/add', (req, res) => {
     const { username, pass } = req.query;
     const insertQuery = `INSERT INTO sys.user (username, password) VALUES('${username}','${pass}')`;
