@@ -23,6 +23,9 @@ class Test extends Component {
     getData(){
         fetch(`http://138.197.221.30:4000/test`,{
             method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
             body: {
                 "name": "Fish",
                 "price": "12.00"
