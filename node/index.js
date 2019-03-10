@@ -57,9 +57,20 @@ app.post('/test', (req,res,next)=>{
             })
         }
         else{
-            return res.json({
-                data: results
-            })
+            if(results.length===0){
+                return res.json({
+                    authentication: false
+                });
+            }
+            else{
+                return res.json({
+                    authentication: true,
+                    username: results.username,
+                    password: results.password,
+                    privelege: results.priv
+                });
+            }
+            
         }
     });
 });
