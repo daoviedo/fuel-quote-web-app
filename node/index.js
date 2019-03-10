@@ -24,8 +24,9 @@ connection.connect(err => {
     }
 });
 
-app.use(cors());
 app.use(bodyParser.json());
+app.use(cors());
+
 
 app.get('/', (req, res) => {
     res.send('Hello From servers')
@@ -36,7 +37,7 @@ app.post('/test', (req,res,next)=>{
         name: req.body.name,
         price: req.body.price
     }
-    console.log(product);
+    console.log(req.body);
     res.json({
         data: product
     })
