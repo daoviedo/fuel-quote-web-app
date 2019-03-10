@@ -17,42 +17,42 @@ import UserLogo from '@material-ui/icons/AccountCircle';
 import HomeLogo from '@material-ui/icons/Home';
 import ReqLogo from '@material-ui/icons/NoteAdd';
 
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
-import { Drawer, List, ListItem, ListItemText, Divider,} from "@material-ui/core";
+import { Drawer, List, ListItem, ListItemText, Divider, } from "@material-ui/core";
 
 window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true;
 
-const styles = _ =>({
+const styles = _ => ({
     root: {
-      flexGrow: 1,
+        flexGrow: 1,
     },
     grow: {
-      flexGrow: 1,
+        flexGrow: 1,
     },
     bar: {
         backgroundColor: "#00897b",
         minHeight: '40px',
         maxHeight: '56px',
-        height: '100%'
+        height: '100%',
     },
-    tool:{
+    tool: {
         minHeight: '100%'
     },
     menuButton: {
-      marginLeft: -12,
-      marginRight: 20,
-      
+        marginLeft: -12,
+        marginRight: 20,
+
     },
 });
 
 class AppBar extends Component {
     constructor(props) {
         super(props);
-    
+
         this.state = {
-            loggedInn: (localStorage.getItem("authen")==="true"),
+            loggedInn: (localStorage.getItem("authen") === "true"),
             user: {
                 username: localStorage.getItem("username"),
                 password: "ENCRYPTED",
@@ -64,72 +64,72 @@ class AppBar extends Component {
 
     logOff = _ => {
         localStorage.clear();
-        this.setState({loggedInn: false, user: {username: "", password: "", priv: ""}});
+        this.setState({ loggedInn: false, user: { username: "", password: "", priv: "" } });
     }
-    
+
     render() {
         const { classes } = this.props;
         const finalLogged = this.state.loggedInn;
-        const privel = (this.state.user.priv==="Admin");
+        const privel = (this.state.user.priv === "Admin");
         return (
             <div >
-                <AppBar1 position="fixed" classes={{root: classes.bar}}>
-                    <Toolbar classes={{root: classes.tool}}>
-                        <Logo style={{fontSize:"200%", marginRight:4, }}/>
+                <AppBar1 position="fixed" classes={{ root: classes.bar }}>
+                    <Toolbar classes={{ root: classes.tool }}>
+                        <Logo style={{ fontSize: "200%", marginRight: 4, }} />
                         <Typography variant="h5" align="left" color="inherit" className={classes.grow}>Devry Energy</Typography>
-                        {finalLogged ? 
-                        (<div>
-                            <Drawer anchor="right" open={this.state.openUserMenu} onClose={()=>this.setState({openUserMenu: false})}>
-                                <div onClick={()=> this.setState({openUserMenu: false})}>
-                                    <List>
-                                        <Link to="/" style={{ textDecoration: 'none'}}>
-                                        <ListItem button>
-                                            <HomeLogo style={{color: "#00897b"}}/>
-                                            <ListItemText primary='Home' />
-                                        </ListItem>
-                                        </Link>
-                                        <Link to="/req_fuel_quote" style={{ textDecoration: 'none'}}>
-                                        <ListItem button>
-                                            <ReqLogo style={{color: "#00897b"}}/>
-                                            <ListItemText primary='Request Fuel' />
-                                        </ListItem>
-                                        </Link>
-                                    </List>
-                                    <Divider/>
-                                    <List>
-                                        <Link to="/manage_account" style={{ textDecoration: 'none'}}>
-                                        <ListItem button>
-                                            <Settings style={{color: "#00897b"}}/>
-                                            <ListItemText primary='Account Settings' />
-                                        </ListItem>
-                                        </Link>
-                                        <Link to="/fuel_history" style={{ textDecoration: 'none'}}>
-                                        <ListItem button>
-                                            <History style={{color: "#00897b"}}/>
-                                            <ListItemText primary='Fuel Quote History' />
-                                        </ListItem>
-                                        </Link>
-                                        {privel ? (<Link to="/userlist" style={{ textDecoration: 'none'}}>
-                                        <ListItem button>
-                                            <AdminLogo style={{color: "#00897b"}}/>
-                                            <ListItemText primary='Admin'/>
-                                        </ListItem>
-                                        </Link>): <div/>}
-                                    </List>
-                                    <Divider/>
-                                    <List>
-                                        <Link to="/" style={{ textDecoration: 'none'}}>
-                                        <ListItem button onClick={this.logOff.bind(this)}>
-                                            <Exit style={{color: "#00897b"}}/>
-                                            <ListItemText primary='Log out' />
-                                        </ListItem>
-                                        </Link>
-                                    </List>
-                                </div>
-                            </Drawer>
-                            <Button color="inherit" style={{textTransform: 'none', outline: 0, fontSize: "90%"}} onClick={()=> this.setState({openUserMenu: true})}><UserLogo style={{marginRight: 3,fontSize: "180%"}}/>{this.state.user.username}</Button></div>) : 
-                        (<Button color="inherit" style={{outline: 0}} href="/login">Login</Button>)}
-                        
+                        {finalLogged ?
+                            (<div>
+                                <Drawer anchor="right" open={this.state.openUserMenu} onClose={() => this.setState({ openUserMenu: false })}>
+                                    <div onClick={() => this.setState({ openUserMenu: false })}>
+                                        <List>
+                                            <Link to="/" style={{ textDecoration: 'none' }}>
+                                                <ListItem button>
+                                                    <HomeLogo style={{ color: "#00897b" }} />
+                                                    <ListItemText primary='Home' />
+                                                </ListItem>
+                                            </Link>
+                                            <Link to="/req_fuel_quote" style={{ textDecoration: 'none' }}>
+                                                <ListItem button>
+                                                    <ReqLogo style={{ color: "#00897b" }} />
+                                                    <ListItemText primary='Request Fuel' />
+                                                </ListItem>
+                                            </Link>
+                                        </List>
+                                        <Divider />
+                                        <List>
+                                            <Link to="/manage_account" style={{ textDecoration: 'none' }}>
+                                                <ListItem button>
+                                                    <Settings style={{ color: "#00897b" }} />
+                                                    <ListItemText primary='Account Settings' />
+                                                </ListItem>
+                                            </Link>
+                                            <Link to="/fuel_history" style={{ textDecoration: 'none' }}>
+                                                <ListItem button>
+                                                    <History style={{ color: "#00897b" }} />
+                                                    <ListItemText primary='Fuel Quote History' />
+                                                </ListItem>
+                                            </Link>
+                                            {privel ? (<Link to="/userlist" style={{ textDecoration: 'none' }}>
+                                                <ListItem button>
+                                                    <AdminLogo style={{ color: "#00897b" }} />
+                                                    <ListItemText primary='Admin' />
+                                                </ListItem>
+                                            </Link>) : <div />}
+                                        </List>
+                                        <Divider />
+                                        <List>
+                                            <Link to="/" style={{ textDecoration: 'none' }}>
+                                                <ListItem button onClick={this.logOff.bind(this)}>
+                                                    <Exit style={{ color: "#00897b" }} />
+                                                    <ListItemText primary='Log out' />
+                                                </ListItem>
+                                            </Link>
+                                        </List>
+                                    </div>
+                                </Drawer>
+                                <Button color="inherit" style={{ textTransform: 'none', outline: 0, fontSize: "90%" }} onClick={() => this.setState({ openUserMenu: true })}><UserLogo style={{ marginRight: 3, fontSize: "180%" }} />{this.state.user.username}</Button></div>) :
+                            (<Button color="inherit" style={{ outline: 0 }} href="/login">Login</Button>)}
+
                     </Toolbar>
                 </AppBar1>
             </div>
@@ -140,5 +140,5 @@ class AppBar extends Component {
 AppBar.propTypes = {
     classes: PropTypes.object.isRequired,
 };
-  
+
 export default withStyles(styles)(AppBar);
