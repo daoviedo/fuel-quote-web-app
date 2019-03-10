@@ -19,7 +19,7 @@ export default class HistoryTable extends Component {
             }
         })
         .then(res => res.json())
-        .then(result => {this.setState({username: result.userdata.username});this.getDataFromHistory().bind(this)})
+        .then(result => {this.setState({username: result.userdata.username});this.getDataFromHistory()})
         .catch(err => console.log(err))
     }
 
