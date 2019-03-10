@@ -31,6 +31,7 @@ class App extends Component {
         .then(result => this.setState({loggedIn: result.authentication}))
         .catch(err => console.log(err))
   }
+  
   render() {
     const {loggedIn} = this.state;
     return (
