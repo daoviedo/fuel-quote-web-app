@@ -34,7 +34,6 @@ class Test extends Component {
     }
 
     render() {
-        console.log(this.state.users)
         const { classes } = this.props;
         return (
             <div>  

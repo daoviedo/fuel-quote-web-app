@@ -37,6 +37,7 @@ app.post('/test', (req,res,next)=>{
         name: req.body.name,
         price: req.body.price
     }
+    console.log(product);
     res.json({
         data: product
     })
