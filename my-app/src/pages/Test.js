@@ -24,8 +24,8 @@ class Test extends Component {
         fetch(`http://138.197.221.30:4000/test`,{
             method: "POST",
             body: {
-                name: "Fish",
-                price: "12.00"
+                "name": "Fish",
+                "price": "12.00"
             }
         })
         .then(res => res.json())
