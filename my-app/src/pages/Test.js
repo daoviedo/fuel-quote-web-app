@@ -5,30 +5,15 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 
 const styles = theme => ({
-    root: {
-      flexGrow: 1,
-    },
-    paper: {
-      height: 140,
-      width: 200,
-    },
-    control: {
-      padding: theme.spacing.unit * 2,
-    },
-    card: {
-        maxWidth: 345,
-        height: '400px',
-        float: 'left',
-        margin: '20px',
-    },
-    media: {
-        height: 140,
-    },
+    
   });
 
 class Test extends Component {
-    state ={
-        users: [],
+    constructor(props){
+        super(props);
+        this.state={
+            
+        }
     }
 
     componentDidMount(){
@@ -36,10 +21,6 @@ class Test extends Component {
     }
 
     getData(){
-        fetch('http://138.197.221.30:4000/users')
-        .then(response=> response.json())
-        .then(res=> this.setState({users: res.data}))
-        .catch(err => console.log(err))
     }
 
     render() {
@@ -48,11 +29,7 @@ class Test extends Component {
         return (
             <div>  
                 <Navbar />
-                <br/><br/><br/><br/>
-                
-                {this.state.users.map(({username, password, firstname})=><p>{username}:{password}:{firstname}</p>)}
-             
-                
+                <br/><br/><br/><br/>    
             </div>
         );
     }
