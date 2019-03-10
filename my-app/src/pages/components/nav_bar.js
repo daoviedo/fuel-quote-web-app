@@ -68,6 +68,7 @@ class AppBar extends Component {
     logOff = _ => {
         document.cookie = "token=" + null;
         this.setState({ loggedInn: false, user: { username: "", priv: "" } });
+        window.location.reload();
     }
 
     verifyData(){
