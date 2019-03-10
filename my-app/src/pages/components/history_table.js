@@ -4,12 +4,26 @@ import Table from 'react-bootstrap/Table'
 
 export default class HistoryTable extends Component {
     componentDidMount() {
-        this.getDataFromHistory();
+        this.verifyData();
     }
     state = {
-        username: localStorage.getItem("username"),
+        username: "",
         Requests: [],
     }
+
+    verifyData(){
+        fetch(`http://138.197.221.30:4000/verify`,{
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer "+ document.cookie.split('=')[1]
+            }
+        })
+        .then(res => res.json())
+        .then(result => {this.setState({username: result.userdata.username});this.fetchData().bind(this)})
+        .catch(err => console.log(err))
+    }
+
+
     getDataFromHistory = () => {
         fetch(`http://138.197.221.30:4000/users/history?username=${this.state.username}`)
             .then(Response => Response.json())

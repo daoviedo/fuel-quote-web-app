@@ -39,5 +39,8 @@ SERVER
 ###Last Edited By Daniel 3/9/19###
 
 CHANGELOG
+    -> Introduced Hashing password in DB
+    -> Introduced JWT Tokens for verification
+
     -> Fixed the login showing invalid credentials when credentials were correct
     -> Fixed the popup rendering for username is taken/available(quick flicker problem)
