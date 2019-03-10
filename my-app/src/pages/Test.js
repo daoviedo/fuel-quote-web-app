@@ -37,7 +37,7 @@ class Test extends Component {
             }),
         })
         .then(res => res.json())
-        .then(result => {this.setState({token: result.data.token}); document.cookie = "token="+result.data.token; console.log(document.cookie.split('=')[1]);console.log(result)})
+        .then(result => {this.setState({token: result.data.token}); document.cookie = "token="+result.data.token; console.log(result)})
         .catch(err => console.log(err))
     }
 
@@ -45,7 +45,7 @@ class Test extends Component {
         fetch(`http://138.197.221.30:4000/test1`,{
             method: "GET",
             headers: {
-                "Authorization": "Bearer "+ this.state.token
+                "Authorization": "Bearer "+ document.cookie.split('=')[1]
             }
         })
         .then(res => res.json())
