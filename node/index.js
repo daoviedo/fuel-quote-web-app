@@ -78,14 +78,12 @@ app.post('/test', (req,res,next)=>{
                             username: results[0].username,
                             password: results[0].password,
                             privelege: results[0].priv }, privateKey, { expiresIn: "1h" }, function(err2, token) {
-                                bcrypt.hash(token, saltRounds, function(err3, hash) {
-                                    return res.json({
-                                        data: {
-                                            authentication: true,
-                                            token: hash
-                                        }
-                                    });
-                                  });
+                                return res.json({
+                                    data: {
+                                        authentication: true,
+                                        token: token
+                                    }
+                                });
                         });
                     }
                     else{
