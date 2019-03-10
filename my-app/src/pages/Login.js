@@ -40,7 +40,7 @@ export default class Login extends Component {
         }),
     })
     .then(res => res.json())
-    .then(result => {this.setState({auth: result.authentication}); document.cookie = "token="+result.token;})
+    .then(result => {document.cookie = "token="+result.token;this.setState({auth: result.authentication});})
     .catch(err => console.log(err))
   }
 
