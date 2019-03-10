@@ -28,10 +28,10 @@ class App extends Component {
             }
         })
         .then(res => res.json())
-        .then(result => this.setState({loggedIn: result.authentication}))
+        .then(result => {this.setState({loggedIn: result.authentication}); console.log("authenticated")})
         .catch(err => console.log(err))
   }
-  
+
   render() {
     const {loggedIn} = this.state;
     return (
