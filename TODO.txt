@@ -25,8 +25,6 @@ REGISTER PAGE
 
 LOGIN PAGE
     L-> Remake Front-end using material ui
-    L-> Move authentication to Back-end
-    L-> If theres time, learn about authentication tokens/cookies/encryption(possibly implement)
 
 FUEL REQUEST HISTORY
     L-> Shorten the width of the table (margins)
