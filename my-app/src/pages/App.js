@@ -37,6 +37,7 @@ class App extends Component {
   }
 
   render() {
+    this.verifyLogged();
     const {loggedIn} = this.state;
     return (
       <BrowserRouter>
@@ -49,7 +50,6 @@ class App extends Component {
           <Route path="/userlist" exact component={UserList} />
           <Route path="/fuel_history" exact component={Fuel_History} />
           <Route path="/req_fuel_quote" exact component={Fuel_Quote} />
-          
 
           <Route exact path="/test" render={() => (
             loggedIn ? (
