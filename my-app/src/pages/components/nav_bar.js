@@ -78,7 +78,7 @@ class AppBar extends Component {
             }
         })
         .then(res => res.json())
-        .then(result => console.log(result))
+        .then(result => this.setState({loggedInn: result.authentication, user: {username: result.userdata.username, priv: result.userdata.privelege}}))
         .catch(err => console.log(err))
     }
 
@@ -86,7 +86,7 @@ class AppBar extends Component {
         const { classes } = this.props;
         const finalLogged = this.state.loggedInn;
         const privel = (this.state.user.priv === "Admin");
-        console.log(document.cookie);
+        
         return (
             <div >
                 <AppBar1 position="fixed" classes={{ root: classes.bar }}>
