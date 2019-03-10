@@ -66,12 +66,13 @@ app.post('/test', (req,res,next)=>{
                 });
             }
             else{
-                const user = {authentication: true,
-                    username: results.username,
-                    password: results.password,
-                    privelege: results.priv}
+                const user = {}
                 return res.json({
-                    data: user
+                    data: {
+                        authentication: true,
+                        results
+                    }
+                    
                 });
             }
             
