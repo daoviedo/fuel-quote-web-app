@@ -62,7 +62,6 @@ class AppBar extends Component {
     }
 
     componentDidMount(){
-        window.location.reload();
         this.verifyData();
     }
 
