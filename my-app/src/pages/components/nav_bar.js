@@ -66,7 +66,7 @@ class AppBar extends Component {
     }
 
     logOff = _ => {
-        localStorage.clear();
+        document.cookie = "token=" + null;
         this.setState({ loggedInn: false, user: { username: "", priv: "" } });
     }
 
@@ -86,7 +86,7 @@ class AppBar extends Component {
         const { classes } = this.props;
         const finalLogged = this.state.loggedInn;
         const privel = (this.state.user.priv === "Admin");
-        console.log(this.state.user)
+        
         return (
             <div >
                 <AppBar1 position="fixed" classes={{ root: classes.bar }}>
