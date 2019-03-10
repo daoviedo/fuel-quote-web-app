@@ -10,6 +10,7 @@ import './css/Home.css';
 
 export default class Home extends Component {
     render() {
+        console.log(document.cookie);
         return (
             <div>
                 <div>
