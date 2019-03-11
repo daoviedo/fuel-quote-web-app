@@ -173,7 +173,7 @@ class FuelRequestForm extends Component{
                                 
                                 <DatePicker
                                     
-                                    margin="auto"
+                                    
                                     minDate={new Date()}
                                     label="Date picker"
                                     value={this.state.DeliveryDate}
