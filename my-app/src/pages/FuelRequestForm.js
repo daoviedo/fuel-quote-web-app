@@ -245,7 +245,7 @@ class FuelRequestForm extends Component{
                     <Paper>
                         
                     </Paper>
-                    )};
+                    )}
                                         
                 
             </div>
