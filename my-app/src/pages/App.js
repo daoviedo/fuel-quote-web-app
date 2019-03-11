@@ -6,10 +6,10 @@ import Redirect from 'react-router-dom/Redirect';
 import Login from './Login';
 import Home from './Home';
 import Register from './Register';
-import Acc_mng from './Acc_mng';
+import Accmng from './Acc_mng';
 import UserList from './UserList';
-import Fuel_History from './Fuel_history';
-import Fuel_Quote from './FuelRequestForm';
+import FuelHistory from './Fuel_history';
+import FuelQuote from './FuelRequestForm';
 import Test from './Test';
 
 
@@ -53,7 +53,7 @@ class App extends Component {
              rendered ? (
               (
                 loggedIn ? (
-                  <Acc_mng/>
+                  <Accmng/>
                 ) : (
                   <Redirect to="/login"/>
                 )
@@ -66,7 +66,7 @@ class App extends Component {
              rendered ? (
               (
                 loggedIn ? (
-                  <Fuel_History/>
+                  <FuelHistory/>
                 ) : (
                   <Redirect to="/login"/>
                 )
@@ -79,7 +79,7 @@ class App extends Component {
              rendered ? (
               (
                 loggedIn ? (
-                  <Fuel_Quote/>
+                  <FuelQuote/>
                 ) : (
                   <Redirect to="/login"/>
                 )
