@@ -16,7 +16,29 @@ import Test from './Test';
 
 
 class App extends Component {
+  state={
+    loggedIn: false,
+    rendered: false,
+  }
+
+  componentDidMount(){
+    this.verifyLogged();
+  }
+
+  verifyLogged(){
+    fetch(`http://138.197.221.30:4000/verify`,{
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer "+ document.cookie.split('=')[1]
+            }
+        })
+        .then(res => res.json())
+        .then(result => {this.setState({loggedIn: result.authentication, rendered: true});})
+        .catch(err => {this.setState({rendered: true});console.log(err)})
+  }
+
   render() {
+    const {rendered, loggedIn} = this.state;
     return (
       <BrowserRouter>
         <div className="App">
@@ -29,8 +51,19 @@ class App extends Component {
           <Route path="/fuel_history" exact component={Fuel_History} />
           <Route path="/req_fuel_quote" exact component={Fuel_Quote} />
 
-          <Route exact path="/test" exact component={Test}/>
-        
+          <Route exact path="/test" render={() => (
+             rendered ? (
+              (
+                loggedIn ? (
+                  <Test/>
+                ) : (
+                  <Redirect to="/login"/>
+                )
+              )
+            ) : (
+              <div/>
+            )
+          )}/>
 
         </div>
       </BrowserRouter>
