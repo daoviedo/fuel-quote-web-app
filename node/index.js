@@ -35,7 +35,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.use((req,res,next)=>{
-    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Origin", "http://www.fuelrequest.ga");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
 
     if(req.method==='OPTIONS'){
@@ -75,7 +75,6 @@ app.post('/login', (req,res,next)=>{
                     if(resu){
                         jwt.sign({
                             username: results[0].username,
-                            password: results[0].password,
                             privelege: results[0].priv }, privateKey, { expiresIn: "1h" }, function(err2, token) {
                                 return res.json({
                                     authentication: true,

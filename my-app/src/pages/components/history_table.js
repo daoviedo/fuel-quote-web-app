@@ -4,12 +4,26 @@ import Table from 'react-bootstrap/Table'
 
 export default class HistoryTable extends Component {
     componentDidMount() {
-        this.getDataFromHistory();
+        this.verifyData();
     }
     state = {
-        username: localStorage.getItem("username"),
+        username: "",
         Requests: [],
     }
+
+    verifyData(){
+        fetch(`http://138.197.221.30:4000/verify`,{
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer "+ document.cookie.split('=')[1]
+            }
+        })
+        .then(res => res.json())
+        .then(result => {this.setState({username: result.userdata.username});this.getDataFromHistory()})
+        .catch(err => console.log(err))
+    }
+
+
     getDataFromHistory = () => {
         fetch(`http://138.197.221.30:4000/users/history?username=${this.state.username}`)
             .then(Response => Response.json())
@@ -18,7 +32,7 @@ export default class HistoryTable extends Component {
     }
 
     renderUser = ({ GallonsRequested, PricePerGallon, TotalPrice, DeliveryAddress, DeliveryCity, DeliveryState, DeliveryZip, DeliveryDate, DateOfRequest }) =>
-        <tr>
+        <tr key={DateOfRequest}>
             <td>{DateOfRequest}</td>
             <td>{GallonsRequested}</td>
             <td>{DeliveryAddress}, {DeliveryCity}, {DeliveryState} {DeliveryZip}</td>
@@ -30,7 +44,7 @@ export default class HistoryTable extends Component {
     render() {
         return (
             <div className="table-container">
-                <Table striped condensed bordered hover variant="light" size="sm" className="scroll">
+                <Table striped condensed="true" bordered hover variant="light" size="sm" className="scroll">
                     <thead>
                         <tr className="table-header-row">
                             <th>Date</th>
