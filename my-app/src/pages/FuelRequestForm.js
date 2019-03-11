@@ -93,7 +93,7 @@ class FuelRequestForm extends Component{
             DeliveryDate: null,
             SuggestedPrice: 10,
             OrderID: Math.floor(Math.random() * 1000000),
-            step: 0,
+            step: 1,
         };
         this.dateChanged = this.dateChanged.bind(this);
 
@@ -145,7 +145,7 @@ class FuelRequestForm extends Component{
     }
 
     redirectToHome = () =>{
-        this.props.history.push('/fuel_history')
+        window.location.replace('/fuel_history')
       }
 
     render() {
@@ -251,7 +251,7 @@ class FuelRequestForm extends Component{
                                         
                 
             </div>
-        );
+        )
         
     }
 }
