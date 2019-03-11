@@ -18,8 +18,6 @@ ACCOUNT SETTINGS PAGE
 
 REGISTER PAGE
     H-> field requirements(ex. length, uppercase...)
-    L-> Validate Address using some Library or package
-    L-> Finalize any bugs or improve visually(BUG: state change after the check username and hitting next really fast)
 
 LOGIN PAGE
     L-> Remake Front-end using material ui
@@ -36,11 +34,5 @@ ADMIN PAGE
 SERVER
 
 
-###Last Edited By Daniel 3/9/19###
+###Last Edited By Daniel 3/11/19###
 
-CHANGELOG
-    -> Introduced Hashing password in DB
-    -> Introduced JWT Tokens for verification
-
-    -> Fixed the login showing invalid credentials when credentials were correct
-    -> Fixed the popup rendering for username is taken/available(quick flicker problem)
