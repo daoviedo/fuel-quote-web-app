@@ -98,7 +98,7 @@ class App extends Component {
                 privlevel === 'Admin' ? (
                   <UserList/>
                 ) : (
-                  <Redirect to="/login"/>
+                  <Redirect to="/"/>
                 )
               )
             ) : (
@@ -111,7 +111,7 @@ class App extends Component {
                 privlevel === 'Admin' ? (
                   <Test/>
                 ) : (
-                  <Redirect to="/login"/>
+                  <Redirect to="/"/>
                 )
               )
             ) : (
