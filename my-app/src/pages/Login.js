@@ -53,7 +53,7 @@ export default class Login extends Component {
     const returnAuth = this.state.auth;
     const isSub = this.state.submitted;
     if(returnAuth){
-      return <Redirect to="/" push="true"/>
+      return <Redirect push to="/"/>
     }
     else{
       return (
