@@ -42,7 +42,7 @@ class Test extends Component {
 
     render() {
         const { classes } = this.props;
-        if(rendered){
+        if(this.state.rendered){
             console.log(this.state.logged);
         }
         
