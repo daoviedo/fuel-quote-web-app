@@ -35,7 +35,7 @@ class App extends Component {
         })
         .then(res => res.json())
         .then(result => this.setState({loggedIn: result.authentication, privlevel: result.userdata.privelege, rendered: true}))
-        .catch(err => {this.setState({rendered: true});console.log(err)})
+        .catch(err => this.setState({rendered: true}))
   }
 
   render() {

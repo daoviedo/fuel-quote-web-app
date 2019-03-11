@@ -80,7 +80,7 @@ class AppBar extends Component {
         })
         .then(res => res.json())
         .then(result => {this.setState({loggedInn: result.authentication, user: {username: result.userdata.username, priv: result.userdata.privelege}})})
-        .catch(err => console.log(err))
+        .catch(err => this.setState({loggedInn: false}))
     }
 
     render() {
