@@ -15,7 +15,8 @@ class Test extends Component {
     constructor(props){
         super(props);
         this.state = {
-            logged: ""
+            logged: false,
+            rendered: false
         }
     }
 
@@ -31,7 +32,7 @@ class Test extends Component {
             }
         })
         .then(res => res.json())
-        .then(result => this.setState({logged: result.authentication}))
+        .then(result => this.setState({logged: result.authentication, rendered: true}))
         .catch(err => console.log(err))
     }
 
@@ -41,7 +42,10 @@ class Test extends Component {
 
     render() {
         const { classes } = this.props;
-        console.log(this.state.logged);
+        if(rendered){
+            console.log(this.state.logged);
+        }
+        
         return (
             <div>  
                 <Navbar />
