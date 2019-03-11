@@ -172,7 +172,7 @@ class FuelRequestForm extends Component{
                             <MuiPickersUtilsProvider utils={DateFnsUtils} theme={TealTheme}>
                                 
                                 <DatePicker
-                                    todayLabel
+                                    
                                     margin="auto"
                                     minDate={new Date()}
                                     label="Date picker"
