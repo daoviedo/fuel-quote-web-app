@@ -19,6 +19,7 @@ class App extends Component {
   state={
     loggedIn: false,
     rendered: false,
+    privlevel: ""
   }
 
   componentDidMount(){
@@ -33,12 +34,12 @@ class App extends Component {
             }
         })
         .then(res => res.json())
-        .then(result => {this.setState({loggedIn: result.authentication, rendered: true});})
+        .then(result => this.setState({loggedIn: result.authentication, privlevel: result.userdata.privelege, rendered: true}))
         .catch(err => {this.setState({rendered: true});console.log(err)})
   }
 
   render() {
-    const {rendered, loggedIn} = this.state;
+    const {rendered, loggedIn, privlevel} = this.state;
     return (
       <BrowserRouter>
         <div className="App">
@@ -46,15 +47,67 @@ class App extends Component {
           <Route path="/" exact component={Home} />
           <Route path="/login" exact component={Login} />
           <Route path="/register" exact component={Register} />
-          <Route path="/manage_account" exact component={Acc_mng} />
-          <Route path="/userlist" exact component={UserList} />
-          <Route path="/fuel_history" exact component={Fuel_History} />
-          <Route path="/req_fuel_quote" exact component={Fuel_Quote} />
-
-          <Route exact path="/test" render={() => (
+          
+          
+          <Route exact path="/manage_account" render={() => (
              rendered ? (
               (
                 loggedIn ? (
+                  <Acc_mng/>
+                ) : (
+                  <Redirect to="/login"/>
+                )
+              )
+            ) : (
+              <div/>
+            )
+          )}/>
+          <Route exact path="/fuel_history" render={() => (
+             rendered ? (
+              (
+                loggedIn ? (
+                  <Fuel_History/>
+                ) : (
+                  <Redirect to="/login"/>
+                )
+              )
+            ) : (
+              <div/>
+            )
+          )}/>
+          <Route exact path="/req_fuel_quote" render={() => (
+             rendered ? (
+              (
+                loggedIn ? (
+                  <Fuel_Quote/>
+                ) : (
+                  <Redirect to="/login"/>
+                )
+              )
+            ) : (
+              <div/>
+            )
+          )}/>
+
+
+
+          <Route exact path="/userlist" render={() => (
+             rendered ? (
+              (
+                privlevel === 'Admin' ? (
+                  <UserList/>
+                ) : (
+                  <Redirect to="/login"/>
+                )
+              )
+            ) : (
+              <div/>
+            )
+          )}/>
+          <Route exact path="/test" render={() => (
+             rendered ? (
+              (
+                privlevel === 'Admin' ? (
                   <Test/>
                 ) : (
                   <Redirect to="/login"/>
