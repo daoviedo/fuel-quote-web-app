@@ -93,7 +93,7 @@ class FuelRequestForm extends Component{
             DeliveryDate: null,
             SuggestedPrice: 10,
             OrderID: Math.floor(Math.random() * 1000000),
-            step: 1,
+            step: 0,
         };
         this.dateChanged = this.dateChanged.bind(this);
 
