@@ -40,6 +40,7 @@ class App extends Component {
 
   render() {
     const {rendered, loggedIn, privlevel} = this.state;
+    console.log(this.state);
     return (
       <BrowserRouter>
         <div className="App">
