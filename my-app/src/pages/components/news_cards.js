@@ -73,7 +73,7 @@ class news_cards_test extends Component {
             
             <Grid container justify='center' style={{maxWidth: '1000px', margin: 'auto'}}>
                 {articles.map(({url, publishedAt, title, description, urlToImage }) =>
-                    <Grid container sm={4} justify='center' key={publishedAt}>
+                    <Grid item sm={4} justify='center' key={publishedAt}>
                         <Card className={classes.card}>
                             <CardActionArea className={classes.content} style={{overflow: 'hidden'}}>
                                 <CardMedia
