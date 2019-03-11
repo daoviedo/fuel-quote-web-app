@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { Carousel } from 'react-bootstrap';
 
 import './car.css';
-import image1 from './images/image1.jpg';
+import image1 from './images/image3.jpeg';
 import image2 from './images/image2.jpeg';
-import image3 from './images/image3.jpeg';
+import image3 from './images/image1.jpg';
 
 
 export default class Home extends Component {
