@@ -32,7 +32,7 @@ export default class HistoryTable extends Component {
     }
 
     renderUser = ({ GallonsRequested, PricePerGallon, TotalPrice, DeliveryAddress, DeliveryCity, DeliveryState, DeliveryZip, DeliveryDate, DateOfRequest }) =>
-        <tr>
+        <tr key={DateOfRequest}>
             <td>{DateOfRequest}</td>
             <td>{GallonsRequested}</td>
             <td>{DeliveryAddress}, {DeliveryCity}, {DeliveryState} {DeliveryZip}</td>
@@ -44,7 +44,7 @@ export default class HistoryTable extends Component {
     render() {
         return (
             <div className="table-container">
-                <Table striped condensed bordered hover variant="light" size="sm" className="scroll">
+                <Table striped condensed="true" bordered hover variant="light" size="sm" className="scroll">
                     <thead>
                         <tr className="table-header-row">
                             <th>Date</th>

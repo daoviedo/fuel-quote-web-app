@@ -26,7 +26,7 @@ export default class Fuel_history extends Component {
         return (
             <div className="history-parent">
                 <div className="navbar"><Navbar /></div>
-                <div className="table-header"><p><h2>Fuel Quote History</h2></p></div>
+                <div className="table-header"><h2>Fuel Quote History</h2></div>
                 <div className="graph">
                     <ResponsiveContainer width="99%" height={350}>
                         <LineChart data={data}>
