@@ -27,12 +27,6 @@ const TealTheme = createMuiTheme({
             backgroundColor: teal[600],
           },
         },
-        MuiPickersCalendarHeader: {
-          switchHeader: {
-            // backgroundColor: teal.A200,
-            // color: "white",
-          },
-        },
         MuiPickersDay: {
           day: {
             color: teal[600],
@@ -99,6 +93,7 @@ class FuelRequestForm extends Component{
             DeliveryDate: null,
             SuggestedPrice: 10,
             OrderID: Math.floor(Math.random() * 1000000),
+            step: 1,
         };
         this.dateChanged = this.dateChanged.bind(this);
 
@@ -126,7 +121,10 @@ class FuelRequestForm extends Component{
             }
         })
         .then(res => res.json())
-        .then(result => {this.setState({username: result.userdata.username});this.getDataFromUser()})
+        .then(result => {
+                this.setState({username: result.userdata.username});
+                this.getDataFromUser()
+            })
         .catch(err => console.log(err))
       }
     getDataFromUser = () =>{
@@ -156,94 +154,102 @@ class FuelRequestForm extends Component{
             
             <div> 
                 <Navbar />
-                <Paper className={classes.root} elevation={20}>
-                    <FormControl className={classes.PriceMargin}>
-                        <InputLabel>Amount of Fuel desired</InputLabel>
-                        <Input
-                        name="GallonsRequested"
-                        value={this.state.GallonsRequested}
-                        onChange={this.handleChange}
-                        type="number"
-                        endAdornment={<InputAdornment position="end">Gallons</InputAdornment>}
-                        />
-                    </FormControl>
-                    <FormControl className={classes.PriceMargin}>
-                        <MuiThemeProvider theme={TealTheme}>
-                            <MuiPickersUtilsProvider utils={DateFnsUtils} theme={TealTheme}>
-                                
-                                <DatePicker
-                                    
-                                    
-                                    minDate={new Date()}
-                                    label="Date picker"
-                                    value={this.state.DeliveryDate}
-                                    onChange={this.dateChanged}
+                    {this.state.step === 0 ? (
+                        <Paper className={classes.root} elevation={20}>
+                            <FormControl className={classes.PriceMargin}>
+                                <InputLabel>Amount of Fuel desired</InputLabel>
+                                <Input
+                                name="GallonsRequested"
+                                value={this.state.GallonsRequested}
+                                onChange={this.handleChange}
+                                type="number"
+                                endAdornment={<InputAdornment position="end">Gallons</InputAdornment>}
                                 />
+                            </FormControl>
+                            <FormControl className={classes.PriceMargin}>
+                                <MuiThemeProvider theme={TealTheme}>
+                                    <MuiPickersUtilsProvider utils={DateFnsUtils} theme={TealTheme}>
+                                        
+                                        <DatePicker
+                                            todayLabel
+                                            margin="auto"
+                                            minDate={new Date()}
+                                            label="Date picker"
+                                            value={this.state.DeliveryDate}
+                                            onChange={this.dateChanged}
+                                        />
 
-                            </MuiPickersUtilsProvider>
-                        </MuiThemeProvider>
-                    </FormControl>
-                    <TextField
-                        fullWidth
-                        label="Address 1"
-                        name= "DeliveryAddress1"
-                        disabled
-                        value={this.state.DeliveryAddress1}
-                        className={classes.margin}
-                    />
-                    <TextField
-                        fullWidth
-                        label="Address 2"
-                        name= "DeliveryAddress2"
-                        disabled
-                        value={this.state.DeliveryAddress2}
-                        className={classes.margin}
-                    />
-                    <TextField
-                        label="City"
-                        name= "DeliveryCity"
-                        disabled
-                        value={this.state.DeliveryCity}
-                        className={classes.AddMargin}
-                    />
-                    <TextField
-                        label="State"
-                        name= "DeliveryState"
-                        disabled
-                        value={this.state.DeliveryState}
-                        className={classes.AddMargin}
-                    />
-                    <TextField
-                        label="Zip"
-                        name= "DeliveryZip"
-                        disabled
-                        value={this.state.DeliveryZip}
-                        className={classes.AddMargin}
-                    />
-                    <TextField
-                        label="Price Per Gallon"
-                        name= "SuggestedPrice"
-                        disabled
-                        value={this.state.SuggestedPrice}
-                        className={classes.PriceMargin}
-                        InputProps={{startAdornment:<InputAdornment position="start">$</InputAdornment>}}
-                    />
-                    <TextField
-                        label="Total Price"
-                        name= "TotalAmount"
-                        disabled
-                        value={this.state.GallonsRequested*this.state.SuggestedPrice}
-                        className={classes.PriceMargin}
-                        InputProps={{startAdornment:<InputAdornment position="start">$</InputAdornment>}}
-                    />     
-                    <FormControl width="auto" fullWidth className={classes.button}>
-                        <MuiThemeProvider theme={TealTheme}>
-                            <Button color="primary"  variant="contained" onClick={()=>this.addRequestToHistory()}>
-                                Submit Fuel Request
-                            </Button>      
-                        </MuiThemeProvider>          
-                    </FormControl>                
-                </Paper>
+                                    </MuiPickersUtilsProvider>
+                                </MuiThemeProvider>
+                            </FormControl>
+                            <TextField
+                                fullWidth
+                                label="Address 1"
+                                name= "DeliveryAddress1"
+                                disabled
+                                value={this.state.DeliveryAddress1}
+                                className={classes.margin}
+                            />
+                            <TextField
+                                fullWidth
+                                label="Address 2"
+                                name= "DeliveryAddress2"
+                                disabled
+                                value={this.state.DeliveryAddress2}
+                                className={classes.margin}
+                            />
+                            <TextField
+                                label="City"
+                                name= "DeliveryCity"
+                                disabled
+                                value={this.state.DeliveryCity}
+                                className={classes.AddMargin}
+                            />
+                            <TextField
+                                label="State"
+                                name= "DeliveryState"
+                                disabled
+                                value={this.state.DeliveryState}
+                                className={classes.AddMargin}
+                            />
+                            <TextField
+                                label="Zip"
+                                name= "DeliveryZip"
+                                disabled
+                                value={this.state.DeliveryZip}
+                                className={classes.AddMargin}
+                            />
+                            <TextField
+                                label="Price Per Gallon"
+                                name= "SuggestedPrice"
+                                disabled
+                                value={this.state.SuggestedPrice}
+                                className={classes.PriceMargin}
+                                InputProps={{startAdornment:<InputAdornment position="start">$</InputAdornment>}}
+                            />
+                            <TextField
+                                label="Total Price"
+                                name= "TotalAmount"
+                                disabled
+                                value={this.state.GallonsRequested*this.state.SuggestedPrice}
+                                className={classes.PriceMargin}
+                                InputProps={{startAdornment:<InputAdornment position="start">$</InputAdornment>}}
+                            />     
+                            <FormControl width="auto" fullWidth className={classes.button}>
+                                <MuiThemeProvider theme={TealTheme}>
+                                    <Button color="primary"  variant="contained" onClick={()=>this.addRequestToHistory()}>
+                                        Submit Fuel Request
+                                    </Button>      
+                                </MuiThemeProvider>          
+                            </FormControl>
+                        </Paper>
+                    ):(
+                    <Paper>
+
+                    </Paper>
+                    )};
+                                        
+                
             </div>
         );
         
