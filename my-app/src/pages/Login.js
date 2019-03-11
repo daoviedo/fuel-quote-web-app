@@ -40,8 +40,8 @@ export default class Login extends Component {
         }),
     })
     .then(res => res.json())
-    .then(result => {document.cookie = "token="+result.token;this.setState({auth: result.authentication});})
-    .catch(err => console.log(err))
+    .then(result => {document.cookie = "token="+result.token;this.setState({auth: result.authentication, submitted: true});})
+    .catch(err => {this.setState({submitted: true});console.log(err)})
   }
 
   handleSubmit = event => {
@@ -52,47 +52,50 @@ export default class Login extends Component {
   render() {
     const returnAuth = this.state.auth;
     const isSub = this.state.submitted;
-    return (
+    if(returnAuth){
+      return <Redirect to="/"/>
+    }
+    else{
+      return (
       
-      <div className="Login">
-      
-      {returnAuth ? <Redirect to={{pathname: '/'}}/> : (
-        <form onSubmit={this.handleSubmit}>
-          <FormGroup controlId="username" >
-            <FormLabel>Username</FormLabel>
-            <FormControl
-              autoFocus
-              type="username"
-              value={this.state.username}
-              onChange={this.handleChange}
-            />
-          </FormGroup>
-          <FormGroup controlId="password" >
-            <FormLabel>Password</FormLabel>
-            <FormControl
-              value={this.state.password}
-              onChange={this.handleChange}
-              type="password"
-            />
-          </FormGroup>
-          {isSub ? (<p style={{color:"red"}}>Invalid Credentials</p>): <div/>}
-          <Button
-            block
-            disabled={!this.validateForm()}
-            type="submit"
-          >
-            Login
-          </Button>
-          <br></br>
-          <p>Don't Have an Account?&ensp;
-              <Button 
-              href="/register"
-              variant="outline-primary" 
-              size="sm"
-              >Register</Button></p>
-        </form>
-      )}
-      </div>
-    );
+        <div className="Login">
+          <form onSubmit={this.handleSubmit}>
+            <FormGroup controlId="username" >
+              <FormLabel>Username</FormLabel>
+              <FormControl
+                autoFocus
+                type="username"
+                value={this.state.username}
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+            <FormGroup controlId="password" >
+              <FormLabel>Password</FormLabel>
+              <FormControl
+                value={this.state.password}
+                onChange={this.handleChange}
+                type="password"
+              />
+            </FormGroup>
+            {isSub ? (<p style={{color:"red"}}>Invalid Credentials</p>): <div/>}
+            <Button
+              block
+              disabled={!this.validateForm()}
+              type="submit"
+            >
+              Login
+            </Button>
+            <br></br>
+            <p>Don't Have an Account?&ensp;
+                <Button 
+                href="/register"
+                variant="outline-primary" 
+                size="sm"
+                >Register</Button></p>
+          </form>    
+        </div>
+      );
+    }
+    
   }
 }
