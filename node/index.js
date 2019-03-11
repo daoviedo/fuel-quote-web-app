@@ -75,7 +75,6 @@ app.post('/login', (req,res,next)=>{
                     if(resu){
                         jwt.sign({
                             username: results[0].username,
-                            password: results[0].password,
                             privelege: results[0].priv }, privateKey, { expiresIn: "1h" }, function(err2, token) {
                                 return res.json({
                                     authentication: true,
