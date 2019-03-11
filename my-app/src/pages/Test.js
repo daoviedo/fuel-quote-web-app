@@ -15,13 +15,30 @@ class Test extends Component {
     constructor(props){
         super(props);
         this.state = {
-            logged: false,
-            rendered: false
+            username: "",
+            password: "",
+            token: ""
         }
     }
 
     componentDidMount(){
-        this.verifyData();
+        this.getData();
+    }
+
+    getData(){
+        fetch(`http://138.197.221.30:4000/login`,{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                username: this.state.username,
+                password: this.state.password
+            }),
+        })
+        .then(res => res.json())
+        .then(result => {this.setState({token: result.token}); document.cookie = "token="+result.token; console.log(result)})
+        .catch(err => console.log(err))
     }
 
     verifyData(){
@@ -32,7 +49,7 @@ class Test extends Component {
             }
         })
         .then(res => res.json())
-        .then(result => this.setState({logged: result.authentication, rendered: true}))
+        .then(result => console.log(result))
         .catch(err => console.log(err))
     }
 
@@ -42,10 +59,6 @@ class Test extends Component {
 
     render() {
         const { classes } = this.props;
-        if(this.state.rendered){
-            console.log(this.state.logged);
-        }
-        
         return (
             <div>  
                 <Navbar />
