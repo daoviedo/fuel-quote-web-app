@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Button, FormGroup, FormControl, FormLabel} from "react-bootstrap";
 import "./css/Login.css";
-import {Redirect} from "react-router-dom";
 
 export default class Login extends Component {
   constructor(props) {
