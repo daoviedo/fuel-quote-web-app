@@ -15,8 +15,6 @@ import teal from '@material-ui/core/colors/teal';
 import { MuiPickersUtilsProvider, DatePicker } from 'material-ui-pickers';
 import DateFnsUtils from '@date-io/date-fns';
 
-
-
 const TealTheme = createMuiTheme({
     palette: {
       primary: {main: teal[600]},
@@ -55,6 +53,11 @@ const styles = theme => ({
         width: "60%",
         marginTop: "10%",
     }, 
+    OrderHeader: {
+        margin: "auto",
+        marginTop: "5%",
+        width:"100%",
+    },
     margin: {
         margin: theme.spacing.unit,
     },
@@ -67,6 +70,11 @@ const styles = theme => ({
         margin: theme.spacing.unit,
         marginTop: theme.spacing.unit*4,
         width:"48%",
+    },
+    OrderIDPageButton: {
+        margin: theme.spacing.unit,
+        //marginTop: ,
+        width:"45%",
     },
     grid: {
         width: '60%',
@@ -140,12 +148,20 @@ class FuelRequestForm extends Component{
         fetch(`http://138.197.221.30:4000/users/addRequest?username=${this.state.username}&GallonsRequested=${this.state.GallonsRequested}
         &PricePerGallon=${this.state.SuggestedPrice}&DeliveryDate=${this.state.DeliveryDate}&ad1=${this.state.DeliveryAddress1}
         &city=${this.state.DeliveryCity}&st=${this.state.DeliveryState}&zip=${this.state.DeliveryZip}&OrderID=${this.state.OrderID}`)
-        .then(this.redirectToHome)
+        this.setState(state => ({
+            step: state.step + 1,
+          }));
  
     }
 
-    redirectToHome = () =>{
-        window.location.replace('/fuel_history')
+    redirectToHome = (num) =>{
+        if(num===0){
+            window.location.replace('/fuel_history')
+        }
+        else{
+            window.location.replace('/')
+        }
+        
       }
 
     render() {
@@ -242,8 +258,27 @@ class FuelRequestForm extends Component{
                             </FormControl>
                         </Paper>
                     ):(
-                    <Paper>
-                        
+                    <Paper className={classes.root} elevation={20}>
+                        <React.Fragment >
+                            <h1 className={classes.OrderHeader} >
+                            Thank you for your request. Your OrderID is #{this.state.OrderID}
+                            </h1>
+                            <FormControl width="auto" align="center" className={classes.PriceMargin}>
+                                <MuiThemeProvider theme={TealTheme}>
+                                    <Button color="primary"  variant="contained" className={classes.OrderIDPageButton} onClick={()=>this.redirectToHome(1)}>
+                                        Return to Home Page
+                                    </Button>     
+                                </MuiThemeProvider>          
+                            </FormControl> 
+                            <FormControl width="auto" align="center"  className={classes.PriceMargin}>
+                                <MuiThemeProvider theme={TealTheme}>
+                                    <Button color="primary"  variant="contained" className={classes.OrderIDPageButton} onClick={()=>this.redirectToHome(0)} >
+                                        See all Fuel Orders
+                                    </Button>     
+                                </MuiThemeProvider>          
+                            </FormControl> 
+                            
+                        </React.Fragment>
                     </Paper>
                     )}
                                         
