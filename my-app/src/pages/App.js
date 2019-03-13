@@ -16,30 +16,30 @@ import Test from './Test';
 
 
 class App extends Component {
-  state={
+  state = {
     loggedIn: false,
     rendered: false,
     privlevel: ""
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.verifyLogged();
   }
 
-  verifyLogged(){
-    fetch(`http://138.197.221.30:4000/verify`,{
-            method: "GET",
-            headers: {
-                "Authorization": "Bearer "+ document.cookie.split('=')[1]
-            }
-        })
-        .then(res => res.json())
-        .then(result => this.setState({loggedIn: result.authentication, privlevel: result.userdata.privelege, rendered: true}))
-        .catch(err => this.setState({rendered: true}))
+  verifyLogged() {
+    fetch(`http://138.197.221.30:4000/verify`, {
+      method: "GET",
+      headers: {
+        "Authorization": "Bearer " + document.cookie.split('=')[1]
+      }
+    })
+      .then(res => res.json())
+      .then(result => this.setState({ loggedIn: result.authentication, privlevel: result.userdata.privelege, rendered: true }))
+      .catch(err => this.setState({ rendered: true }))
   }
 
   render() {
-    const {rendered, loggedIn, privlevel} = this.state;
+    const { rendered, loggedIn, privlevel } = this.state;
     return (
       <BrowserRouter>
         <div className="App">
@@ -47,76 +47,76 @@ class App extends Component {
           <Route path="/" exact component={Home} />
           <Route path="/login" exact component={Login} />
           <Route path="/register" exact component={Register} />
-          
-          
+
+
           <Route exact path="/manage_account" render={() => (
-             rendered ? (
+            rendered ? (
               (
                 loggedIn ? (
-                  <Accmng/>
+                  <Accmng />
                 ) : (
-                  <Redirect to="/login"/>
-                )
+                    <Redirect to="/login" />
+                  )
               )
             ) : (
-              <div/>
-            )
-          )}/>
+                <div />
+              )
+          )} />
           <Route exact path="/fuel_history" render={() => (
-             rendered ? (
+            rendered ? (
               (
                 loggedIn ? (
-                  <FuelHistory/>
+                  <FuelHistory />
                 ) : (
-                  <Redirect to="/login"/>
-                )
+                    <Redirect to="/login" />
+                  )
               )
             ) : (
-              <div/>
-            )
-          )}/>
+                <div />
+              )
+          )} />
           <Route exact path="/req_fuel_quote" render={() => (
-             rendered ? (
+            rendered ? (
               (
                 loggedIn ? (
-                  <FuelQuote/>
+                  <FuelQuote />
                 ) : (
-                  <Redirect to="/login"/>
-                )
+                    <Redirect to="/login" />
+                  )
               )
             ) : (
-              <div/>
-            )
-          )}/>
+                <div />
+              )
+          )} />
 
 
 
           <Route exact path="/userlist" render={() => (
-             rendered ? (
+            rendered ? (
               (
                 privlevel === 'Admin' ? (
-                  <UserList/>
+                  <UserList />
                 ) : (
-                  <Redirect to="/"/>
-                )
+                    <Redirect to="/" />
+                  )
               )
             ) : (
-              <div/>
-            )
-          )}/>
+                <div />
+              )
+          )} />
           <Route exact path="/test" render={() => (
-             rendered ? (
+            rendered ? (
               (
                 privlevel === 'Admin' ? (
-                  <Test/>
+                  <Test />
                 ) : (
-                  <Redirect to="/"/>
-                )
+                    <Redirect to="/" />
+                  )
               )
             ) : (
-              <div/>
-            )
-          )}/>
+                <div />
+              )
+          )} />
 
         </div>
       </BrowserRouter>

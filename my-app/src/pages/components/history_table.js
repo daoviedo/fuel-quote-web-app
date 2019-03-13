@@ -11,16 +11,16 @@ export default class HistoryTable extends Component {
         Requests: [],
     }
 
-    verifyData(){
-        fetch(`http://138.197.221.30:4000/verify`,{
+    verifyData() {
+        fetch(`http://138.197.221.30:4000/verify`, {
             method: "GET",
             headers: {
-                "Authorization": "Bearer "+ document.cookie.split('=')[1]
+                "Authorization": "Bearer " + document.cookie.split('=')[1]
             }
         })
-        .then(res => res.json())
-        .then(result => {this.setState({username: result.userdata.username});this.getDataFromHistory()})
-        .catch(err => console.log(err))
+            .then(res => res.json())
+            .then(result => { this.setState({ username: result.userdata.username }); this.getDataFromHistory() })
+            .catch(err => console.log(err))
     }
 
 
