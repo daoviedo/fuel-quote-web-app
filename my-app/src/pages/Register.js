@@ -126,6 +126,14 @@ class Register extends React.Component {
         this.setState({[name]: lanV});
       }
     }
+    else if(name === "password"){
+      if(lanV.includes(" ")){
+        alert("Password cannot contain spaces");
+      }
+      else{
+        this.setState({[name]: lanV});
+      }
+    }
     else{
       this.setState({[name]: lanV});
     }
