@@ -118,7 +118,7 @@ class Register extends React.Component {
 
   handleLan = (name,lanV) => {
     if(name === "username"){
-      var pattern = new RegExp(/[~`!#$%\^&*+=\[\]\\';,/{}|\\":<>\?]/);
+      var pattern = new RegExp(/[~`!#$%^&*+=[\]\\';,/{}|\\":<>?]/);
       if (pattern.test(lanV)) {
         alert("Please only use standard alphanumerics or -,_");
       }
