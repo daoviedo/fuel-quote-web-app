@@ -117,7 +117,7 @@ class Register extends React.Component {
   }
 
   handleLan = (name,lanV) => {
-    if(name === "username"){console.log(name, lanV)}
+    if(name === "username"){console.log(lanV.includes(" "))}
     
     this.setState({[name]: lanV});
   }
