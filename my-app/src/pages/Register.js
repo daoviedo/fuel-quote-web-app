@@ -135,7 +135,7 @@ class Register extends React.Component {
       }
     }
     else if(name === "firstName" || name === "lastName"){
-      var pattern = new RegExp(/[-~`!@#$%_^&*()+=[\];,/{}|\\":0-9<>?]/);
+      var pattern = new RegExp(/[-~`!@#$% _^&*()+=[\];,/{}|\\":0-9<>?]/);
       if (pattern.test(lanV)) {
         alert("Please only use letters or '");
       }
