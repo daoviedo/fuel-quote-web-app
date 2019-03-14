@@ -152,9 +152,18 @@ class Acc_mng extends Component{
     }
 
     handleChange = event => {
-        this.setState({
-          [event.target.name]: event.target.value, needsUpdate: true
-        });
+      if(event.target.name === "firstName" || event.target.name === "lastName"){
+        var pattern = new RegExp(/[-~`!@#$% _^&*()+=[\];,/{}|\\":0-9<>?]/);
+        if (pattern.test(lanV)) {
+          alert("Please only use letters or '");
+        }
+        else{
+          this.setState({[event.target.name]: event.target.value, needsUpdate: true});
+        }
+      }
+      else{
+        this.setState({[event.target.name]: event.target.value, needsUpdate: true});
+      }
     }
 
     verifyData(){
