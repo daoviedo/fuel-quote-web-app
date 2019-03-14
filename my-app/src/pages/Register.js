@@ -134,6 +134,15 @@ class Register extends React.Component {
         this.setState({[name]: lanV});
       }
     }
+    else if(name === "firstName" || name === "lastName"){
+      var pattern = new RegExp(/[~`!@#$%_^&*()+=[\];,/{}|\\":0-9<>?]/);
+      if (pattern.test(lanV)) {
+        alert("Please only use letters or -,',.");
+      }
+      else{
+        this.setState({[name]: lanV});
+      }
+    }
     else{
       this.setState({[name]: lanV});
     }
