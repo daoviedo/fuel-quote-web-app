@@ -119,7 +119,7 @@ class Register extends React.Component {
   handleLan = (name,lanV) => {
     if(name === "username"){
       var pattern = new RegExp(/[~`!@#$%^ .&*()+=[\]\\';,/{}|\\":<>?]/);
-      if(lanV.length > 16){ alert("Username cannot exede 16 characters long"); }
+      if(lanV.length > 16){ alert("Username cannot exceed 16 characters long"); }
       else if (pattern.test(lanV)) {
         alert("Please only use standard alphanumerics or -,_");
       }
@@ -128,7 +128,7 @@ class Register extends React.Component {
       }
     }
     else if(name === "password"){
-      if(lanV.length > 32){ alert("Password cannot exede 32 characters long"); }
+      if(lanV.length > 32){ alert("Password cannot exceed 32 characters long"); }
       else if(lanV.includes(" ")){
         alert("Password cannot contain spaces");
       }
