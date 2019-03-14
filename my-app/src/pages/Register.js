@@ -120,11 +120,15 @@ class Register extends React.Component {
     if(name === "username"){
       var pattern = new RegExp(/[~`!#$%\^&*+=\[\]\\';,/{}|\\":<>\?]/);
       if (pattern.test(lanV)) {
-        alert("Please only use standard alphanumerics");
+        alert("Please only use standard alphanumerics or -,_");
+      }
+      else{
+        this.setState({[name]: lanV});
       }
     }
-    
-    this.setState({[name]: lanV});
+    else{
+      this.setState({[name]: lanV});
+    }
   }
 
   handleNext = () => {
