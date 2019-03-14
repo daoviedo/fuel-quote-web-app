@@ -154,7 +154,7 @@ class Acc_mng extends Component{
     handleChange = event => {
       if(event.target.name === "firstName" || event.target.name === "lastName"){
         var pattern = new RegExp(/[-~`!@#$% _^&*()+=[\];,/{}|\\":0-9<>?]/);
-        if (pattern.test(lanV)) {
+        if (pattern.test(event.target.value)) {
           alert("Please only use letters or '");
         }
         else{
