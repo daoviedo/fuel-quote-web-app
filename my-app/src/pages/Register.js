@@ -128,7 +128,7 @@ class Register extends React.Component {
       }
     }
     else if(name === "password"){
-      if(lanV.length > 32){"Password cannot exede 32 characters long"}
+      if(lanV.length > 32){ alert("Password cannot exede 32 characters long"); }
       else if(lanV.includes(" ")){
         alert("Password cannot contain spaces");
       }
