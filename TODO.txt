@@ -11,13 +11,12 @@ HOMEPAGE
 
 FUEL REQUEST FORM
     L-> See how we're going to manage to actually calculate cost
-    L-> Create a Confirmation Pop-up Submission Page
 
 ACCOUNT SETTINGS PAGE
 
 
 REGISTER PAGE
-    H-> field requirements(ex. length, uppercase...)
+    
 
 LOGIN PAGE
     L-> Remake Front-end using material ui
@@ -34,7 +33,4 @@ ADMIN PAGE
 SERVER
 
 
-###Last Edited By Daniel 3/11/19###
-
-testing merge
-
+###Last Edited By Daniel 3/13/19###
