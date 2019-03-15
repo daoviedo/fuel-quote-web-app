@@ -10,7 +10,7 @@ class Userpage extends Component {
     render() {
         return (
             <div>
-                <h3>{this.state.username}</h3>
+                <h3>{this.state.username} is the username</h3>
             </div>
         );
     }
