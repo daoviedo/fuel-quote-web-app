@@ -4,7 +4,7 @@ class Userpage extends Component {
     constructor(props){
         super(props)
         this.state = {
-            username : this.props.params.id
+            username : this.props.match.params.id
         }
     }
     render() {
