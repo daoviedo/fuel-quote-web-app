@@ -8,6 +8,7 @@ class Userpage extends Component {
         }
     }
     render() {
+        console.log(this.props)
         return (
             <div>
                 <h3>{this.state.username} is the username</h3>
