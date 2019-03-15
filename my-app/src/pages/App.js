@@ -12,6 +12,8 @@ import FuelHistory from './Fuel_history';
 import FuelQuote from './FuelRequestForm';
 import Test from './Test';
 
+import UserPage from './Userpage'
+
 
 
 
@@ -47,6 +49,8 @@ class App extends Component {
           <Route path="/" exact component={Home} />
           <Route path="/login" exact component={Login} />
           <Route path="/register" exact component={Register} />
+
+          <Route path="/user/:id" exact component={UserPage}/>
 
 
           <Route exact path="/manage_account" render={() => (
