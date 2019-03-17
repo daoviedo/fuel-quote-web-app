@@ -4,7 +4,7 @@ import Table from 'react-bootstrap/Table'
 
 export default class HistoryTable extends Component {
     componentDidMount() {
-        this.verifyData();
+        this.verifyDataTest();
     }
     state = {
         username: "",
@@ -20,6 +20,18 @@ export default class HistoryTable extends Component {
         })
             .then(res => res.json())
             .then(result => { this.setState({ username: result.userdata.username }); this.getDataFromHistory() })
+            .catch(err => console.log(err))
+    }
+
+    verifyDataTest() {
+        fetch(`http://138.197.221.30:4000/fuelhistory`, {
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + document.cookie.split('=')[1]
+            }
+        })
+            .then(res => res.json())
+            .then(result => this.setState({ Requests: result.data }))
             .catch(err => console.log(err))
     }
 

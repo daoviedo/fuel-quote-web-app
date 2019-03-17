@@ -101,6 +101,24 @@ app.get('/verify', checkAuth, (req,res,next)=>{
     });
 });
 
+app.get('/fuelhistory', checkAuth, (req,res,next)=>{
+    const username = req.userData.username;
+
+    const findHistory = `SELECT * FROM sys.history WHERE username='${username}'`;
+    connection.query(findHistory, (err, results) => {
+        if(err){
+            return res.send(err)
+        }
+        else{
+            return res.json({
+                authentication: true,
+                data: results
+            })
+        }
+    });
+
+})
+
 
 app.get('/users/add', (req, res) => {
     const { username, pass } = req.query;
