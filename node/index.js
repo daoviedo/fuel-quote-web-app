@@ -218,7 +218,7 @@ app.get('/users/update/:username', (req, res) => {
 
 //Refactor this using checkAuth for admins
 app.get('/users', checkAdmin, (req, res) => {
-    const selectAll = 'SELECT * FROM sys.user';
+    const selectAll = 'SELECT username, firstname, lastname, ad1, ad2, city, st, zip, priv, totalRequests FROM sys.user';
     connection.query(selectAll, (err, results) => {
         if(err){
             return res.send(err)

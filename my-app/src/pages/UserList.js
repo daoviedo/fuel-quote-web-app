@@ -65,8 +65,7 @@ class UserList extends Component {
             .catch(err => console.log(err))
     }
 
-    renderUser = ({ username, password }) => <div className="output">{username}:{password}&ensp;<Button size='sm' variant="outline-danger" onClick={() => this.delUser(username, password)} >Remove Account</Button></div>
-    renderUserList = ({ username, password, firstname, lastname, ad1, ad2, city, st, zip, priv, totalRequests }) =>
+    renderUserList = ({ username, firstname, lastname, ad1, ad2, city, st, zip, priv, totalRequests }) =>
         <TableRow key={username}>
             <TableCell component="th" scope="row">
                 {username}
