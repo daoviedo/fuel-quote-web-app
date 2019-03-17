@@ -134,7 +134,6 @@ class Acc_mng extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
       firstName: "",
       lastName: "",
       address1: "",
@@ -170,7 +169,7 @@ class Acc_mng extends Component{
       fetch(`http://138.197.221.30:4000/users/data`,{
           method: "GET",
           headers: {
-              "Authorization": "Bearer "+ document.cookie.split('=')[1]
+            "Authorization": "Bearer "+ document.cookie.split('=')[1]
           }
       })
       .then(res => res.json())
@@ -178,11 +177,24 @@ class Acc_mng extends Component{
       .catch(err => console.log(err))
     }
 
-    updateProfile= _ => {
-        const user = this.state.username;
-        fetch(`http://138.197.221.30:4000/users/update/${user}?f=${this.state.firstName}&l=${this.state.lastName}&a1=${this.state.address1}&a2=${this.state.address2}&c=${this.state.city}&s=${this.state.dropSelection}&z=${this.state.zip}`)
-        .then(()=>this.verifyData())
-        .catch(err => console.log(err))
+    patchProfile(){
+      fetch(`http://138.197.221.30:4000/users/update`,{
+          method: "PATCH",
+          headers: {
+            "Authorization": "Bearer "+ document.cookie.split('=')[1]
+          },
+          body: JSON.stringify({
+            firstname: this.state.firstName,
+            lastname: this.state.lastName,
+            address1: this.state.address1,
+            address2: this.state.address2,
+            city: this.state.city,
+            st: this.state.dropSelection,
+            zip: this.state.zip
+          })
+      })
+      .then(()=>this.verifyData())
+      .catch(err => console.log(err))
     }
     
     render(){
@@ -296,7 +308,7 @@ class Acc_mng extends Component{
                 <Button variant="contained"
                       color="primary"
                       disabled={!this.state.needsUpdate}
-                      onClick={()=> this.updateProfile()}
+                      onClick={()=> this.patchProfile()}
                       className={classes.button}>Update Profile</Button>
               </div>
               </Paper>
