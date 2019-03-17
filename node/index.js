@@ -185,9 +185,9 @@ app.get('/users/fuelrequestinfo', (req, res) => {
     });
 });
 
-//Refactor this using checkAuth
-app.get('/users/data/:username', (req, res) => {
-    const username  = req.params.username;
+//Refactored using checkAuth
+app.get('/users/data', checkAuth, (req, res) => {
+    const username  = req.userData.username;
     const addressQuery = `SELECT firstname, lastname, ad1, ad2, city, st, zip FROM sys.user WHERE username='${username}'`;
     connection.query(addressQuery, (err, results) => {
         if(err){
@@ -195,6 +195,7 @@ app.get('/users/data/:username', (req, res) => {
         }
         else{
             return res.json({
+                authentication: true,
                 data: results
             })
         }
@@ -216,7 +217,7 @@ app.get('/users/update/:username', (req, res) => {
     });
 });
 
-//Refactor this using checkAuth for admins
+//Refactored using checkAdmin for admins
 app.get('/users', checkAdmin, (req, res) => {
     const selectAll = 'SELECT username, firstname, lastname, ad1, ad2, city, st, zip, priv, totalRequests FROM sys.user';
     connection.query(selectAll, (err, results) => {
