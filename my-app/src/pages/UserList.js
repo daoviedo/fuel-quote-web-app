@@ -54,8 +54,8 @@ class UserList extends Component {
     }
 
 
-    delUser = (username, pass) => {
-        fetch(`http://138.197.221.30:4000/users/remove?username=${username}&pass=${pass}`)
+    delUser = (username) => {
+        fetch(`http://138.197.221.30:4000/users/remove/${username}`)
             .then(this.getUser)
             .catch(err => console.log(err))
     }
@@ -75,7 +75,7 @@ class UserList extends Component {
             <TableCell align="right">{zip}</TableCell>
             <TableCell align="right">{priv}</TableCell>
             <TableCell align="right">{totalRequests}</TableCell>
-            <TableCell align="right"><Button size='sm' variant="outline-danger" onClick={() => this.delUser(username, password)} >Remove Account</Button></TableCell>
+            <TableCell align="right"><Button size='sm' variant="outline-danger" onClick={() => this.delUser(username)} >Remove Account</Button></TableCell>
         </TableRow>
 
     render() {

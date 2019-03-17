@@ -139,9 +139,18 @@ app.get('/users/adduser', (req, res) => {
     
 });
 
-//Create a new method of Deleting after admin is checked
-app.get('/users/remove', (req, res) => {
-    
+//Refactored method for deleting a user
+app.get('/users/remove/:username', checkAdmin, (req, res) => {
+    const username = req.params.username;
+    const delQuery = `DELETE FROM sys.user WHERE username='${username}'`;
+    connection.query(delQuery, (err1, results) => {
+        if(err1){
+            return res.send(err1)
+        }
+        else{
+            return res.send('Successfully Deleted User')
+        }
+    });
 });
 
 //Method to check if username is available in registering
