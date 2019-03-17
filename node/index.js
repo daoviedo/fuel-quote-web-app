@@ -203,7 +203,7 @@ app.get('/users/data', checkAuth, (req, res) => {
 });
 
 //Refactor this using checkAuth
-app.patch('/users/update', checkAuth, (req, res) => {
+app.put('/users/update', checkAuth, (req, res) => {
     const username  = req.userData.username;
     console.log(req.body.firstname)
     const addressQuery = `UPDATE sys.user SET firstname='${req.body.firstname}',lastname='${req.body.lastname}',ad1='${req.body.address1}',ad2='${req.body.address2}',city='${req.body.city}',st='${req.body.st}',zip='${req.body.zip}' WHERE username='${username}'`;
