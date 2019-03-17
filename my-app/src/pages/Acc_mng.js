@@ -191,7 +191,7 @@ class Acc_mng extends Component{
             city: this.state.city,
             st: this.state.dropSelection,
             zip: this.state.zip
-          })
+          }),
       })
       .then(()=>this.verifyData())
       .catch(err => console.log(err))
