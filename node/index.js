@@ -5,13 +5,13 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 const checkAuth = require('./check-auth');
+const checkAdmin = require('./check-admin');
 
 const saltRounds = 10;
 const privateKey = "ASLFJDGasdkdgasfsdlgkasdflgmpashlmh";
 
 const app = express();
 
-const selectAll = 'SELECT * FROM sys.user';
 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -208,7 +208,8 @@ app.get('/users/update/:username', (req, res) => {
 });
 
 //Refactor this using checkAuth for admins
-app.get('/users', (req, res) => {
+app.get('/users', checkAdmin, (req, res) => {
+    const selectAll = 'SELECT * FROM sys.user';
     connection.query(selectAll, (err, results) => {
         if(err){
             return res.send(err)

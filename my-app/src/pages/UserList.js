@@ -38,13 +38,18 @@ class UserList extends Component {
     }
 
     componentDidMount() {
-        this.getUser();
+        this.fetchUsers();
     }
 
-    getUser = _ => {
-        fetch('http://138.197.221.30:4000/users')
-            .then(response => response.json())
-            .then(response => this.setState({ users: response.data }))
+    fetchUsers() {
+        fetch(`http://138.197.221.30:4000/users`, {
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + document.cookie.split('=')[1]
+            }
+        })
+            .then(res => res.json())
+            .then(result => this.setState({ users: result.data }))
             .catch(err => console.log(err))
     }
 
