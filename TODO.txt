@@ -2,8 +2,6 @@ This will be a to-do list for us to check things off or add things as we need.
 H-> means High priority
 L-> means Low priority
 
-DATABASE
-
 
 HOMEPAGE
     L-> Add new area(ex. About us)
@@ -11,12 +9,6 @@ HOMEPAGE
 
 FUEL REQUEST FORM
     L-> See how we're going to manage to actually calculate cost
-
-ACCOUNT SETTINGS PAGE
-
-
-REGISTER PAGE
-    
 
 LOGIN PAGE
     L-> Remake Front-end using material ui
@@ -27,10 +19,10 @@ FUEL REQUEST HISTORY
     L-> Fix the columns with money(INT -> DOUBLE) and add in '$'
     L-> Fix timestamp for when an entry was created
 
-ADMIN PAGE
+BACKEND
+    H-> Refactor /fuelrequestinfo to use the checkauth middleware
+    H-> Refactor /addRequest to use the checkauth middleware
+    H-> Refactor /adduser to a post request
+    L-> Refactor all open address (/login, /adduser, /check) to use a session key to ensure its coming from our site
 
-
-SERVER
-
-
-###Last Edited By Daniel 3/13/19###
+###Last Edited By Daniel 3/17/19###
