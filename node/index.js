@@ -140,7 +140,7 @@ app.get('/users/adduser', (req, res) => {
 });
 
 //Refactored method for deleting a user
-app.get('/users/remove/:username', checkAdmin, (req, res) => {
+app.delete('/users/remove/:username', checkAdmin, (req, res) => {
     const username = req.params.username;
     const delQuery = `DELETE FROM sys.user WHERE username='${username}'`;
     connection.query(delQuery, (err1, results) => {

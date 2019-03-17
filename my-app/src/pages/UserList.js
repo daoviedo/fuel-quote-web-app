@@ -55,8 +55,13 @@ class UserList extends Component {
 
 
     delUser = (username) => {
-        fetch(`http://138.197.221.30:4000/users/remove/${username}`)
-            .then(this.getUser)
+        fetch(`http://138.197.221.30:4000/users/remove/${username}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": "Bearer " + document.cookie.split('=')[1]
+            }
+        })
+            .then(this.fetchUsers())
             .catch(err => console.log(err))
     }
 
