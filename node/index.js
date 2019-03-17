@@ -34,6 +34,7 @@ connection.connect(err => {
 app.use(cors());
 app.use(bodyParser.json());
 
+//Controls the kinds of requests sent CHANGE TO OUR DOMAIN AFTER DEV IS OVER
 app.use((req,res,next)=>{
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
@@ -46,15 +47,15 @@ app.use((req,res,next)=>{
 });
 
 
-
+//Remove this sometime in the future
 app.get('/', (req, res) => {
     res.send('Hello From servers')
 });
 
+//Post Request to login
 app.post('/login', (req,res,next)=>{
     const username = req.body.username;
     const password = req.body.password;
-
 
     const lookQuery = `SELECT * FROM sys.user WHERE username='${username}'`;
     connection.query(lookQuery, (err, results) => {
@@ -94,6 +95,7 @@ app.post('/login', (req,res,next)=>{
     });
 });
 
+//Get Request to verify token is valid
 app.get('/verify', checkAuth, (req,res,next)=>{
     res.json({
         authentication: true,
@@ -101,6 +103,7 @@ app.get('/verify', checkAuth, (req,res,next)=>{
     });
 });
 
+//New Request for fuel history (Refactored)
 app.get('/fuelhistory', checkAuth, (req,res,next)=>{
     const username = req.userData.username;
 
@@ -119,20 +122,7 @@ app.get('/fuelhistory', checkAuth, (req,res,next)=>{
 
 })
 
-
-app.get('/users/add', (req, res) => {
-    const { username, pass } = req.query;
-    const insertQuery = `INSERT INTO sys.user (username, password) VALUES('${username}','${pass}')`;
-    connection.query(insertQuery, (err, results) => {
-        if(err){
-            return res.send(err)
-        }
-        else{
-            return res.send('Successfully Added User')
-        }
-    });
-});
-
+//Request for Registering, Switch to a post in the future with a session key validation
 app.get('/users/adduser', (req, res) => {
     const { username, pass, fname, lname, ad1, ad2, city, st, zip, priv } = req.query;
     bcrypt.hash(pass, saltRounds, function(err, hash) {
@@ -149,34 +139,12 @@ app.get('/users/adduser', (req, res) => {
     
 });
 
+//Create a new method of Deleting after admin is checked
 app.get('/users/remove', (req, res) => {
-    const { username, pass } = req.query;
-    const removeQuery = `DELETE FROM sys.user WHERE username='${username}' AND password = '${pass}'`;
-    connection.query(removeQuery, (err, results) => {
-        if(err){
-            return res.send(err)
-        }
-        else{
-            return res.send('Successfully Removed User')
-        }
-    });
+    
 });
 
-app.get('/users/lookup', (req, res) => {
-    const { username, pass } = req.query;
-    const lookQuery = `SELECT * FROM sys.user WHERE username='${username}' AND password = '${pass}'`;
-    connection.query(lookQuery, (err, results) => {
-        if(err){
-            return res.send(err)
-        }
-        else{
-            return res.json({
-                data: results
-            })
-        }
-    });
-});
-
+//Method to check if username is available in registering
 app.get('/users/check', (req, res) => {
     const { username } = req.query;
     const lookQuery = `SELECT username FROM sys.user WHERE username='${username}'`;
@@ -192,6 +160,7 @@ app.get('/users/check', (req, res) => {
     });
 });
 
+//Refactor this using checkAuth
 app.get('/users/fuelrequestinfo', (req, res) => {
     const { username } = req.query;
     const addressQuery = `SELECT ad1, ad2, city, st, zip FROM sys.user WHERE username='${username}'`;
@@ -207,6 +176,7 @@ app.get('/users/fuelrequestinfo', (req, res) => {
     });
 });
 
+//Refactor this using checkAuth
 app.get('/users/data/:username', (req, res) => {
     const username  = req.params.username;
     const addressQuery = `SELECT firstname, lastname, ad1, ad2, city, st, zip FROM sys.user WHERE username='${username}'`;
@@ -222,6 +192,7 @@ app.get('/users/data/:username', (req, res) => {
     });
 });
 
+//Refactor this using checkAuth
 app.get('/users/update/:username', (req, res) => {
     const username  = req.params.username;
     const { f,l,a1,a2,c,s,z } = req.query;
@@ -236,6 +207,7 @@ app.get('/users/update/:username', (req, res) => {
     });
 });
 
+//Refactor this using checkAuth for admins
 app.get('/users', (req, res) => {
     connection.query(selectAll, (err, results) => {
         if(err){
@@ -249,21 +221,7 @@ app.get('/users', (req, res) => {
     });
 });
 
-app.get('/users/history', (req, res) => {
-    const { username } = req.query;
-    const findHistory = `SELECT * FROM sys.history WHERE username='${username}'`;
-    connection.query(findHistory, (err, results) => {
-        if(err){
-            return res.send(err)
-        }
-        else{
-            return res.json({
-                data: results
-            })
-        }
-    });
-});
-
+//Refactor this using checkAuth and a post request
 app.get('/users/addRequest', (req, res) => {
     var date=new Date();
     const { username, GallonsRequested, PricePerGallon, DeliveryDate, ad1, city, st, zip, OrderID} = req.query;

@@ -11,30 +11,21 @@ import Legend from 'recharts/lib/component/Legend';
 
 export default class HistoryGraph extends Component {
     componentDidMount() {
-        this.verifyData();
+        this.fetchFuelHistory();
     }
     state = {
-        username: "",
         Requests: [],
     }
 
-    verifyData() {
-        fetch(`http://138.197.221.30:4000/verify`, {
+    fetchFuelHistory() {
+        fetch(`http://138.197.221.30:4000/fuelhistory`, {
             method: "GET",
             headers: {
                 "Authorization": "Bearer " + document.cookie.split('=')[1]
             }
         })
             .then(res => res.json())
-            .then(result => { this.setState({ username: result.userdata.username }); this.getDataFromHistory() })
-            .catch(err => console.log(err))
-    }
-
-
-    getDataFromHistory = () => {
-        fetch(`http://138.197.221.30:4000/users/history?username=${this.state.username}`)
-            .then(Response => Response.json())
-            .then(Response => this.setState({ Requests: Response.data }))
+            .then(result => this.setState({ Requests: result.data }))
             .catch(err => console.log(err))
     }
 
