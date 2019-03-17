@@ -179,9 +179,10 @@ class Acc_mng extends Component{
 
     patchProfile(){
       fetch(`http://138.197.221.30:4000/users/update`,{
-          method: "PUT",
+          method: "PATCH",
           headers: {
-            "Authorization": "Bearer "+ document.cookie.split('=')[1]
+            "Authorization": "Bearer "+ document.cookie.split('=')[1],
+            "Content-Type": "application/json"
           },
           body: JSON.stringify({
             firstname: this.state.firstName,
