@@ -185,7 +185,7 @@ app.get('/users/fuelrequestinfo', (req, res) => {
     });
 });
 
-//Refactored using checkAuth
+//Method used to get the user's data for Acc_Mng page
 app.get('/users/data', checkAuth, (req, res) => {
     const username  = req.userData.username;
     const addressQuery = `SELECT firstname, lastname, ad1, ad2, city, st, zip FROM sys.user WHERE username='${username}'`;
@@ -202,10 +202,9 @@ app.get('/users/data', checkAuth, (req, res) => {
     });
 });
 
-//Refactor this using checkAuth
+//Method used to update user's profile
 app.patch('/users/update', checkAuth, (req, res) => {
     const username  = req.userData.username;
-    console.log(req.body)
     const addressQuery = `UPDATE sys.user SET firstname='${req.body.firstname}',lastname='${req.body.lastname}',ad1='${req.body.address1}',ad2='${req.body.address2}',city='${req.body.city}',st='${req.body.st}',zip='${req.body.zip}' WHERE username='${username}'`;
     connection.query(addressQuery, (err, results) => {
         if(err){
