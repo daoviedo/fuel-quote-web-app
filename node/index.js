@@ -169,22 +169,6 @@ app.get('/users/check', (req, res) => {
     });
 });
 
-//Refactor this using checkAuth
-app.get('/users/fuelrequestinfo', (req, res) => {
-    const { username } = req.query;
-    const addressQuery = `SELECT ad1, ad2, city, st, zip FROM sys.user WHERE username='${username}'`;
-    connection.query(addressQuery, (err, results) => {
-        if(err){
-            return res.send(err)
-        }
-        else{
-            return res.json({
-                data: results
-            })
-        }
-    });
-});
-
 //Method used to get the user's data for Acc_Mng page
 app.get('/users/data', checkAuth, (req, res) => {
     const username  = req.userData.username;
@@ -231,10 +215,28 @@ app.get('/users', checkAdmin, (req, res) => {
     });
 });
 
+//Refactor this using checkAuth
+app.get('/users/fuelrequestinfo', checkAuth, (req, res) => {
+    const username = req.userData.username;
+    const addressQuery = `SELECT ad1, ad2, city, st, zip FROM sys.user WHERE username='${username}'`;
+    connection.query(addressQuery, (err, results) => {
+        if(err){
+            return res.send(err)
+        }
+        else{
+            return res.json({
+                data: results
+            })
+        }
+    });
+});
+
 //Refactor this using checkAuth and a post request
-app.get('/users/addRequest', (req, res) => {
+app.post('/users/addRequest', checkAuth, (req, res) => {
     var date=new Date();
-    const { username, GallonsRequested, PricePerGallon, DeliveryDate, ad1, city, st, zip, OrderID} = req.query;
+    const username = req.userData.username
+    const { GallonsRequested, PricePerGallon, DeliveryDate, ad1, city, st, zip, OrderID } = req.body;
+    console.log(GallonsRequested, PricePerGallon)
     date = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate() + ' ' + (date.getUTCHours()-5) + ':' + date.getUTCMinutes() + ":" + date.getUTCSeconds();
     LoadingDate=new Date(DeliveryDate);
     LoadingDate=LoadingDate.getFullYear() + '-' + (LoadingDate.getMonth()+1) + '-' + LoadingDate.getDate();

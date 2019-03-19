@@ -91,7 +91,6 @@ class FuelRequestForm extends Component{
     constructor(props){
         super(props)
         this.state = {
-            username:"",
             GallonsRequested: "",
             DeliveryAddress1: "",
             DeliveryAddress2: "",
@@ -107,7 +106,7 @@ class FuelRequestForm extends Component{
 
       }
     componentDidMount(){
-        this.verifyData();
+        this.pullData();
     }
 
     dateChanged = d => {
@@ -121,38 +120,44 @@ class FuelRequestForm extends Component{
             [e.target.name] : e.target.value
         });
     };
-    verifyData(){
-        fetch(`http://138.197.221.30:4000/verify`,{
+
+    pullData() {
+        fetch(`http://138.197.221.30:4000/users/fuelrequestinfo`,{
             method: "GET",
             headers: {
                 "Authorization": "Bearer "+ document.cookie.split('=')[1]
             }
         })
         .then(res => res.json())
-        .then(result => {
-                this.setState({username: result.userdata.username});
-                this.getDataFromUser()
-            })
-        .catch(err => console.log(err))
-      }
-    getDataFromUser = () =>{
-        fetch(`http://138.197.221.30:4000/users/fuelrequestinfo?username=${this.state.username}`)
-        .then(Response => Response.json())
         .then(Response => this.setState({DeliveryAddress1: Response.data[0].ad1, DeliveryAddress2:Response.data[0].ad2,
             DeliveryCity: Response.data[0].city, DeliveryState: Response.data[0].st, DeliveryZip: Response.data[0].zip}))
         .catch(err => console.log(err))
     }
 
-    
-    addRequestToHistory = () => {
-        fetch(`http://138.197.221.30:4000/users/addRequest?username=${this.state.username}&GallonsRequested=${this.state.GallonsRequested}
-        &PricePerGallon=${this.state.SuggestedPrice}&DeliveryDate=${this.state.DeliveryDate}&ad1=${this.state.DeliveryAddress1}
-        &city=${this.state.DeliveryCity}&st=${this.state.DeliveryState}&zip=${this.state.DeliveryZip}&OrderID=${this.state.OrderID}`)
-        this.setState(state => ({
+    createNewRequest() {
+        fetch(`http://138.197.221.30:4000/users/addRequest`,{
+            method: "POST",
+            headers: {
+                "Authorization": "Bearer "+ document.cookie.split('=')[1],
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                GallonsRequested: this.state.GallonsRequested,
+                PricePerGallon: this.state.SuggestedPrice,
+                DeliveryDate: this.state.DeliveryDate,
+                ad1: this.state.DeliveryAddress1,
+                city: this.state.DeliveryCity,
+                st: this.state.DeliveryState,
+                zip: this.state.DeliveryZip,
+                OrderID: this.state.OrderID
+            }),
+        })
+        .then(this.setState(state => ({
             step: state.step + 1,
-          }));
- 
+        })))
     }
+
+    
 
     redirectToHome = (num) =>{
         if(num===0){
@@ -251,7 +256,7 @@ class FuelRequestForm extends Component{
                             />     
                             <FormControl width="auto" fullWidth className={classes.button}>
                                 <MuiThemeProvider theme={TealTheme}>
-                                    <Button color="primary"  variant="contained" onClick={()=>this.addRequestToHistory()}>
+                                    <Button color="primary"  variant="contained" onClick={()=>this.createNewRequest()}>
                                         Submit Fuel Request
                                     </Button>      
                                 </MuiThemeProvider>          
