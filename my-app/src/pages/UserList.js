@@ -61,7 +61,7 @@ class UserList extends Component {
                 "Authorization": "Bearer " + document.cookie.split('=')[1]
             }
         })
-            .then(this.fetchUsers())
+            .then(() => this.fetchUsers())
             .catch(err => console.log(err))
     }
 
