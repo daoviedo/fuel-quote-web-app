@@ -20,9 +20,6 @@ FUEL REQUEST HISTORY
     L-> Fix timestamp for when an entry was created
 
 BACKEND
-    H-> Refactor /fuelrequestinfo to use the checkauth middleware
-    H-> Refactor /addRequest to use the checkauth middleware
-    H-> Refactor /adduser to a post request
     L-> Refactor all open address (/login, /adduser, /check) to use a session key to ensure its coming from our site
 
-###Last Edited By Daniel 3/17/19###
+###Last Edited By Daniel 3/19/19###
