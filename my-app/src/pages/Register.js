@@ -162,10 +162,27 @@ class Register extends React.Component {
     }));
   };
 
-  submitUser = () => {
-    fetch(`http://138.197.221.30:4000/users/adduser?username=${this.state.username}&pass=${this.state.password}&fname=${this.state.firstName}&lname=${this.state.lastName}&ad1=${this.state.address1}&ad2=${this.state.address2}&city=${this.state.city}&st=${this.state.dropSelection}&zip=${this.state.zip}&priv=user`)
-        .then(this.handleNext)
-        .catch(err => console.log(err))
+  RegisterNewUser = () => {
+    fetch(`http://138.197.221.30:4000/users/adduser`,{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            username: this.state.username,
+            pass: this.state.password,
+            fname: this.state.firstName,
+            lname: this.state.lastName,
+            ad1: this.state.address1,
+            ad2: this.state.address2,
+            city: this.state.city,
+            st: this.state.dropSelection,
+            zip: this.state.zip,
+            priv: "user"
+        }),
+    })
+    .then(this.handleNext)
+    .catch(err => console.log(err))
   }
 
   redirectUser(){
@@ -229,7 +246,7 @@ class Register extends React.Component {
                       variant="contained"
                       color="primary"
                       disabled={!this.validateComplete()}
-                      onClick={this.submitUser}
+                      onClick={this.RegisterNewUser}
                       className={classes.button}
                     >Create Account</Button>) : (<Button
                       variant="contained"
