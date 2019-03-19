@@ -215,7 +215,7 @@ app.get('/users', checkAdmin, (req, res) => {
     });
 });
 
-//Refactor this using checkAuth
+//Method to pull user's data for fuel request
 app.get('/users/fuelrequestinfo', checkAuth, (req, res) => {
     const username = req.userData.username;
     const addressQuery = `SELECT ad1, ad2, city, st, zip FROM sys.user WHERE username='${username}'`;
@@ -231,12 +231,11 @@ app.get('/users/fuelrequestinfo', checkAuth, (req, res) => {
     });
 });
 
-//Refactor this using checkAuth and a post request
+//Post Method to add new fuel request
 app.post('/users/addRequest', checkAuth, (req, res) => {
     var date=new Date();
     const username = req.userData.username
     const { GallonsRequested, PricePerGallon, DeliveryDate, ad1, city, st, zip, OrderID } = req.body;
-    console.log(GallonsRequested, PricePerGallon)
     date = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate() + ' ' + (date.getUTCHours()-5) + ':' + date.getUTCMinutes() + ":" + date.getUTCSeconds();
     LoadingDate=new Date(DeliveryDate);
     LoadingDate=LoadingDate.getFullYear() + '-' + (LoadingDate.getMonth()+1) + '-' + LoadingDate.getDate();
