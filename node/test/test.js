@@ -7,9 +7,6 @@ chai.use(chaiHttp)
 
 
 // Check user
-const usernames = ['Daniel', 'Shahzaib', 'Joely', 'Coogs-Uh'];
-
-
 describe('/GET username for existing user: Daniel', () => {
     it('it should GET the username', (done) => {
         chai.request(server)
