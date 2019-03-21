@@ -26,6 +26,23 @@ for (let x = 0; x < usernames.length; x++) {
     });
 }
 
+// login test
+let user = {
+    username: 'Daniel',
+    password: '1234'
+};
 
-
-// 
+describe('/POST login', () => {
+    it('it should login', (done) => {
+        chai.request(server)
+            .get('/login')
+            .send(user)
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+                res.body.should.have.property('authentication');
+                res.body.should.have.property('token');
+                done();
+            });
+    });
+});
