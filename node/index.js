@@ -26,7 +26,7 @@ connection.connect(err => {
         console.log(err);
         return err;
     } else {
-        console.log("Success");
+        //console.log("Success");
     }
 });
 
@@ -252,7 +252,7 @@ app.post('/users/addRequest', checkAuth, (req, res) => {
 
 
 app.listen(4000, () => {
-    console.log(`Server listening on port 4000`)
+    //console.log(`Server listening on port 4000`)
 });
 
 module.exports = app;
