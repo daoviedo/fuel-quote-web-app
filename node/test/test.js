@@ -5,8 +5,9 @@ let should = chai.should();
 
 chai.use(chaiHttp)
 
-const usernames = ['Daniel', 'Shahzaib', 'Joely'];
 
+// Check user
+const usernames = ['Daniel', 'Shahzaib', 'Joely', 'Coogs-Uh'];
 for (let x = 0; x < usernames.length; x++) {
     describe('/GET username', () => {
         it('it should GET the username', (done) => {
@@ -14,6 +15,8 @@ for (let x = 0; x < usernames.length; x++) {
                 .get('/users/check?username=' + usernames[x])
                 .end((err, res) => {
                     res.should.have.status(200);
+                    res.body.should.be.a('object');
+                    res.body.should.have.property('data');
                     res.body.data.should.be.a('array');
                     //res.body.data.length.should.be.eql(1);
                     //res.body.length.should.be.eql(0);
@@ -22,3 +25,7 @@ for (let x = 0; x < usernames.length; x++) {
         });
     });
 }
+
+
+
+// 
