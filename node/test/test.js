@@ -84,7 +84,7 @@ describe('/POST login for a invalid user', () => {
 
 //verify test
 let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkRhbmllbCIsInByaXZlbGVnZSI6IkFkbWluIiwiaWF0IjoxNTUzMjEwMzc3LCJleHAiOjE1NTMyMTM5Nzd9.mqAcuR2oX4Io0mMH_GrqwFt4UWEbO8cmQBwfkemxfC0";
-describe('/GET verify token for valid user', () => {
+describe('/GET verify token for valid token', () => {
     it('it should GET authentication and userdata', (done) => {
         chai.request(server)
             .get('/verify')
@@ -93,7 +93,20 @@ describe('/GET verify token for valid user', () => {
                 res.should.have.status(200);
                 res.body.should.be.a('object');
                 res.body.authentication.should.be.eql(true);
-                //res.body.length.should.be.eql(0);
+                done();
+            });
+    });
+});
+
+describe('/GET verify token for invalid token', () => {
+    it('it should not GET authentication and userdata', (done) => {
+        chai.request(server)
+            .get('/verify')
+            .set("Authorization", "Bearer "+ "incorrecttoken")
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+                res.body.authentication.should.be.eql(false);
                 done();
             });
     });
