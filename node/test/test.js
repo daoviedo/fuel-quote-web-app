@@ -50,7 +50,12 @@ let user = {
     password: '1234'
 };
 
-describe('/POST login', () => {
+let invalidUser = {
+    username: 'svfdgdf',
+    password: '12345'
+};
+
+describe('/POST login for a valid user', () => {
     it('it should login', (done) => {
         chai.request(server)
             .post('/login')
@@ -60,6 +65,21 @@ describe('/POST login', () => {
                 res.body.should.be.a('object');
                 res.body.authentication.should.be.eql(true);
                 res.body.token.should.not.be.eql(null);
+                done();
+            });
+    });
+});
+
+describe('/POST login for a invalid user', () => {
+    it('it should be invalid login', (done) => {
+        chai.request(server)
+            .post('/login')
+            .send(invalidUser)
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+                res.body.authentication.should.be.eql(false);
+                res.body.token.should.be.eql(null);
                 done();
             });
     });
