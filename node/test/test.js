@@ -8,6 +8,7 @@ chai.use(chaiHttp)
 
 // Check user
 const usernames = ['Daniel', 'Shahzaib', 'Joely', 'Coogs-Uh'];
+/*
 for (let x = 0; x < usernames.length; x++) {
     describe('/GET username', () => {
         it('it should GET the username', (done) => {
@@ -25,7 +26,7 @@ for (let x = 0; x < usernames.length; x++) {
         });
     });
 }
-
+*/
 // login test
 let user = {
     username: 'Daniel',
