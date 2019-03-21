@@ -10,8 +10,8 @@ describe('/GET username', () => {
       chai.request(server)
           .get('/users/check?username=Daniel')
           .end((err, res) => {
-                res.should.have.status(200);
-                //res.body.should.be.a('array');
+                //res.should.have.status(200);
+                res.body.data.should.be.a('array');
                 //res.body.length.should.be.eql(0);
             done();
           });
