@@ -8,7 +8,7 @@ chai.use(chaiHttp)
 
 // Check user
 const usernames = ['Daniel', 'Shahzaib', 'Joely', 'Coogs-Uh'];
-/*
+
 for (let x = 0; x < usernames.length; x++) {
     describe('/GET username', () => {
         it('it should GET the username', (done) => {
@@ -26,7 +26,7 @@ for (let x = 0; x < usernames.length; x++) {
         });
     });
 }
-*/
+
 // login test
 let user = {
     username: 'Daniel',
@@ -36,13 +36,8 @@ let user = {
 describe('/POST login', () => {
     it('it should login', (done) => {
         chai.request(server)
-            .post('/login', {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(user),
-            })
+            .post('/login')
+            .send(user)
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('object');
