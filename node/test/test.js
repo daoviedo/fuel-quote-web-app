@@ -79,7 +79,7 @@ describe('/POST login for a invalid user', () => {
                 res.should.have.status(200);
                 res.body.should.be.a('object');
                 res.body.authentication.should.be.eql(false);
-                res.body.token.should.be.eql(null);
+                res.body.token.should.be.null;
                 done();
             });
     });
