@@ -5,7 +5,7 @@ const expect = require('chai').expect;
 
 chai.use(require('chai-http'));
 
-const app = require('./index.js');
+const app = require('../index.js');
 
 describe('Check users', function () {
     it('should return user', function () {
