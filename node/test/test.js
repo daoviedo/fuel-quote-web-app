@@ -58,8 +58,8 @@ describe('/POST login', () => {
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('object');
-                res.body.should.have.property('authentication');
-                res.body.should.have.property('token');
+                res.body.authentication.should.be.eql(true);
+                res.body.token.should.not.be.eql(null);
                 done();
             });
     });
