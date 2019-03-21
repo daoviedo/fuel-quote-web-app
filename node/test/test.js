@@ -19,7 +19,7 @@ describe('/GET username for existing user: Daniel', () => {
                 res.body.should.be.a('object');
                 res.body.should.have.property('data');
                 res.body.data.should.be.a('array');
-                res.body.data[0].username.should.be('Daniel');
+                res.body.data[0].username.should.be.eql('Daniel');
                 //res.body.data.length.should.be.eql(1);
                 //res.body.length.should.be.eql(0);
                 done();
