@@ -36,8 +36,13 @@ let user = {
 describe('/POST login', () => {
     it('it should login', (done) => {
         chai.request(server)
-            .post('/login')
-            .send(user)
+            .post('/login', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(user),
+            })
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('object');
