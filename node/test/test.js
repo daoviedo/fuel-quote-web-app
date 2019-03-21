@@ -1,20 +1,19 @@
-'use strict';
+let chai = require('chai');
+let chaiHttp = require('chai-http');
+let server = require('../index');
+let should = chai.should();
 
-const chai = require('chai');
-const expect = require('chai').expect;
+chai.use(chaiHttp)
 
-chai.use(require('chai-http'));
-
-const app = require('../index.js');
-
-describe('Check users', function () {
-    it('should return user', function () {
-        return chai.request(app)
-            .get('/users/check?username=' + 'Daniel')
-            .then(function (res) {
-                expect(res).to.have.status(200);
-                expect(res).to.be.json;
-                expect(res.body).to.be.an('object');
-            });
+describe('/GET username', () => {
+    it('it should GET the username', (done) => {
+      chai.request(server)
+          .get('/users/check?username=Daniel')
+          .end((err, res) => {
+                res.should.have.status(200);
+                //res.body.should.be.a('array');
+                //res.body.length.should.be.eql(0);
+            done();
+          });
     });
 });
