@@ -83,11 +83,11 @@ describe('/POST login for a invalid user', () => {
 });
 
 //verify test
-let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkRhbmllbCIsInByaXZlbGVnZSI6IkFkbWluIiwiaWF0IjoxNTUzMjEwMzc3LCJleHAiOjE1NTMyMTM5Nzd9.mqAcuR2oX4Io0mMH_GrqwFt4UWEbO8cmQBwfkemxfC0"
+let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkRhbmllbCIsInByaXZlbGVnZSI6IkFkbWluIiwiaWF0IjoxNTUzMjEwMzc3LCJleHAiOjE1NTMyMTM5Nzd9.mqAcuR2oX4Io0mMH_GrqwFt4UWEbO8cmQBwfkemxfC0";
 describe('/GET verify token for valid user', () => {
     it('it should GET authentication and userdata', (done) => {
         chai.request(server)
-            .get('/users/check?username=TestingAcc',{
+            .get('/verify',{
                 method: "GET",
                 headers: {
                     "Authorization": "Bearer "+ token
@@ -96,7 +96,7 @@ describe('/GET verify token for valid user', () => {
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('object');
-                (res.body.authentication === true).should.be.true;
+                res.body.authentication.should.be.eql(true);
                 //res.body.length.should.be.eql(0);
                 done();
             });
