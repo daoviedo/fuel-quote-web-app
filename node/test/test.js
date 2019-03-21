@@ -28,8 +28,8 @@ for (let x = 0; x < usernames.length; x++) {
 
 // login test
 let user = {
-    'username': 'Daniel',
-    'password': '1234'
+    username: 'Daniel',
+    password: '1234'
 };
 
 describe('/POST login', () => {
