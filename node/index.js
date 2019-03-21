@@ -250,9 +250,11 @@ app.post('/users/addRequest', checkAuth, (req, res) => {
     });
 });
 
+if(process.env.NODE_ENV !== 'test'){
+    app.listen(4000, () => {
+        //console.log(`Server listening on port 4000`)
+    });
+}
 
-app.listen(4000, () => {
-    //console.log(`Server listening on port 4000`)
-});
 
 module.exports = app;
