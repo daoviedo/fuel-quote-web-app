@@ -28,15 +28,24 @@ for (let x = 0; x < usernames.length; x++) {
 
 // login test
 let user = {
-    'username': 'Daniel',
-    'password': '1234'
+    username: 'Daniel',
+    password: '1234'
 };
 
 describe('/POST login', () => {
     it('it should login', (done) => {
         chai.request(server)
-            .get('/login')
-            .send(user)
+            .get('/login', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    username: user.username,
+                    password: user.password
+                }),
+            })
+
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('object');
