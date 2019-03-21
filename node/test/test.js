@@ -8,7 +8,7 @@ chai.use(chaiHttp)
 describe('/GET username', () => {
     it('it should GET the username', (done) => {
       chai.request(server)
-          .get('/users/check?username=sdfsfg')
+          .get('/users/check?username=Daniel')
           .end((err, res) => {
                 res.should.have.status(200);
                 res.body.data.should.be.a('array');
