@@ -87,12 +87,8 @@ let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkRhbmllbCIsIn
 describe('/GET verify token for valid user', () => {
     it('it should GET authentication and userdata', (done) => {
         chai.request(server)
-            .get('/verify',{
-                method: "GET",
-                headers: {
-                    "Authorization": "Bearer "+ token
-                }
-            })
+            .get('/verify')
+            .set("Authorization", "Bearer "+ token)
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('object');
