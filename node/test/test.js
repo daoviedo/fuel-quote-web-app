@@ -145,7 +145,7 @@ describe('Fuel Request Unit Test', () => {
         it('it should UPDATE the users info with the new info', (done) => {
             chai.request(server)
                 .patch('/users/update')
-                .send()
+                .send(TestUserInfo)
                 .set("Authorization", "Bearer "+ TestUserToken)
                 .end((err, res) => {
                     res.should.have.status(200);
