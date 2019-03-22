@@ -305,7 +305,7 @@ describe('Fuel Request Unit Test', () => {
                 .get('/users/addRequest')
                 .set("Authorization", "Bearer "+ TestUserToken)
                 .end((err, res) => {
-                    //res.should.have.status(200);
+                    res.should.have.status(200);
                     res.body.should.be.a('object');
                     res.text.should.be.eql('Successfully Added Request');
                     done();
