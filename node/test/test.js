@@ -23,7 +23,6 @@ describe('/GET username for existing user: Daniel', () => {
             });
     });
 });
-
 describe('/GET username for non-existing user: TestingAcc', () => {
     it('it should GET an empty data result', (done) => {
         chai.request(server)
@@ -46,12 +45,10 @@ let user = {
     username: 'Daniel',
     password: '1234'
 };
-
 let invalidUser = {
     username: 'svfdgdf',
     password: '12345'
 };
-
 describe('/POST login for a valid user', () => {
     it('it should login', (done) => {
         chai.request(server)
@@ -66,7 +63,6 @@ describe('/POST login for a valid user', () => {
             });
     });
 });
-
 describe('/POST login for a invalid user', () => {
     it('it should be invalid login', (done) => {
         chai.request(server)
@@ -82,7 +78,7 @@ describe('/POST login for a invalid user', () => {
     });
 });
 
-//verify test
+//verify test (CHANGE TOKEN EVERY HOUR)
 let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkRhbmllbCIsInByaXZlbGVnZSI6IkFkbWluIiwiaWF0IjoxNTUzMjE4NTU4LCJleHAiOjE1NTMyMjIxNTh9.4fEDPJCitdmqYB94aZZlwE8oV3UlJ2lT8GJcO5ViTjg";
 describe('/GET verify token for valid token', () => {
     it('it should GET authentication and userdata', (done) => {
@@ -97,7 +93,6 @@ describe('/GET verify token for valid token', () => {
             });
     });
 });
-
 describe('/GET verify token for invalid token', () => {
     it('it should not GET authentication and userdata', (done) => {
         chai.request(server)
@@ -112,7 +107,8 @@ describe('/GET verify token for invalid token', () => {
     });
 });
 
-describe('/DELETE delete user with valid admin authentication', () => {
+//Delete user test
+describe('/DELETE user with valid admin authentication', () => {
     it('it should DELETE the user successfully', (done) => {
         chai.request(server)
             .delete('/users/remove/dfhdh')
@@ -124,8 +120,7 @@ describe('/DELETE delete user with valid admin authentication', () => {
             });
     });
 });
-
-describe('/DELETE delete user with invalid admin authentication', () => {
+describe('/DELETE user with invalid admin authentication', () => {
     it('it should not DELETE the user', (done) => {
         chai.request(server)
             .delete('/users/remove/dfhdh')
@@ -134,6 +129,22 @@ describe('/DELETE delete user with invalid admin authentication', () => {
                 res.should.have.status(200);
                 res.text.should.not.be.eql('Successfully Deleted User');
                 res.body.authentication.should.be.eql(false);
+                done();
+            });
+    });
+});
+
+//fuel history test
+describe('/GET fuel history with valid token', () => {
+    it('it should GET authentication and userdata', (done) => {
+        chai.request(server)
+            .get('/fuelhistory')
+            .set("Authorization", "Bearer "+ token)
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+                res.body.authentication.should.be.eql(true);
+                res.userdata.should.exist;
                 done();
             });
     });
