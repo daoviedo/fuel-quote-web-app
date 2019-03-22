@@ -59,6 +59,18 @@ let updatedUserInfo = {
     st: 'TX',
     zip: '77477'
 }
+let newUserInfo = {
+    username: 'testUser',
+    pass: '1234',
+    fname: 'testName',
+    lname:'Test',
+    ad1: 'address1',
+    ad2: 'address2',
+    city: 'mcity',
+    st: 'TX',
+    zip: '77477',
+    priv: 'user'
+}
 describe('/POST login for a valid user', () => {
     it('it should login', (done) => {
         chai.request(server)
@@ -73,6 +85,7 @@ describe('/POST login for a valid user', () => {
             });
     });
 });
+
 describe('/POST login for a invalid user', () => {
     it('it should be invalid login', (done) => {
         chai.request(server)
@@ -276,6 +289,19 @@ describe('/PATCH user info should be updated', () => {
             });
     });
 });
+
 //aduser
-//update
+describe('/PATCH user info should be updated', () => {
+    it('it should add the test user info', (done) => {
+        chai.request(server)
+            .post('/users/adduser')
+            .send(newUserInfo)
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.text.should.be.eql('Successfully Added User');
+                done();
+            });
+    });
+});
+
 //add request
