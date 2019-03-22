@@ -105,7 +105,7 @@ class Login extends Component {
         window.location.replace('/');
         }
         else{
-          if(isSub){alert("Invalid Credentials")}
+          if(isSub){alert("Invalid Credentials"); this.setState({submitted: false})}
             return (
                 <main className={classes.main}>
                 <MuiThemeProvider theme={theme1}>
@@ -138,12 +138,12 @@ class Login extends Component {
                       </Button>
                     </form>
                   </Paper>
-                  <p>Don't Have an Account?&ensp;
-                <Button2 
+                  <Typography>Don't Have an Account?&ensp;
+                <Button
                 href="/register"
-                variant="outline-primary" 
-                size="sm"
-                >Register</Button2></p>
+                variant="outlined"
+                color="primary"
+                >Register</Button></Typography>
                   </MuiThemeProvider>
                 </main>
         );
