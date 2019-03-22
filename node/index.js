@@ -234,7 +234,7 @@ app.get('/users/fuelrequestinfo', checkAuth, (req, res) => {
 //Post Method to add new fuel request
 app.post('/users/addRequest', checkAuth, (req, res) => {
     var date=new Date();
-    const username = req.userData.username
+    const username = req.userData.username;
     const { GallonsRequested, PricePerGallon, DeliveryDate, ad1, city, st, zip, OrderID } = req.body;
     date = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate() + ' ' + (date.getUTCHours()-5) + ':' + date.getUTCMinutes() + ":" + date.getUTCSeconds();
     LoadingDate=new Date(DeliveryDate);
@@ -247,6 +247,16 @@ app.post('/users/addRequest', checkAuth, (req, res) => {
         else{
             return res.send(date)
         }
+    });
+});
+
+app.post('/pricemodule', checkAuth, (req, res) => {
+    const username = req.userData.username;
+    const { GallonsRequested, DeliveryDate, st } = req.body;
+
+    const ppg = 10;
+    return res.json({
+        totalPrice: ppg*GallonsRequested
     });
 });
 
