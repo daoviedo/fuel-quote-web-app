@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import teal from '@material-ui/core/colors/teal';
+import Button2 from 'react-bootstrap/Button';
 
 const theme1 = createMuiTheme({
     palette: {
@@ -104,6 +105,7 @@ class Login extends Component {
         window.location.replace('/');
         }
         else{
+          if(isSub){alert("Invalid Credentials")}
             return (
                 <main className={classes.main}>
                 <MuiThemeProvider theme={theme1}>
@@ -124,7 +126,6 @@ class Login extends Component {
                         <InputLabel>Password</InputLabel>
                         <Input value={this.state.password} onChange={this.handleChange} type="password" id="password" autoComplete="current-password" style={{marginBottom: '40px'}}/>
                       </FormControl>
-                      {isSub ? (<p style={{color:"red"}}>Invalid Credentials</p>): <div/>}
                       <Button
                         type="submit"
                         fullWidth
@@ -135,14 +136,14 @@ class Login extends Component {
                       >
                         Sign in
                       </Button>
-                      <p>Don't Have an Account?&ensp;
-                <Button 
+                    </form>
+                  </Paper>
+                  <p>Don't Have an Account?&ensp;
+                <Button2 
                 href="/register"
                 variant="outline-primary" 
                 size="sm"
-                >Register</Button></p>
-                    </form>
-                  </Paper>
+                >Register</Button2></p>
                   </MuiThemeProvider>
                 </main>
         );
