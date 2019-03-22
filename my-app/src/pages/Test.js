@@ -111,12 +111,12 @@ class Test extends Component {
                 </Typography>
                 <form className={classes.form} onSubmit={this.handleSubmit}>
                   <FormControl margin="normal" required fullWidth style={{marginTop: '40px'}}>
-                    <InputLabel htmlFor="username">Username</InputLabel>
-                    <Input id="username" name="username" autoComplete="username" autoFocus value={this.state.username} onChange={this.handleChange}/>
+                    <InputLabel>Username</InputLabel>
+                    <Input id="username" autoComplete="username" autoFocus value={this.state.username} onChange={this.handleChange}/>
                   </FormControl>
                   <FormControl margin="normal" required fullWidth>
-                    <InputLabel htmlFor="password">Password</InputLabel>
-                    <Input value={this.state.password} onChange={this.handleChange} name="password" type="password" id="password" autoComplete="current-password" style={{marginBottom: '40px'}}/>
+                    <InputLabel>Password</InputLabel>
+                    <Input value={this.state.password} onChange={this.handleChange} type="password" id="password" autoComplete="current-password" style={{marginBottom: '40px'}}/>
                   </FormControl>
                   <Button
                     type="submit"
