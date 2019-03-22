@@ -89,7 +89,7 @@ class Test extends Component {
       this.loginAuth();
     }
     render(){
-        const { classes } = props;
+        const { classes } = this.props;
         return (
             <main className={classes.main}>
               <CssBaseline />
