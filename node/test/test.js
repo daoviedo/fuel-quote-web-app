@@ -83,7 +83,7 @@ describe('/POST login for a invalid user', () => {
 });
 
 //verify test
-let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkRhbmllbCIsInByaXZlbGVnZSI6IkFkbWluIiwiaWF0IjoxNTUzMjEwMzc3LCJleHAiOjE1NTMyMTM5Nzd9.mqAcuR2oX4Io0mMH_GrqwFt4UWEbO8cmQBwfkemxfC0";
+let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkRhbmllbCIsInByaXZlbGVnZSI6IkFkbWluIiwiaWF0IjoxNTUzMjE4NTU4LCJleHAiOjE1NTMyMjIxNTh9.4fEDPJCitdmqYB94aZZlwE8oV3UlJ2lT8GJcO5ViTjg";
 describe('/GET verify token for valid token', () => {
     it('it should GET authentication and userdata', (done) => {
         chai.request(server)
@@ -107,6 +107,19 @@ describe('/GET verify token for invalid token', () => {
                 res.should.have.status(200);
                 res.body.should.be.a('object');
                 res.body.authentication.should.be.eql(false);
+                done();
+            });
+    });
+});
+
+describe('/DELETE delete user with valid authentication', () => {
+    it('it should DELETE the user successfully', (done) => {
+        chai.request(server)
+            .delete('/users/remove/dfhdh')
+            .set("Authorization", "Bearer "+ token)
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.eql('Successfully Deleted User');
                 done();
             });
     });
