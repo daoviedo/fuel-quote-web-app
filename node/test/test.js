@@ -102,7 +102,7 @@ describe('/POST login for a invalid user', () => {
 });
 
 //verify test (CHANGE TOKEN EVERY HOUR)
-let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkRhbmllbCIsInByaXZlbGVnZSI6IkFkbWluIiwiaWF0IjoxNTUzMjc3NDE3LCJleHAiOjE1NTMyODEwMTd9.bvAV3TZJTtOW1wsAlYagEVuBaeNYy8ANQrXgyDgerpA";
+let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkRhbmllbCIsInByaXZlbGVnZSI6IkFkbWluIiwiaWF0IjoxNTUzMjgxMjQwLCJleHAiOjE1NTMyODQ4NDB9.5z4VVP1g5JAxQq8OG5-qo5EvekRXo4-9_f11emPtVwE";
 describe('/GET verify token for valid token', () => {
     it('it should GET authentication and userdata', (done) => {
         chai.request(server)
