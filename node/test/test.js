@@ -136,7 +136,7 @@ describe('/DELETE user with invalid admin authentication', () => {
 
 //fuel history test
 describe('/GET fuel history with valid token', () => {
-    it('it should GET authentication and userdata', (done) => {
+    it('it should GET authentication and array of data', (done) => {
         chai.request(server)
             .get('/fuelhistory')
             .set("Authorization", "Bearer "+ token)
@@ -146,6 +146,49 @@ describe('/GET fuel history with valid token', () => {
                 res.body.authentication.should.be.eql(true);
                 res.body.should.have.property('data');
                 res.body.data.should.be.a('array');
+                done();
+            });
+    });
+});
+describe('/GET fuel history with invalid token', () => {
+    it('it should GET authentication false and no array', (done) => {
+        chai.request(server)
+            .get('/fuelhistory')
+            .set("Authorization", "Bearer "+ 'invalidtoken')
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+                res.body.authentication.should.be.eql(false);
+                done();
+            });
+    });
+});
+
+//get user info test
+describe('/GET user info with valid token', () => {
+    it('it should GET authentication and array of data', (done) => {
+        chai.request(server)
+            .get('/users/data')
+            .set("Authorization", "Bearer "+ token)
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+                res.body.authentication.should.be.eql(true);
+                res.body.should.have.property('data');
+                res.body.data.should.be.a('array');
+                done();
+            });
+    });
+});
+describe('/GET user info with invalid token', () => {
+    it('it should GET authentication false and no array', (done) => {
+        chai.request(server)
+            .get('/users/data')
+            .set("Authorization", "Bearer "+ 'invalidtoken')
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+                res.body.authentication.should.be.eql(false);
                 done();
             });
     });
