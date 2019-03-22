@@ -93,48 +93,55 @@ class Test extends Component {
     }
   
     handleSubmit = event => {
-        console.log("submiutted");
       event.preventDefault();
       this.loginAuth();
     }
     render(){
         const { classes } = this.props;
-        console.log(this.state.password, this.state.username);
-        return (
-            <main className={classes.main}>
-            <MuiThemeProvider theme={theme1}>
-              <CssBaseline />
-              <Paper className={classes.paper}>
-                <Avatar className={classes.avatar}>
-                  <LockOutlinedIcon />
-                </Avatar>
-                <Typography component="h1" variant="h5">
-                  Sign in
-                </Typography>
-                <form className={classes.form} onSubmit={this.handleSubmit}>
-                  <FormControl margin="normal" required fullWidth style={{marginTop: '40px'}}>
-                    <InputLabel>Username</InputLabel>
-                    <Input id="username" autoComplete="username" autoFocus value={this.state.username} onChange={this.handleChange}/>
-                  </FormControl>
-                  <FormControl margin="normal" required fullWidth>
-                    <InputLabel>Password</InputLabel>
-                    <Input value={this.state.password} onChange={this.handleChange} type="password" id="password" autoComplete="current-password" style={{marginBottom: '40px'}}/>
-                  </FormControl>
-                  <Button
-                    type="submit"
-                    fullWidth
-                    disabled={!this.validateForm()}
-                    variant="contained"
-                    color="primary"
-                    className={classes.submit}
-                  >
-                    Sign in
-                  </Button>
-                </form>
-              </Paper>
-              </MuiThemeProvider>
-            </main>
-    );
+        const returnAuth = this.state.auth;
+        const isSub = this.state.submitted;
+        if(returnAuth){
+        window.location.replace('/');
+        }
+        else{
+            return (
+                <main className={classes.main}>
+                <MuiThemeProvider theme={theme1}>
+                  <CssBaseline />
+                  <Paper className={classes.paper}>
+                    <Avatar className={classes.avatar}>
+                      <LockOutlinedIcon />
+                    </Avatar>
+                    <Typography component="h1" variant="h5">
+                      Sign in
+                    </Typography>
+                    <form className={classes.form} onSubmit={this.handleSubmit}>
+                      <FormControl margin="normal" required fullWidth style={{marginTop: '40px'}}>
+                        <InputLabel>Username</InputLabel>
+                        <Input id="username" autoComplete="username" autoFocus value={this.state.username} onChange={this.handleChange}/>
+                      </FormControl>
+                      <FormControl margin="normal" required fullWidth>
+                        <InputLabel>Password</InputLabel>
+                        <Input value={this.state.password} onChange={this.handleChange} type="password" id="password" autoComplete="current-password" style={{marginBottom: '40px'}}/>
+                      </FormControl>
+                      {isSub ? (<p style={{color:"red"}}>Invalid Credentials</p>): <div/>}
+                      <Button
+                        type="submit"
+                        fullWidth
+                        disabled={!this.validateForm()}
+                        variant="contained"
+                        color="primary"
+                        className={classes.submit}
+                      >
+                        Sign in
+                      </Button>
+                    </form>
+                  </Paper>
+                  </MuiThemeProvider>
+                </main>
+        );
+        }
+        
     }
 }
 
