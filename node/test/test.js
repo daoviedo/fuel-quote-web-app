@@ -265,7 +265,7 @@ describe('Fuel Request Unit Test', () => {
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
-                    (res.body.data.length===0).should.be.eql(true)
+                    res.body.authentication.should.be.eql(false);
                     done();
                 });
         });
