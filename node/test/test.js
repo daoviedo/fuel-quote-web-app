@@ -80,7 +80,7 @@ describe('Fuel Request Unit Test', () => {
         it('it should login', (done) => {
             chai.request(server)
                 .post('/login')
-                .send(TestUserInfo.username,TestUserInfo.password)
+                .send(ValidUser)
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
