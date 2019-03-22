@@ -302,8 +302,9 @@ describe('Fuel Request Unit Test', () => {
     describe('/POST fuel request is added to the fuel history table', () => {
         it('it should post all the information of the request into the fuel request history table', (done) => {
             chai.request(server)
-                .get('/users/addRequest')
+                .post('/users/addRequest')
                 .set("Authorization", "Bearer "+ TestUserToken)
+                .send(TestFuelRequest)
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
