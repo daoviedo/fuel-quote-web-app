@@ -90,6 +90,19 @@ describe('Unit Test', () => {
                 });
         });
     });
+    describe('/GET verify token for valid token', () => {
+        it('it should GET authentication and userdata', (done) => {
+            chai.request(server)
+                .get('/verify')
+                .set("Authorization", "Bearer "+ token1)
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                    res.body.authentication.should.be.eql(true);
+                    done();
+                });
+        });
+    });
 });
 
 describe('/POST login for a valid user', () => {
