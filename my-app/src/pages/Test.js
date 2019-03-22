@@ -4,8 +4,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -45,49 +43,90 @@ const styles = theme => ({
   },
 });
 
-function SignIn(props) {
-  const { classes } = props;
-
-  return (
-    <main className={classes.main}>
-      <CssBaseline />
-      <Paper className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <form className={classes.form}>
-          <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="email">Email Address</InputLabel>
-            <Input id="email" name="email" autoComplete="email" autoFocus />
-          </FormControl>
-          <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="password">Password</InputLabel>
-            <Input name="password" type="password" id="password" autoComplete="current-password" />
-          </FormControl>
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Sign in
-          </Button>
-        </form>
-      </Paper>
-    </main>
-  );
+class Test extends Component {
+    constructor(props) {
+      super(props);
+  
+      this.state = {
+        username: "",
+        password: "",
+        auth: false,
+        submitted: false
+      };
+  
+      this.handleChange = this.handleChange.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
+    }
+  
+    validateForm() {
+      return this.state.username.length > 0 && this.state.password.length > 0;
+    }
+  
+    handleChange = event => {
+      this.setState({
+        [event.target.id]: event.target.value
+      });
+    }
+  
+    loginAuth(){
+      fetch(`http://138.197.221.30:4000/login`,{
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+              username: this.state.username,
+              password: this.state.password
+          }),
+      })
+      .then(res => res.json())
+      .then(result => {document.cookie = "token="+result.token;this.setState({auth: result.authentication, submitted: true});})
+      .catch(err => {this.setState({submitted: true});console.log(err)})
+    }
+  
+    handleSubmit = event => {
+      event.preventDefault();
+      this.loginAuth();
+    }
+    render(){
+        const { classes } = props;
+        return (
+            <main className={classes.main}>
+              <CssBaseline />
+              <Paper className={classes.paper}>
+                <Avatar className={classes.avatar}>
+                  <LockOutlinedIcon />
+                </Avatar>
+                <Typography component="h1" variant="h5">
+                  Sign in
+                </Typography>
+                <form className={classes.form}>
+                  <FormControl margin="normal" required fullWidth>
+                    <InputLabel htmlFor="email">Username</InputLabel>
+                    <Input id="username" name="username" autoComplete="username" autoFocus />
+                  </FormControl>
+                  <FormControl margin="normal" required fullWidth>
+                    <InputLabel htmlFor="password">Password</InputLabel>
+                    <Input name="password" type="password" id="password" autoComplete="current-password" />
+                  </FormControl>
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.submit}
+                  >
+                    Sign in
+                  </Button>
+                </form>
+              </Paper>
+            </main>
+    );
+    }
 }
 
-SignIn.propTypes = {
+Test.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SignIn);
+export default withStyles(styles)(Test);
