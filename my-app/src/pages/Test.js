@@ -109,18 +109,19 @@ class Test extends Component {
                 <Typography component="h1" variant="h5">
                   Sign in
                 </Typography>
-                <form className={classes.form}>
+                <form className={classes.form} onSubmit={this.handleSubmit}>
                   <FormControl margin="normal" required fullWidth style={{marginTop: '40px'}}>
                     <InputLabel htmlFor="username">Username</InputLabel>
-                    <Input id="username" name="username" autoComplete="username" autoFocus />
+                    <Input id="username" name="username" autoComplete="username" autoFocus value={this.state.username} onChange={this.handleChange}/>
                   </FormControl>
                   <FormControl margin="normal" required fullWidth>
                     <InputLabel htmlFor="password">Password</InputLabel>
-                    <Input name="password" type="password" id="password" autoComplete="current-password" style={{marginBottom: '40px'}}/>
+                    <Input value={this.state.password} onChange={this.handleChange} name="password" type="password" id="password" autoComplete="current-password" style={{marginBottom: '40px'}}/>
                   </FormControl>
                   <Button
                     type="submit"
                     fullWidth
+                    disabled={!this.validateForm()}
                     variant="contained"
                     color="primary"
                     className={classes.submit}
