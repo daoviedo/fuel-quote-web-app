@@ -116,6 +116,7 @@ describe('Fuel Request Unit Test', () => {
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
+                    console.log(TestUserToken);
                     res.body.authentication.should.be.eql(true);
                     done();
                 });
