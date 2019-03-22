@@ -101,9 +101,9 @@ class Test extends Component {
                   Sign in
                 </Typography>
                 <form className={classes.form}>
-                  <FormControl margin="normal" required fullWidth>
-                    <InputLabel htmlFor="email">Username</InputLabel>
-                    <Input id="username" name="username" autoComplete="username" autoFocus style={{marginTop: '40px'}}/>
+                  <FormControl margin="normal" required fullWidth style={{marginTop: '40px'}}>
+                    <InputLabel htmlFor="username">Username</InputLabel>
+                    <Input id="username" name="username" autoComplete="username" autoFocus />
                   </FormControl>
                   <FormControl margin="normal" required fullWidth>
                     <InputLabel htmlFor="password">Password</InputLabel>
