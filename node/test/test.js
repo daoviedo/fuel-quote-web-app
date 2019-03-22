@@ -112,7 +112,7 @@ describe('/GET verify token for invalid token', () => {
     });
 });
 
-describe('/DELETE delete user with valid authentication', () => {
+describe('/DELETE delete user with valid admin authentication', () => {
     it('it should DELETE the user successfully', (done) => {
         chai.request(server)
             .delete('/users/remove/dfhdh')
@@ -120,6 +120,20 @@ describe('/DELETE delete user with valid authentication', () => {
             .end((err, res) => {
                 res.should.have.status(200);
                 res.text.should.be.eql('Successfully Deleted User');
+                done();
+            });
+    });
+});
+
+describe('/DELETE delete user with invalid admin authentication', () => {
+    it('it should not DELETE the user', (done) => {
+        chai.request(server)
+            .delete('/users/remove/dfhdh')
+            .set("Authorization", "Bearer "+ "invalidtoken")
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.text.should.not.be.eql('Successfully Deleted User');
+                res.body.authentication.should.be.eql(false);
                 done();
             });
     });
