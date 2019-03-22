@@ -8,9 +8,14 @@ chai.use(chaiHttp)
 
 describe('Fuel Request Unit Test', () => {
     let TestUserToken = null;
-    let ValidUser = {
+    let AdminToken = null;
+    let ValidAdmin = {
         username: 'Daniel',
         password: '1234'
+    };
+    let ValidUser = {
+        username: 'TestUser',
+        password: 'Test'
     };
     let invalidUser = {
         username: 'svfdgdf',
@@ -93,6 +98,23 @@ describe('Fuel Request Unit Test', () => {
     });
 
     //test for login
+    describe('/POST login for a valid administrator', () => {
+        it('it should login', (done) => {
+            chai.request(server)
+                .post('/login')
+                .send(ValidAdmin)
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                    res.body.authentication.should.be.eql(true);
+                    (res.body.token === null).should.be.false;
+                    AdminToken=res.body.token;
+                    done();
+                });
+        });
+    });
+
+    //test for login
     describe('/POST login for a invalid user', () => {
         it('it should be invalid login', (done) => {
             chai.request(server)
@@ -117,7 +139,6 @@ describe('Fuel Request Unit Test', () => {
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
-                    console.log(TestUserToken);
                     res.body.authentication.should.be.eql(true);
                     done();
                 });
@@ -154,6 +175,20 @@ describe('Fuel Request Unit Test', () => {
                 });
         });
     });
+
+    //test for deleting a user
+    describe('/DELETE user with valid admin authentication', () => {
+        it('it should DELETE the user successfully', (done) => {
+            chai.request(server)
+                .delete('/users/remove/TestUser')
+                .set("Authorization", "Bearer "+ AdminToken)
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.text.should.be.eql('Successfully Deleted User');
+                    done();
+                });
+        });
+    });
     
 })
 
@@ -180,18 +215,7 @@ describe('Fuel Request Unit Test', () => {
 
 
 // //Delete user test
-// describe('/DELETE user with valid admin authentication', () => {
-//     it('it should DELETE the user successfully', (done) => {
-//         chai.request(server)
-//             .delete('/users/remove/dfhdh')
-//             .set("Authorization", "Bearer "+ token)
-//             .end((err, res) => {
-//                 res.should.have.status(200);
-//                 res.text.should.be.eql('Successfully Deleted User');
-//                 done();
-//             });
-//     });
-// });
+
 // describe('/DELETE user with invalid admin authentication', () => {
 //     it('it should not DELETE the user', (done) => {
 //         chai.request(server)
