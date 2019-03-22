@@ -138,11 +138,13 @@ class Login extends Component {
                       </Button>
                     </form>
                   </Paper>
-                  <Typography>Don't Have an Account?&ensp;
+                  <Typography style={{marginTop: '5px'}}>Don't Have an Account?&ensp;
                 <Button
                 href="/register"
                 variant="outlined"
                 color="primary"
+                size="small"
+                style={{ textTransform: 'none', outline: 0}}
                 >Register</Button></Typography>
                   </MuiThemeProvider>
                 </main>
