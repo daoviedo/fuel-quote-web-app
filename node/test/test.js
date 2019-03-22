@@ -203,7 +203,6 @@ describe('/GET all users with valid token and admin', () => {
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('object');
-                res.body.authentication.should.be.eql(true);
                 res.body.should.have.property('data');
                 res.body.data.should.be.a('array');
                 done();
@@ -233,7 +232,6 @@ describe('/GET user info for fuelrequest with valid token', () => {
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('object');
-                res.body.authentication.should.be.eql(true);
                 res.body.should.have.property('data');
                 res.body.data.should.be.a('array');
                 done();
