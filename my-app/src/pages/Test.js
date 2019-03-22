@@ -35,7 +35,7 @@ const styles = theme => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '70%', // Fix IE 11 issue.
     marginTop: theme.spacing.unit,
   },
   submit: {
@@ -100,7 +100,7 @@ class Test extends Component {
                 <Typography component="h1" variant="h5">
                   Sign in
                 </Typography>
-                <form className={classes.form} style={{marginLeft: 20, marginRight: 20}}>
+                <form className={classes.form}>
                   <FormControl margin="normal" required fullWidth style={{marginTop: '40px'}}>
                     <InputLabel htmlFor="username">Username</InputLabel>
                     <Input id="username" name="username" autoComplete="username" autoFocus />
