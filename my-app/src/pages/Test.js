@@ -105,9 +105,9 @@ class Test extends Component {
                     <InputLabel htmlFor="email">Username</InputLabel>
                     <Input id="username" name="username" autoComplete="username" autoFocus />
                   </FormControl>
-                  <FormControl margin="normal" required fullWidth marginBottom="20px">
+                  <FormControl margin="normal" required fullWidth>
                     <InputLabel htmlFor="password">Password</InputLabel>
-                    <Input name="password" type="password" id="password" autoComplete="current-password" />
+                    <Input name="password" type="password" id="password" autoComplete="current-password" style={{marginBottom: '100px'}}/>
                   </FormControl>
                   <Button
                     type="submit"
