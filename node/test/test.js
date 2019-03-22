@@ -72,7 +72,26 @@ let newUserInfo = {
     priv: 'user'
 }
 
-this.token1 = "sdf";
+describe('Unit Test', () => {
+    let token1 = "";
+    describe('/POST login for a valid user', () => {
+        it('it should login', (done) => {
+            chai.request(server)
+                .post('/login')
+                .send(user)
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                    res.body.authentication.should.be.eql(true);
+                    (res.body.token === null).should.be.false;
+                    token1 = res.body.token;
+                    console.log(token1);
+                    done();
+                });
+        });
+    });
+});
+
 describe('/POST login for a valid user', () => {
     it('it should login', (done) => {
         chai.request(server)
