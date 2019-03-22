@@ -142,7 +142,7 @@ class Login extends Component {
                 <Button
                 href="/register"
                 variant="outlined"
-                color="inherit"
+                color="primary"
                 size="small"
                 style={{ textTransform: 'none', textDecoration: 'none', textDecorationColor: 'none'}}
                 >Register</Button></Typography>
