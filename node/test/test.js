@@ -193,3 +193,63 @@ describe('/GET user info with invalid token', () => {
             });
     });
 });
+
+//get all users test
+describe('/GET all users with valid token and admin', () => {
+    it('it should GET authentication and array of data', (done) => {
+        chai.request(server)
+            .get('/users')
+            .set("Authorization", "Bearer "+ token)
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+                res.body.authentication.should.be.eql(true);
+                res.body.should.have.property('data');
+                res.body.data.should.be.a('array');
+                done();
+            });
+    });
+});
+describe('/GET all users with invalid token or not admin', () => {
+    it('it should GET authentication false and no array', (done) => {
+        chai.request(server)
+            .get('/users')
+            .set("Authorization", "Bearer "+ 'invalidtoken')
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+                res.body.authentication.should.be.eql(false);
+                done();
+            });
+    });
+});
+
+//get user info for fuelrequest
+describe('/GET user info for fuelrequest with valid token', () => {
+    it('it should GET authentication and array of data', (done) => {
+        chai.request(server)
+            .get('/users/fuelrequestinfo')
+            .set("Authorization", "Bearer "+ token)
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+                res.body.authentication.should.be.eql(true);
+                res.body.should.have.property('data');
+                res.body.data.should.be.a('array');
+                done();
+            });
+    });
+});
+describe('/GET user info for fuelrequest with invalid token', () => {
+    it('it should GET authentication false and no array', (done) => {
+        chai.request(server)
+            .get('/users/fuelrequestinfo')
+            .set("Authorization", "Bearer "+ 'invalidtoken')
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+                res.body.authentication.should.be.eql(false);
+                done();
+            });
+    });
+});
