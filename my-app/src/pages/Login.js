@@ -144,7 +144,7 @@ class Login extends Component {
                 variant="outlined"
                 color="primary"
                 size="small"
-                style={{ textTransform: 'none', textDecoration: 'none', textDecorationColor: 'none'}}
+                style={{ textTransform: 'none', textDecorationColor: 'inherit'}}
                 >Register</Button></Typography>
                   </MuiThemeProvider>
                 </main>
