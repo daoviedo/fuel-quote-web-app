@@ -93,11 +93,13 @@ class Test extends Component {
     }
   
     handleSubmit = event => {
+        console.log("submiutted");
       event.preventDefault();
       this.loginAuth();
     }
     render(){
         const { classes } = this.props;
+        console.log(this.state.password, this.state.username);
         return (
             <main className={classes.main}>
             <MuiThemeProvider theme={theme1}>
