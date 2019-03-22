@@ -257,15 +257,15 @@ describe('Fuel Request Unit Test', () => {
         });
     });
 
-    describe('/GET all users when you are not an admin', () => {
-        it('it should GET no array', (done) => {
+    describe('/GET all users with invalid token or not admin', () => {
+        it('it should GET authentication false and no array', (done) => {
             chai.request(server)
                 .get('/users')
                 .set("Authorization", "Bearer "+ TestUserToken)
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
-                    (res.body.data.length()==0).should.be.eql(true)
+                    (res.body.data.length===0).should.be.eql(true)
                     done();
                 });
         });
