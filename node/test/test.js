@@ -119,7 +119,7 @@ describe('/DELETE delete user with valid authentication', () => {
             .set("Authorization", "Bearer "+ token)
             .end((err, res) => {
                 res.should.have.status(200);
-                console.log(res);
+                res.text.should.be.eql('Successfully Deleted User');
                 done();
             });
     });
