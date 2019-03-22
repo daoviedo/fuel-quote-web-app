@@ -49,6 +49,10 @@ let invalidUser = {
     username: 'svfdgdf',
     password: '12345'
 };
+let updatedUserInfo = {
+    username: 'Daniel',
+    firstname: 'Danny'
+}
 describe('/POST login for a valid user', () => {
     it('it should login', (done) => {
         chai.request(server)
@@ -251,3 +255,21 @@ describe('/GET user info for fuelrequest with invalid token', () => {
             });
     });
 });
+
+//Checking to make sure that when you update a user the users firstname is updated
+describe('/PATCH user info should be updated', () => {
+    it('it should UPDATE the users info with the new info', (done) => {
+        chai.request(server)
+            .patch('/users/update')
+            .send(updatedUserInfo)
+            .set("Authorization", "Bearer "+ token)
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.text.should.be.eql('Successfully Updated User');
+                done();
+            });
+    });
+});
+//aduser
+//update
+//add request
