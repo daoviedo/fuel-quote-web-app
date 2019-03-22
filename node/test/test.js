@@ -33,6 +33,17 @@ describe('Fuel Request Unit Test', () => {
         zip: '00000',
         priv: 'user'
     }
+    let TestFuelRequest = {
+        GallonsRequested: 10, 
+        PricePerGallon: 15, 
+        DeliveryDate: new Date(), 
+        ad1: TestUserInfo.ad1, 
+        city: TestUserInfo.city, 
+        st: TestUserInfo.st, 
+        zip: TestUserInfo.zip, 
+        OrderID: Math.floor(Math.random() * 1000000)
+        
+    }
     
     //test for the check to see if username is available
     describe('/GET test:existing user: Daniel', () => {
@@ -271,6 +282,37 @@ describe('Fuel Request Unit Test', () => {
         });
     });
 
+    //get user info for fuelrequest
+    describe('/GET user info for fuelrequest with valid token', () => {
+    it('it should GET authentication and array of data', (done) => {
+        chai.request(server)
+            .get('/users/fuelrequestinfo')
+            .set("Authorization", "Bearer "+ TestUserToken)
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+                res.body.should.have.property('data');
+                res.body.data.should.be.a('array');
+                done();
+            });
+        });
+    });
+
+    //testing for adding a valid user fuel request
+    describe('/POST fuel request to the fuel history table', () => {
+        it('it should post all the information of the request into the fuel request history table', (done) => {
+            chai.request(server)
+                .get('/users/addRequest')
+                .set("Authorization", "Bearer "+ TestUserToken)
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                    res.text.should.be.eql('Successfully Added Request');
+                    done();
+                });
+        });
+    });
+    
     //test for deleting a user
     describe('/DELETE user with valid admin authentication', () => {
         it('it should DELETE the user successfully', (done) => {
@@ -300,76 +342,3 @@ describe('Fuel Request Unit Test', () => {
         });
     });
 })
-
-
-// // login test
-// let user = {
-//     username: 'Daniel',
-//     password: '1234'
-// };
-// let invalidUser = {
-//     username: 'svfdgdf',
-//     password: '12345'
-// };
-// let updatedUserInfo = {
-//     username: 'Daniel',
-//     firstname: 'Danny',
-//     lastname:'oviedo',
-//     ad1: 'address1',
-//     ad2: 'address2',
-//     city: 'mcity',
-//     st: 'TX',
-//     zip: '77477'
-// }
-
-
-// //Delete user test
-
-
-
-// //fuel history test
-
-
-
-// //get user info test
-
-
-
-
-
-
-// //get user info for fuelrequest
-// describe('/GET user info for fuelrequest with valid token', () => {
-//     it('it should GET authentication and array of data', (done) => {
-//         chai.request(server)
-//             .get('/users/fuelrequestinfo')
-//             .set("Authorization", "Bearer "+ token)
-//             .end((err, res) => {
-//                 res.should.have.status(200);
-//                 res.body.should.be.a('object');
-//                 res.body.should.have.property('data');
-//                 res.body.data.should.be.a('array');
-//                 done();
-//             });
-//     });
-// });
-// describe('/GET user info for fuelrequest with invalid token', () => {
-//     it('it should GET authentication false and no array', (done) => {
-//         chai.request(server)
-//             .get('/users/fuelrequestinfo')
-//             .set("Authorization", "Bearer "+ 'invalidtoken')
-//             .end((err, res) => {
-//                 res.should.have.status(200);
-//                 res.body.should.be.a('object');
-//                 res.body.authentication.should.be.eql(false);
-//                 done();
-//             });
-//     });
-// });
-
-// //Checking to make sure that when you update a user the users firstname is updated
-
-// //aduser
-
-
-// //add request

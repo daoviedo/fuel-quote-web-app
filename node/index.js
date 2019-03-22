@@ -245,7 +245,7 @@ app.post('/users/addRequest', checkAuth, (req, res) => {
             return res.send(err)
         }
         else{
-            return res.send(date)
+            return res.send("Successfully Added Request")
         }
     });
 });
