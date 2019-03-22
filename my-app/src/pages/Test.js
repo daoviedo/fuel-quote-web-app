@@ -103,11 +103,11 @@ class Test extends Component {
                 <form className={classes.form}>
                   <FormControl margin="normal" required fullWidth>
                     <InputLabel htmlFor="email">Username</InputLabel>
-                    <Input id="username" name="username" autoComplete="username" autoFocus />
+                    <Input id="username" name="username" autoComplete="username" autoFocus style={{marginTop: '40px'}}/>
                   </FormControl>
                   <FormControl margin="normal" required fullWidth>
                     <InputLabel htmlFor="password">Password</InputLabel>
-                    <Input name="password" type="password" id="password" autoComplete="current-password" style={{marginBottom: '100px'}}/>
+                    <Input name="password" type="password" id="password" autoComplete="current-password" style={{marginBottom: '40px'}}/>
                   </FormControl>
                   <Button
                     type="submit"
