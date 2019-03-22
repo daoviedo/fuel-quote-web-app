@@ -72,7 +72,7 @@ let newUserInfo = {
     priv: 'user'
 }
 
-let token1 = "sdf";
+this.token1 = "sdf";
 describe('/POST login for a valid user', () => {
     it('it should login', (done) => {
         chai.request(server)
@@ -83,7 +83,7 @@ describe('/POST login for a valid user', () => {
                 res.body.should.be.a('object');
                 res.body.authentication.should.be.eql(true);
                 (res.body.token === null).should.be.false;
-                token1.set(res.body.token);
+                this.token1.set(res.body.token);
                 console.log(token1);
                 done();
             });
