@@ -115,7 +115,6 @@ describe('/POST login for a valid user', () => {
                 res.body.should.be.a('object');
                 res.body.authentication.should.be.eql(true);
                 (res.body.token === null).should.be.false;
-                this.token1.set(res.body.token);
                 console.log(token1);
                 done();
             });

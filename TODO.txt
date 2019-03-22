@@ -19,4 +19,17 @@ FUEL REQUEST HISTORY
 BACKEND
     L-> Refactor all open address (/login, /adduser, /check) to use a session key to ensure its coming from our site
 
+UNIT TEST
+    Order:
+        Check username,
+        Register,
+        Login,
+        Verify token,
+        Update account settings,
+        Request fuel,
+        Pull Fuel History,
+        Delete Account.
+
+    ---ALSO CREATE A UNIT TEST FOR AN ADMIN---
+
 ###Last Edited By Daniel 3/22/19###
