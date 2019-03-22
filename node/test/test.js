@@ -51,7 +51,13 @@ let invalidUser = {
 };
 let updatedUserInfo = {
     username: 'Daniel',
-    firstname: 'Danny'
+    firstname: 'Danny',
+    lastname:'oviedo',
+    ad1: 'address1',
+    ad2: 'address2',
+    city: 'mcity',
+    st: 'TX',
+    zip: '77477'
 }
 describe('/POST login for a valid user', () => {
     it('it should login', (done) => {
