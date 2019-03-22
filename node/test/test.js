@@ -176,6 +176,101 @@ describe('Fuel Request Unit Test', () => {
         });
     });
 
+    //testing for recieving fuel history
+    describe('/GET fuel history with valid token', () => {
+        it('it should GET authentication and array of data', (done) => {
+            chai.request(server)
+                .get('/fuelhistory')
+                .set("Authorization", "Bearer "+ TestUserToken)
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                    res.body.authentication.should.be.eql(true);
+                    res.body.should.have.property('data');
+                    res.body.data.should.be.a('array');
+                    done();
+                });
+        });
+    });
+
+    //testing for recieving fuel history
+    describe('/GET fuel history with invalid token', () => {
+        it('it should GET authentication false and no array', (done) => {
+            chai.request(server)
+                .get('/fuelhistory')
+                .set("Authorization", "Bearer "+ 'invalidtoken')
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                    res.body.authentication.should.be.eql(false);
+                    done();
+                });
+        });
+    });
+
+    //testing for getting user Data of the user
+    describe('/GET user info with valid token', () => {
+        it('it should GET authentication and array of data', (done) => {
+            chai.request(server)
+                .get('/users/data')
+                .set("Authorization", "Bearer "+ TestUserToken)
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                    res.body.authentication.should.be.eql(true);
+                    res.body.should.have.property('data');
+                    res.body.data.should.be.a('array');
+                    done();
+                });
+        });
+    });
+
+    //testing for getting user Data of the user
+    describe('/GET user info with invalid token', () => {
+        it('it should GET authentication false and no array', (done) => {
+            chai.request(server)
+                .get('/users/data')
+                .set("Authorization", "Bearer "+ 'invalidtoken')
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                    res.body.authentication.should.be.eql(false);
+                    done();
+                });
+        });
+    });
+
+    //testing for getting all users 
+    describe('/GET all users with valid token and admin', () => {
+    it('it should GET authentication and array of data', (done) => {
+        chai.request(server)
+            .get('/users')
+            .set("Authorization", "Bearer "+ AdminToken)
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+                res.body.should.have.property('data');
+                res.body.data.should.be.a('array');
+                (res.body.data.length==0).should.be.eql(false)
+                done();
+            });
+        });
+    });
+
+    describe('/GET all users when you are not an admin', () => {
+        it('it should GET no array', (done) => {
+            chai.request(server)
+                .get('/users')
+                .set("Authorization", "Bearer "+ TestUserToken)
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                    (res.body.data.length==0).should.be.eql(true)
+                    done();
+                });
+        });
+    });
+
     //test for deleting a user
     describe('/DELETE user with valid admin authentication', () => {
         it('it should DELETE the user successfully', (done) => {
@@ -190,6 +285,20 @@ describe('Fuel Request Unit Test', () => {
         });
     });
     
+    //test for deleting a user
+    describe('/DELETE user with invalid admin authentication', () => {
+        it('it should not DELETE the user', (done) => {
+            chai.request(server)
+                .delete('/users/remove/dfhdh')
+                .set("Authorization", "Bearer "+ "invalidtoken")
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.text.should.not.be.eql('Successfully Deleted User');
+                    res.body.authentication.should.be.eql(false);
+                    done();
+                });
+        });
+    });
 })
 
 
@@ -216,108 +325,18 @@ describe('Fuel Request Unit Test', () => {
 
 // //Delete user test
 
-// describe('/DELETE user with invalid admin authentication', () => {
-//     it('it should not DELETE the user', (done) => {
-//         chai.request(server)
-//             .delete('/users/remove/dfhdh')
-//             .set("Authorization", "Bearer "+ "invalidtoken")
-//             .end((err, res) => {
-//                 res.should.have.status(200);
-//                 res.text.should.not.be.eql('Successfully Deleted User');
-//                 res.body.authentication.should.be.eql(false);
-//                 done();
-//             });
-//     });
-// });
+
 
 // //fuel history test
-// describe('/GET fuel history with valid token', () => {
-//     it('it should GET authentication and array of data', (done) => {
-//         chai.request(server)
-//             .get('/fuelhistory')
-//             .set("Authorization", "Bearer "+ token)
-//             .end((err, res) => {
-//                 res.should.have.status(200);
-//                 res.body.should.be.a('object');
-//                 res.body.authentication.should.be.eql(true);
-//                 res.body.should.have.property('data');
-//                 res.body.data.should.be.a('array');
-//                 done();
-//             });
-//     });
-// });
-// describe('/GET fuel history with invalid token', () => {
-//     it('it should GET authentication false and no array', (done) => {
-//         chai.request(server)
-//             .get('/fuelhistory')
-//             .set("Authorization", "Bearer "+ 'invalidtoken')
-//             .end((err, res) => {
-//                 res.should.have.status(200);
-//                 res.body.should.be.a('object');
-//                 res.body.authentication.should.be.eql(false);
-//                 done();
-//             });
-//     });
-// });
+
+
 
 // //get user info test
-// describe('/GET user info with valid token', () => {
-//     it('it should GET authentication and array of data', (done) => {
-//         chai.request(server)
-//             .get('/users/data')
-//             .set("Authorization", "Bearer "+ token)
-//             .end((err, res) => {
-//                 res.should.have.status(200);
-//                 res.body.should.be.a('object');
-//                 res.body.authentication.should.be.eql(true);
-//                 res.body.should.have.property('data');
-//                 res.body.data.should.be.a('array');
-//                 done();
-//             });
-//     });
-// });
-// describe('/GET user info with invalid token', () => {
-//     it('it should GET authentication false and no array', (done) => {
-//         chai.request(server)
-//             .get('/users/data')
-//             .set("Authorization", "Bearer "+ 'invalidtoken')
-//             .end((err, res) => {
-//                 res.should.have.status(200);
-//                 res.body.should.be.a('object');
-//                 res.body.authentication.should.be.eql(false);
-//                 done();
-//             });
-//     });
-// });
 
-// //get all users test
-// describe('/GET all users with valid token and admin', () => {
-//     it('it should GET authentication and array of data', (done) => {
-//         chai.request(server)
-//             .get('/users')
-//             .set("Authorization", "Bearer "+ token)
-//             .end((err, res) => {
-//                 res.should.have.status(200);
-//                 res.body.should.be.a('object');
-//                 res.body.should.have.property('data');
-//                 res.body.data.should.be.a('array');
-//                 done();
-//             });
-//     });
-// });
-// describe('/GET all users with invalid token or not admin', () => {
-//     it('it should GET authentication false and no array', (done) => {
-//         chai.request(server)
-//             .get('/users')
-//             .set("Authorization", "Bearer "+ 'invalidtoken')
-//             .end((err, res) => {
-//                 res.should.have.status(200);
-//                 res.body.should.be.a('object');
-//                 res.body.authentication.should.be.eql(false);
-//                 done();
-//             });
-//     });
-// });
+
+
+
+
 
 // //get user info for fuelrequest
 // describe('/GET user info for fuelrequest with valid token', () => {
