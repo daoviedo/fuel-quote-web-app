@@ -114,7 +114,7 @@ describe('Fuel Request Unit Test', () => {
         it('it should GET authentication and userdata', (done) => {
             chai.request(server)
                 .get('/verify')
-                .set("Authorization", "Bearer "+ token1)
+                .set("Authorization", "Bearer "+ TestUserToken)
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
@@ -146,7 +146,7 @@ describe('Fuel Request Unit Test', () => {
             chai.request(server)
                 .patch('/users/update')
                 .send()
-                .set("Authorization", "Bearer "+ token)
+                .set("Authorization", "Bearer "+ TestUserToken)
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.text.should.be.eql('Successfully Updated User');
