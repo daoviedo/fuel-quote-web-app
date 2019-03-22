@@ -10,6 +10,14 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import teal from '@material-ui/core/colors/teal';
+
+const theme1 = createMuiTheme({
+    palette: {
+      primary: {main: teal[600]},
+    },
+  });
 
 const styles = theme => ({
   main: {
@@ -92,6 +100,7 @@ class Test extends Component {
         const { classes } = this.props;
         return (
             <main className={classes.main}>
+            <MuiThemeProvider theme={theme1}>
               <CssBaseline />
               <Paper className={classes.paper}>
                 <Avatar className={classes.avatar}>
@@ -120,6 +129,7 @@ class Test extends Component {
                   </Button>
                 </form>
               </Paper>
+              </MuiThemeProvider>
             </main>
     );
     }
