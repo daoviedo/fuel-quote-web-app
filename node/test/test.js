@@ -144,8 +144,8 @@ describe('/GET fuel history with valid token', () => {
                 res.should.have.status(200);
                 res.body.should.be.a('object');
                 res.body.authentication.should.be.eql(true);
-                console.log(res.body.userData);
-                should.exist(res.body.userData);
+                res.body.should.have.property('data');
+                res.body.data.should.be.a('array');
                 done();
             });
     });
