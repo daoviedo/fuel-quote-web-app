@@ -105,7 +105,7 @@ class Test extends Component {
                     <InputLabel htmlFor="email">Username</InputLabel>
                     <Input id="username" name="username" autoComplete="username" autoFocus />
                   </FormControl>
-                  <FormControl margin="normal" required fullWidth>
+                  <FormControl margin="normal" required fullWidth marginBottom="20px">
                     <InputLabel htmlFor="password">Password</InputLabel>
                     <Input name="password" type="password" id="password" autoComplete="current-password" />
                   </FormControl>
