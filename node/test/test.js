@@ -62,7 +62,7 @@ describe('Fuel Request Unit Test', () => {
     });
 
     //test to see if the user is successfully added to the Database
-    describe('/PATCH user info should be added to the database', () => {
+    describe('/PATCH user should be added', () => {
         it('it should add the test user info', (done) => {
             chai.request(server)
                 .post('/users/adduser')
@@ -86,7 +86,6 @@ describe('Fuel Request Unit Test', () => {
                     res.body.should.be.a('object');
                     res.body.authentication.should.be.eql(true);
                     (res.body.token === null).should.be.false;
-                    TestUserToken = res.body.token;
                     done();
                 });
         });
