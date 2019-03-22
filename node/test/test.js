@@ -86,6 +86,7 @@ describe('Fuel Request Unit Test', () => {
                     res.body.should.be.a('object');
                     res.body.authentication.should.be.eql(true);
                     (res.body.token === null).should.be.false;
+                    TestUserToken=res.body.token;
                     done();
                 });
         });
