@@ -100,7 +100,7 @@ class Test extends Component {
                 <Typography component="h1" variant="h5">
                   Sign in
                 </Typography>
-                <form className={classes.form}>
+                <form className={classes.form} style={{marginLeft: 20, marginRight: 20}}>
                   <FormControl margin="normal" required fullWidth style={{marginTop: '40px'}}>
                     <InputLabel htmlFor="username">Username</InputLabel>
                     <Input id="username" name="username" autoComplete="username" autoFocus />
