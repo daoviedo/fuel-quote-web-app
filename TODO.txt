@@ -10,9 +10,6 @@ HOMEPAGE
 FUEL REQUEST FORM
     L-> See how we're going to manage to actually calculate cost
 
-LOGIN PAGE
-    L-> Remake Front-end using material ui
-
 FUEL REQUEST HISTORY
     L-> Shorten the width of the table (margins)
     L-> Add icons to the column titles
@@ -22,4 +19,4 @@ FUEL REQUEST HISTORY
 BACKEND
     L-> Refactor all open address (/login, /adduser, /check) to use a session key to ensure its coming from our site
 
-###Last Edited By Daniel 3/19/19###
+###Last Edited By Daniel 3/22/19###
