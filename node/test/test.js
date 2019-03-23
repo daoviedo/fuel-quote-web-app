@@ -98,7 +98,8 @@ describe('Fuel Request Unit Test', () => {
                 .post('/users/adduser')
                 .send(TestUserInfo)
                 .end((err, res) => {
-                    res.should.have.status(403);
+                    res.should.have.status(200);
+                    console.log(err)
                     done();
                 });
         });
