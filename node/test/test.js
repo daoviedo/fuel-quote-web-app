@@ -91,6 +91,19 @@ describe('Fuel Request Unit Test', () => {
         });
     });
     
+    //test to see if an existing user is entered into users table
+    describe('/POST user should not be created: TestUser', () => {
+        it('it should not add the test user info', (done) => {
+            chai.request(server)
+                .post('/users/adduser')
+                .send(TestUserInfo)
+                .end((err, res) => {
+                    res.should.have.status(403);
+                    done();
+                });
+        });
+    });
+
     //test for login
     describe('/POST login for a valid user', () => {
         it('it should login', (done) => {
@@ -299,7 +312,7 @@ describe('Fuel Request Unit Test', () => {
     });
 
     //testing for adding a valid user fuel request
-    describe('/POST fuel request is added to the fuel history table', () => {
+    describe('/POST fuel request is added to the fuel history table with valid ', () => {
         it('it should post all the information of the request into the fuel request history table', (done) => {
             chai.request(server)
                 .post('/users/addRequest')
@@ -309,6 +322,22 @@ describe('Fuel Request Unit Test', () => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
                     res.text.should.be.eql('Successfully Added Request');
+                    done();
+                });
+        });
+    });
+
+    //testing for adding a invalid user fuel request
+    describe('/POST fuel request is added to the fuel history table with invalid user', () => {
+        it('it should not authenticate/add request', (done) => {
+            chai.request(server)
+                .post('/users/addRequest')
+                .set("Authorization", "Bearer "+ "TestUserToken")
+                .send(TestFuelRequest)
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                    res.body.authentication.should.be.eql(false);
                     done();
                 });
         });
