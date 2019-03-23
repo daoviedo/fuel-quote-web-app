@@ -99,7 +99,7 @@ describe('Fuel Request Unit Test', () => {
                 .send(TestUserInfo)
                 .end((err, res) => {
                     res.should.have.status(200);
-                    console.log(err)
+                    console.log(res.text)
                     done();
                 });
         });
