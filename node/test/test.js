@@ -78,7 +78,7 @@ describe('Fuel Request Unit Test', () => {
     });
 
     //test to see if the user is successfully added to the Database
-    describe('/PATCH user should be added', () => {
+    describe('/POST user should be created: TestUser', () => {
         it('it should add the test user info', (done) => {
             chai.request(server)
                 .post('/users/adduser')
