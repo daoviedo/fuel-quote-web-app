@@ -129,7 +129,7 @@ app.post('/users/adduser', (req, res) => {
         const insertQuery = `INSERT INTO sys.user (username, password, firstname, lastname, ad1, ad2, city, st, zip, priv) VALUES('${username}','${hash}','${fname}','${lname}','${ad1}','${ad2}','${city}','${st}','${zip}','${priv}')`;
         connection.query(insertQuery, (err1, results) => {
             if(err1){
-                return res.send(err1)
+                return res.json(err1)
             }
             else{
                 return res.send('Successfully Added User')

@@ -99,7 +99,7 @@ describe('Fuel Request Unit Test', () => {
                 .send(TestUserInfo)
                 .end((err, res) => {
                     res.should.have.status(200);
-                    res.text.errno.should.be.eql(1062);
+                    res.body.errno.should.be.eql(1062);
                     console.log(res.text)
                     done();
                 });
