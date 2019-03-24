@@ -121,14 +121,9 @@ class FuelRequestForm extends Component{
         });
     };
 
-    testInput(){
-        if(this.state.GallonsRequested.length === 0 || this.state.DeliveryDate === null){
-            return false;
-        }else{
-            return true;
-        }
+    testInput (){
+        return (this.state.GallonsRequested === "" && this.state.DeliveryDate === null);
     }
-
     pullData() {
         fetch(`http://138.197.221.30:4000/users/fuelrequestinfo`,{
             method: "GET",
