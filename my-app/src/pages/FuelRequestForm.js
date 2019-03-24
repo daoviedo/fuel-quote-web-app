@@ -121,6 +121,14 @@ class FuelRequestForm extends Component{
         });
     };
 
+    testInput(){
+        if(this.state.GallonsRequested.length === 0 || this.state.DeliveryDate.length === 0){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
     pullData() {
         fetch(`http://138.197.221.30:4000/users/fuelrequestinfo`,{
             method: "GET",
@@ -256,7 +264,7 @@ class FuelRequestForm extends Component{
                             />     
                             <FormControl width="auto" fullWidth className={classes.button}>
                                 <MuiThemeProvider theme={TealTheme}>
-                                    <Button color="primary"  variant="contained" onClick={()=>this.createNewRequest()}>
+                                    <Button color="primary"  variant="contained" disable={!this.testInput()} onClick={()=>this.createNewRequest()}>
                                         Submit Fuel Request
                                     </Button>      
                                 </MuiThemeProvider>          
