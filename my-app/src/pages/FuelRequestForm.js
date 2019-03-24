@@ -77,7 +77,7 @@ const styles = theme => ({
         align: "center"
     },
     PriceMargin: {
-        margin: theme.spacing.unit,
+        margin: 'auto',
         marginTop: theme.spacing.unit*4,
         width:"48%",
     },
