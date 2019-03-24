@@ -47,11 +47,6 @@ app.use((req,res,next)=>{
 });
 
 
-//Remove this sometime in the future
-app.get('/', (req, res) => {
-    res.send('Hello From servers')
-});
-
 //Post Request to login
 app.post('/login', (req,res,next)=>{
     const username = req.body.username;
@@ -109,6 +104,7 @@ app.get('/fuelhistory', checkAuth, (req,res,next)=>{
 
     const findHistory = `SELECT * FROM sys.history WHERE username='${username}'`;
     connection.query(findHistory, (err, results) => {
+        /* istanbul ignore if  */
         if(err){
             return res.send(err)
         }
