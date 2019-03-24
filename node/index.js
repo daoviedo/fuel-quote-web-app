@@ -140,6 +140,7 @@ app.delete('/users/remove/:username', checkAdmin, (req, res) => {
     const username = req.params.username;
     const delQuery = `DELETE FROM sys.user WHERE username='${username}'`;
     connection.query(delQuery, (err1, results) => {
+        /* istanbul ignore if  */
         if(err1){
             return res.send(err1)
         }
@@ -154,6 +155,7 @@ app.get('/users/check', (req, res) => {
     const { username } = req.query;
     const lookQuery = `SELECT username FROM sys.user WHERE username='${username}'`;
     connection.query(lookQuery, (err, results) => {
+        /* istanbul ignore if  */
         if(err){
             return res.send(err)
         }
@@ -170,6 +172,7 @@ app.get('/users/data', checkAuth, (req, res) => {
     const username  = req.userData.username;
     const addressQuery = `SELECT firstname, lastname, ad1, ad2, city, st, zip FROM sys.user WHERE username='${username}'`;
     connection.query(addressQuery, (err, results) => {
+        /* istanbul ignore if  */
         if(err){
             return res.send(err)
         }
@@ -187,6 +190,7 @@ app.patch('/users/update', checkAuth, (req, res) => {
     const username  = req.userData.username;
     const addressQuery = `UPDATE sys.user SET firstname='${req.body.firstname}',lastname='${req.body.lastname}',ad1='${req.body.address1}',ad2='${req.body.address2}',city='${req.body.city}',st='${req.body.st}',zip='${req.body.zip}' WHERE username='${username}'`;
     connection.query(addressQuery, (err, results) => {
+        /* istanbul ignore if  */
         if(err){
             return res.send(err)
         }
@@ -200,6 +204,7 @@ app.patch('/users/update', checkAuth, (req, res) => {
 app.get('/users', checkAdmin, (req, res) => {
     const selectAll = 'SELECT username, firstname, lastname, ad1, ad2, city, st, zip, priv, totalRequests FROM sys.user';
     connection.query(selectAll, (err, results) => {
+        /* istanbul ignore if  */
         if(err){
             return res.send(err)
         }
@@ -216,6 +221,7 @@ app.get('/users/fuelrequestinfo', checkAuth, (req, res) => {
     const username = req.userData.username;
     const addressQuery = `SELECT ad1, ad2, city, st, zip FROM sys.user WHERE username='${username}'`;
     connection.query(addressQuery, (err, results) => {
+        /* istanbul ignore if  */
         if(err){
             return res.send(err)
         }
@@ -237,6 +243,7 @@ app.post('/users/addRequest', checkAuth, (req, res) => {
     LoadingDate=LoadingDate.getFullYear() + '-' + (LoadingDate.getMonth()+1) + '-' + LoadingDate.getDate();
     const insertQuery = `INSERT INTO sys.history (RequestID, username, GallonsRequested, PricePerGallon, TotalPrice, DateOfRequest, DeliveryDate, DeliveryAddress, DeliveryCity, DeliveryState, DeliveryZip) VALUES('${OrderID}','${username}','${GallonsRequested}','${PricePerGallon}','${PricePerGallon*GallonsRequested}','${date}', '${LoadingDate}', '${ad1}', '${city}', '${st}', '${zip}')`;
     connection.query(insertQuery, (err, results) => {
+        /* istanbul ignore if  */
         if(err){
             return res.send(err)
         }

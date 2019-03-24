@@ -21,6 +21,10 @@ describe('Fuel Request Unit Test', () => {
         username: 'svfdgdf',
         password: '12345'
     };
+    let invalidPass = {
+        username: 'Daniel',
+        password: '123456'
+    };
     let TestUserInfo = {
         username: 'TestUser',
         pass: 'Test',
@@ -106,6 +110,20 @@ describe('Fuel Request Unit Test', () => {
     });
 
     //test for login
+    describe('/POST login with incorrect password', () => {
+        it('it should not login', (done) => {
+            chai.request(server)
+                .post('/login')
+                .send(invalidPass)
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                    res.body.authentication.should.be.eql(false);
+                    (res.body.token === null).should.be.true;
+                    done();
+                });
+        });
+    });
     describe('/POST login for a valid user', () => {
         it('it should login', (done) => {
             chai.request(server)
