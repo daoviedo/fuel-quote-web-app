@@ -122,7 +122,7 @@ class FuelRequestForm extends Component{
     };
 
     testInput(){
-        if(this.state.GallonsRequested.length === 0 || this.state.DeliveryDate.length === 0){
+        if(this.state.GallonsRequested.length === 0 || this.state.DeliveryDate === null){
             return false;
         }else{
             return true;
