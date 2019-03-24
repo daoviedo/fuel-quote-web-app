@@ -249,7 +249,7 @@ app.post('/users/addRequest', checkAuth, (req, res) => {
         }
     });
 });
-
+/*
 app.post('/pricemodule', checkAuth, (req, res) => {
     const username = req.userData.username;
     const { GallonsRequested, DeliveryDate, st } = req.body;
@@ -259,7 +259,7 @@ app.post('/pricemodule', checkAuth, (req, res) => {
         totalPrice: ppg*GallonsRequested
     });
 });
-
+*/
 if(process.env.NODE_ENV !== 'test'){
     app.listen(4000, () => {
         //console.log(`Server listening on port 4000`)
