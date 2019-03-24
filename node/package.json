@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test nyc --reporter=text mocha --exit"
+    "test": "NODE_ENV=test nyc --reporter=html mocha --exit"
   },
   "keywords": [],
   "author": "",
