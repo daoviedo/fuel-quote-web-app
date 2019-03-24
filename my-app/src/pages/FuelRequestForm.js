@@ -66,6 +66,16 @@ const styles = theme => ({
         width:"31.9%",
         align: "center"
     },
+    AddMargin1: {
+        margin: theme.spacing.unit,
+        width:"8%",
+        align: "center"
+    },
+    AddMargin2: {
+        margin: theme.spacing.unit,
+        width:"15%",
+        align: "center"
+    },
     PriceMargin: {
         margin: theme.spacing.unit,
         marginTop: theme.spacing.unit*4,
@@ -232,14 +242,14 @@ class FuelRequestForm extends Component{
                                 name= "DeliveryState"
                                 disabled
                                 value={this.state.DeliveryState}
-                                className={classes.AddMargin}
+                                className={classes.AddMargin1}
                             />
                             <TextField
                                 label="Zip"
                                 name= "DeliveryZip"
                                 disabled
                                 value={this.state.DeliveryZip}
-                                className={classes.AddMargin}
+                                className={classes.AddMargin2}
                             />
                             <TextField
                                 label="Price Per Gallon"
