@@ -259,7 +259,7 @@ class FuelRequestForm extends Component{
                             />     
                             <FormControl width="auto" fullWidth className={classes.button}>
                                 <MuiThemeProvider theme={TealTheme}>
-                                    <Button color="primary"  variant="contained" disabled={!this.testInput()} onClick={()=>this.createNewRequest()}>
+                                    <Button color="primary"  variant="contained" disabled={this.testInput()} onClick={()=>this.createNewRequest()}>
                                         Submit Fuel Request
                                     </Button>      
                                 </MuiThemeProvider>          
