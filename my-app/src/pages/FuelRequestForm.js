@@ -50,7 +50,7 @@ const styles = theme => ({
         flexWrap: 'wrap',
         align: "center",
         margin: "auto",
-        width: "60%",
+        width: "35%",
         marginTop: "10%",
     }, 
     OrderHeader: {
