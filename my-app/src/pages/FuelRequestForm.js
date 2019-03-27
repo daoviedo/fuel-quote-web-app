@@ -14,6 +14,8 @@ import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import teal from '@material-ui/core/colors/teal';
 import { MuiPickersUtilsProvider, DatePicker } from 'material-ui-pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
 
 const TealTheme = createMuiTheme({
     palette: {
@@ -45,52 +47,67 @@ const TealTheme = createMuiTheme({
   });
 
 const styles = theme => ({
-    root: {
+    heading: {
+        align: "center",
+        margin: "auto",
+        width: "auto",
+        marginTop: "7%",
+    },
+    priceHeading: {
+        display: 'flex',
+        align: "center",
+        margin: "auto",
+        width: "auto",
+        marginTop: "7%",
+    },
+    paper: {
         display: 'flex',
         flexWrap: 'wrap',
         align: "center",
         margin: "auto",
         width: "35%",
-        marginTop: "10%",
+        marginTop: "2%",
     }, 
     OrderHeader: {
         margin: "auto",
         marginTop: "5%",
         width:"100%",
     },
-    margin: {
+    Addresses: {
         margin: theme.spacing.unit,
     },
     AddMargin: {
         margin: theme.spacing.unit,
         width:"31.9%",
-        align: "center"
     },
-    AddMargin1: {
+    CityZip: {
         margin: theme.spacing.unit,
-        width:"8%",
-        align: "center"
+        width:"41%",
     },
-    AddMargin2: {
+    States: {
         margin: theme.spacing.unit,
-        width:"15%",
-        align: "center"
+        width:"5%",
+    },
+    QuestionMargin: {
+        margin: "auto"
     },
     PriceMargin: {
-        margin: 'auto',
-        marginTop: theme.spacing.unit*4,
+        margin: "auto",
+        marginTop: theme.spacing.unit,
         width:"48%",
     },
     OrderIDPageButton: {
         margin: theme.spacing.unit,
-        //marginTop: ,
-        width:"45%",
+        width:"100%",
     },
     grid: {
         width: '60%',
     },
     button: {
-        margin: theme.spacing.unit*4,
+        margin: theme.spacing.unit*2,
+    },
+    centered: {
+        margin: theme.spacing.unit*2,
     },
       
     
@@ -132,7 +149,13 @@ class FuelRequestForm extends Component{
     };
 
     testInput (){
-        return (this.state.GallonsRequested === "" || this.state.DeliveryDate === null);
+        if(this.state.step===0){
+            return (this.state.GallonsRequested === "");
+        }
+        else{
+            return (this.state.DeliveryDate === null);
+        }
+        
     }
     pullData() {
         fetch(`http://138.197.221.30:4000/users/fuelrequestinfo`,{
@@ -170,6 +193,11 @@ class FuelRequestForm extends Component{
         })))
     }
 
+    nextStep() {
+        this.setState(state => ({
+            step: state.step + 1
+        }))
+    }
     
 
     redirectToHome = (num) =>{
@@ -184,14 +212,175 @@ class FuelRequestForm extends Component{
 
     render() {
         const {classes}=this.props;
+        var minimum=new Date();
+        minimum.setMonth(minimum.getMonth()+1);
         return (
             
             <div> 
                 <Navbar />
+                <h1 className={classes.heading}>Fuel Request Form</h1>
+                <Paper className={classes.paper} elevation={20}>
                     {this.state.step === 0 ? (
-                        <Paper className={classes.root} elevation={20}>
+                        <React.Fragment>
+                            <h5 className={classes.heading}>How Many Gallons of Fuel would you like to Request?</h5>
+                            <FormControl className={classes.QuestionMargin} >
+                                <InputLabel>Desired Fuel</InputLabel>
+                                <Input
+                                name="GallonsRequested"
+                                value={this.state.GallonsRequested}
+                                onChange={this.handleChange}
+                                type="number"
+                                endAdornment={<InputAdornment position="end">Gallons</InputAdornment>}
+                                />
+                            </FormControl>
+                            <FormControl width="auto" fullWidth className={classes.button}>
+                                <MuiThemeProvider theme={TealTheme}>
+                                    <Button color="primary"  variant="contained" disabled={this.testInput()} onClick={()=>this.nextStep()}>
+                                        Next Page
+                                    </Button>      
+                                </MuiThemeProvider>          
+                            </FormControl>
+                        </React.Fragment>
+                    ) : (
+                        <React.Fragment>{this.state.step===1 ? (
+                            <React.Fragment>
+                                <h5 className={classes.heading}>What day would you like the fuel delivered?</h5>
+                                <FormControl className={classes.PriceMargin}>
+                                    <MuiThemeProvider theme={TealTheme}>
+                                        <MuiPickersUtilsProvider utils={DateFnsUtils} theme={TealTheme}>
+                                        
+                                            <DatePicker
+                                                minDate={minimum}
+                                                label="Desired Delivery"
+                                                value={this.state.DeliveryDate}
+                                                onChange={this.dateChanged}
+                                            />
+                                        </MuiPickersUtilsProvider>
+                                    </MuiThemeProvider>
+                                </FormControl>
+                                <FormControl width="auto" fullWidth className={classes.button}>
+                                    <MuiThemeProvider theme={TealTheme}>
+                                        <Button color="primary"  variant="contained" disabled={this.testInput()} onClick={()=>this.nextStep()}>
+                                            Next Page
+                                        </Button>      
+                                    </MuiThemeProvider>          
+                                </FormControl>
+                            </React.Fragment>
+                        ):(
+                            <React.Fragment>
+                                {this.state.step===2 ? (
+                                    <React.Fragment>
+                                        <h5 className={classes.heading}>Please Confirm the Delivery Address</h5>
+                                        <TextField
+                                            fullWidth
+                                            label="Address 1"
+                                            name= "DeliveryAddress1"
+                                            disabled
+                                            value={this.state.DeliveryAddress1}
+                                            className={classes.Addresses}
+                                        />
+                                        <TextField
+                                            fullWidth
+                                            label="Address 2"
+                                            name= "DeliveryAddress2"
+                                            disabled
+                                            value={this.state.DeliveryAddress2}
+                                            className={classes.Addresses}
+                                        />
+                                        <Grid className={classes.centered}>
+                                            <TextField
+                                                label="City"
+                                                name= "DeliveryCity"
+                                                disabled
+                                                value={this.state.DeliveryCity}
+                                                className={classes.CityZip}
+                                            />
+                                            <TextField
+                                                label="State"
+                                                name= "DeliveryState"
+                                                disabled
+                                                value={this.state.DeliveryState}
+                                                className={classes.States}
+                                            />
+                                            <TextField
+                                                label="Zip"
+                                                name= "DeliveryZip"
+                                                disabled
+                                                value={this.state.DeliveryZip}
+                                                className={classes.CityZip}
+                                            />
+                                        </Grid>
+                                        <FormControl width="auto" fullWidth className={classes.button}>
+                                            <MuiThemeProvider theme={TealTheme}>
+                                                <Button color="primary"  variant="contained" onClick={()=>this.nextStep()}>
+                                                    Confirm Address
+                                                </Button>      
+                                            </MuiThemeProvider>          
+                                        </FormControl>
+                                    </React.Fragment>
+
+                                ):(
+                                    <React.Fragment>
+                                        {this.state.step===3 ? (
+                                            <React.Fragment>
+                                                <h4 className={classes.heading}>We have calculated a quote for you: </h4>
+                                                <h5 className={classes.heading}>The Price per Gallon will be ${this.state.SuggestedPrice}</h5>
+                                                <h5 className={classes.heading}>Your Total Price will be ${this.state.GallonsRequested*this.state.SuggestedPrice}</h5>
+
+                                                <FormControl width="auto" fullWidth className={classes.button}>
+                                                    <Typography>Please Submit in order for us to process your request</Typography>
+                                                    <MuiThemeProvider theme={TealTheme}>
+                                                        <Button color="primary"  variant="contained" onClick={()=>this.createNewRequest()}>
+                                                            Submit Request 
+                                                        </Button>      
+                                                    </MuiThemeProvider>          
+                                                </FormControl>
+                                        </React.Fragment>
+                                        ):(
+                                            <React.Fragment >
+                                                <h3 className={classes.OrderHeader} >
+                                                Thank you for your request. Your OrderID is #{this.state.OrderID}
+                                                </h3>
+                                                <FormControl width="auto" align="center" className={classes.PriceMargin}>
+                                                    <MuiThemeProvider theme={TealTheme}>
+                                                        <Button color="primary"  variant="contained" className={classes.OrderIDPageButton} onClick={()=>this.redirectToHome(1)}>
+                                                            Return to Home Page
+                                                        </Button>  
+                                                        <Button color="primary"  variant="contained" className={classes.OrderIDPageButton} onClick={()=>this.redirectToHome(0)} >
+                                                            See all Fuel Orders
+                                                        </Button>    
+                                                    </MuiThemeProvider> 
+                                                </FormControl>
+                                                
+                                                {/* <FormControl width="auto" align="center"  className={classes.PriceMargin}>
+                                                    <MuiThemeProvider theme={TealTheme}>
+                                                            
+                                                    </MuiThemeProvider>          
+                                                </FormControl>  */}
+                                                
+                                            </React.Fragment>
+
+
+                                        )}
+                                    </React.Fragment>
+                                )}
+                            </React.Fragment>
+                        )}</React.Fragment>
+                    )}
+                            
+                            {/* 
+                    ):(
+                        
+                                 
+                            
+
+                    )} */}
+                </Paper>
+                
+                    {/* {this.state.step === 0 ? (
+                        <Paper className={classes.paper} elevation={20}>
                             <FormControl className={classes.PriceMargin}>
-                                <InputLabel>Amount of Fuel desired</InputLabel>
+                                <InputLabel>Desired Fuel</InputLabel>
                                 <Input
                                 name="GallonsRequested"
                                 value={this.state.GallonsRequested}
@@ -276,7 +465,7 @@ class FuelRequestForm extends Component{
                             </FormControl>
                         </Paper>
                     ):(
-                    <Paper className={classes.root} elevation={20}>
+                    <Paper className={classes.paper} elevation={20}>
                         <React.Fragment >
                             <h1 className={classes.OrderHeader} >
                             Thank you for your request. Your OrderID is #{this.state.OrderID}
@@ -298,7 +487,7 @@ class FuelRequestForm extends Component{
                             
                         </React.Fragment>
                     </Paper>
-                    )}
+                    )} */}
                                         
                 
             </div>
