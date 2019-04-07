@@ -158,7 +158,7 @@ class FuelRequestForm extends Component{
         
     }
     pullData() {
-        fetch(`http://138.197.221.30:4000/users/fuelrequestinfo`,{
+        fetch(`https://api.fuelrequest.ga/users/fuelrequestinfo`,{
             method: "GET",
             headers: {
                 "Authorization": "Bearer "+ document.cookie.split('=')[1]
@@ -171,7 +171,7 @@ class FuelRequestForm extends Component{
     }
 
     createNewRequest() {
-        fetch(`http://138.197.221.30:4000/users/addRequest`,{
+        fetch(`https://api.fuelrequest.ga/users/addRequest`,{
             method: "POST",
             headers: {
                 "Authorization": "Bearer "+ document.cookie.split('=')[1],

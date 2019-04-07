@@ -29,7 +29,7 @@ class App extends Component {
   }
 
   verifyLogged() {
-    fetch(`http://138.197.221.30:4000/verify`, {
+    fetch(`https://api.fuelrequest.ga/verify`, {
       method: "GET",
       headers: {
         "Authorization": "Bearer " + document.cookie.split('=')[1]

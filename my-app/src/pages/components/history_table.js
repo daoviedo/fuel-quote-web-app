@@ -11,7 +11,7 @@ export default class HistoryTable extends Component {
     }
 
     fetchFuelHistory() {
-        fetch(`http://138.197.221.30:4000/fuelhistory`, {
+        fetch(`https://api.fuelrequest.ga/fuelhistory`, {
             method: "GET",
             headers: {
                 "Authorization": "Bearer " + document.cookie.split('=')[1]

@@ -166,7 +166,7 @@ class Acc_mng extends Component{
     }
 
     verifyData(){
-      fetch(`http://138.197.221.30:4000/users/data`,{
+      fetch(`https://api.fuelrequest.ga/users/data`,{
           method: "GET",
           headers: {
             "Authorization": "Bearer "+ document.cookie.split('=')[1]
@@ -178,7 +178,7 @@ class Acc_mng extends Component{
     }
 
     patchProfile(){
-      fetch(`http://138.197.221.30:4000/users/update`,{
+      fetch(`https://api.fuelrequest.ga/users/update`,{
           method: "PATCH",
           headers: {
             "Authorization": "Bearer "+ document.cookie.split('=')[1],

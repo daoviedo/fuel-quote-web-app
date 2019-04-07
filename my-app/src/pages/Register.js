@@ -163,7 +163,7 @@ class Register extends React.Component {
   };
 
   RegisterNewUser = () => {
-    fetch(`http://138.197.221.30:4000/users/adduser`,{
+    fetch(`https://api.fuelrequest.ga/users/adduser`,{
         method: "POST",
         headers: {
             "Content-Type": "application/json",

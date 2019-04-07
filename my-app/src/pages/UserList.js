@@ -42,7 +42,7 @@ class UserList extends Component {
     }
 
     fetchUsers() {
-        fetch(`http://138.197.221.30:4000/users`, {
+        fetch(`https://api.fuelrequest.ga/users`, {
             method: "GET",
             headers: {
                 "Authorization": "Bearer " + document.cookie.split('=')[1]
@@ -55,7 +55,7 @@ class UserList extends Component {
 
 
     delUser = (username) => {
-        fetch(`http://138.197.221.30:4000/users/remove/${username}`, {
+        fetch(`https://api.fuelrequest.ga/users/remove/${username}`, {
             method: "DELETE",
             headers: {
                 "Authorization": "Bearer " + document.cookie.split('=')[1]
