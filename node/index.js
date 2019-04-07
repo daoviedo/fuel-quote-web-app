@@ -90,6 +90,10 @@ app.post('/login', (req,res,next)=>{
     });
 });
 
+app.get('/', (req,res,next)=>{
+    res.send('Hello');
+});
+
 //Get Request to verify token is valid
 app.get('/verify', checkAuth, (req,res,next)=>{
     res.json({
