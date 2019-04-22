@@ -22,14 +22,15 @@ export default class HistoryTable extends Component {
             .catch(err => console.log(err))
     }
 
-    renderUser = ({ GallonsRequested, PricePerGallon, TotalPrice, DeliveryAddress, DeliveryCity, DeliveryState, DeliveryZip, DeliveryDate, DateOfRequest }) =>
+    renderUser = ({ RequestID, GallonsRequested, PricePerGallon, TotalPrice, DeliveryAddress, DeliveryCity, DeliveryState, DeliveryZip, DeliveryDate, DateOfRequest }) =>
         <tr key={DateOfRequest}>
-            <td>{DateOfRequest}</td>
+            <td>{RequestID}</td>
+            <td>{(DateOfRequest.split('.000Z')[0]).replace("T", " @ ")}</td>
             <td>{GallonsRequested}</td>
             <td>{DeliveryAddress}, {DeliveryCity}, {DeliveryState} {DeliveryZip}</td>
             <td>{DeliveryDate}</td>
-            <td>{PricePerGallon}</td>
-            <td>{TotalPrice}</td>
+            <td>${PricePerGallon.toFixed(2)}</td>
+            <td>${TotalPrice.toFixed(2)}</td>
         </tr>
 
     render() {
@@ -38,11 +39,12 @@ export default class HistoryTable extends Component {
                 <Table striped condensed="true" bordered hover variant="light" size="sm" className="scroll">
                     <thead>
                         <tr className="table-header-row">
-                            <th>Date</th>
+                            <th>Order ID</th>
+                            <th>Order Date</th>
                             <th>Gallons Requested</th>
                             <th>Delivery Address</th>
                             <th>Delivery Date</th>
-                            <th>Suggested Price</th>
+                            <th>Price Per Gallon</th>
                             <th>Total Amount Due</th>
                         </tr>
                     </thead>

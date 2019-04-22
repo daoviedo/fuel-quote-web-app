@@ -65,7 +65,7 @@ class UserList extends Component {
             .catch(err => console.log(err))
     }
 
-    renderUserList = ({ username, firstname, lastname, ad1, ad2, city, st, zip, priv, totalRequests }) =>
+    renderUserList = ({ username, firstname, lastname, ad1, ad2, city, st, zip, priv }) =>
         <TableRow key={username}>
             <TableCell component="th" scope="row">
                 {username}
@@ -78,7 +78,6 @@ class UserList extends Component {
             <TableCell align="right">{st}</TableCell>
             <TableCell align="right">{zip}</TableCell>
             <TableCell align="right">{priv}</TableCell>
-            <TableCell align="right">{totalRequests}</TableCell>
             <TableCell align="right"><Button size='sm' variant="outline-danger" onClick={() => this.delUser(username)} >Remove Account</Button></TableCell>
         </TableRow>
 
@@ -101,7 +100,6 @@ class UserList extends Component {
                                 <TableCell align="right" className={classes.header}>State</TableCell>
                                 <TableCell align="right" className={classes.header}>Zip</TableCell>
                                 <TableCell align="right" className={classes.header}>Priveledge</TableCell>
-                                <TableCell align="right" className={classes.header}>Requests Made</TableCell>
                                 <TableCell align="right" className={classes.header}>Remove Account</TableCell>
                             </TableRow>
                         </TableHead>
