@@ -35,12 +35,12 @@ export default class HistoryGraph extends Component {
                 <div className="graph">
                     <ResponsiveContainer width="99%" height={350}>
                         <LineChart data={this.state.Requests}>
-                            <XAxis dataKey="DeliveryDate" />
-                            <YAxis />
+                            <XAxis dataKey="RequestID"/>
+                            <YAxis type="number" domain={[1.70, 1.80]}/>
                             <CartesianGrid vertical={false} strokeDasharray="3 3" />
                             <Tooltip />
                             <Legend />
-                            <Line type="monotone" dataKey="PricePerGallon" stroke="#00897b" activeDot={{ r: 8 }} />
+                            <Line type="monotone" dataKey="PricePerGallon" stroke="#00897b" activeDot={{ r: 8 }}/>
                         </LineChart>
                     </ResponsiveContainer>
                 </div>
