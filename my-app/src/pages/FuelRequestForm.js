@@ -125,7 +125,7 @@ class FuelRequestForm extends Component{
             DeliveryState: "",
             DeliveryZip: "",
             DeliveryDate: null,
-            SuggestedPrice: 10,
+            SuggestedPrice: "",
             OrderID: Math.floor(Math.random() * 1000000),
             step: 0,
         };
@@ -178,7 +178,7 @@ class FuelRequestForm extends Component{
             }
         })
         .then(res => res.json())
-        .then(res=> this.setState({SuggestedPrice:res.data[0]}))
+        .then(res=> this.setState({SuggestedPrice:res.data[0].ppg}))
         .catch(err => console.log(err))
     }
     createNewRequest() {
@@ -205,6 +205,7 @@ class FuelRequestForm extends Component{
     }
 
     nextStep() {
+        this.getPricePerGallon();
         this.setState(state => ({
             step: state.step + 1
         }))
@@ -255,7 +256,6 @@ class FuelRequestForm extends Component{
                     ) : (
                         <React.Fragment>{this.state.step===1 ? (
                             <React.Fragment>
-                                {this.getPricePerGallon}
                                 <h5 className={classes.heading}>What day would you like the fuel delivered?</h5>
                                 <FormControl className={classes.PriceMargin}>
                                     <MuiThemeProvider theme={TealTheme}>
