@@ -12,7 +12,6 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import teal from '@material-ui/core/colors/teal';
-import Button2 from 'react-bootstrap/Button';
 
 const theme1 = createMuiTheme({
     palette: {
