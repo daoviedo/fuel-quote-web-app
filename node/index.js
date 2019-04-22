@@ -174,7 +174,7 @@ app.get('/users/check', (req, res) => {
 //method to get the priceperGallon for a user
 app.get('/pricepergallon/:gallonsWanted', checkAuth, (req, res) => {
     const { gallonsWanted } = req.params;
-    const lookQuery = `SELECT sys.pricePerGallon('${req.userData.username}',${gallonsWanted})`;
+    const lookQuery = `SELECT sys.pricePerGallon('${req.userData.username}',${gallonsWanted}) as ppg`;
     connection.query(lookQuery, (err, results) => {
         /* istanbul ignore if  */
         if(err){
