@@ -106,7 +106,7 @@ app.get('/verify', checkAuth, (req,res,next)=>{
 app.get('/fuelhistory', checkAuth, (req,res,next)=>{
     const username = req.userData.username;
 
-    const findHistory = `SELECT * FROM sys.history WHERE username='${username}'`;
+    const findHistory = `SELECT * FROM sys.history WHERE username='${username}' ORDER BY DateOfRequest DESC`;
     connection.query(findHistory, (err, results) => {
         /* istanbul ignore if  */
         if(err){
@@ -256,13 +256,13 @@ app.get('/users/fuelrequestinfo', checkAuth, (req, res) => {
 
 //Post Method to add new fuel request
 app.post('/users/addRequest', checkAuth, (req, res) => {
-    var date=new Date();
+    //var date=new Date();
     const username = req.userData.username;
     const { GallonsRequested, PricePerGallon, DeliveryDate, ad1, city, st, zip, OrderID } = req.body;
-    date = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate() + ' ' + (date.getUTCHours()-5) + ':' + date.getUTCMinutes() + ":" + date.getUTCSeconds();
+    //date = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate() + ' ' + (date.getUTCHours()-5) + ':' + date.getUTCMinutes() + ":" + date.getUTCSeconds();
     LoadingDate=new Date(DeliveryDate);
     LoadingDate=LoadingDate.getFullYear() + '-' + (LoadingDate.getMonth()+1) + '-' + LoadingDate.getDate();
-    const insertQuery = `INSERT INTO sys.history (RequestID, username, GallonsRequested, PricePerGallon, TotalPrice, DateOfRequest, DeliveryDate, DeliveryAddress, DeliveryCity, DeliveryState, DeliveryZip) VALUES('${OrderID}','${username}','${GallonsRequested}','${PricePerGallon}','${PricePerGallon*GallonsRequested}','${date}', '${LoadingDate}', '${ad1}', '${city}', '${st}', '${zip}')`;
+    const insertQuery = `INSERT INTO sys.history (RequestID, username, GallonsRequested, PricePerGallon, TotalPrice, DateOfRequest, DeliveryDate, DeliveryAddress, DeliveryCity, DeliveryState, DeliveryZip) VALUES('${OrderID}','${username}','${GallonsRequested}','${PricePerGallon}','${PricePerGallon*GallonsRequested}',CURRENT_TIMESTAMP(), '${LoadingDate}', '${ad1}', '${city}', '${st}', '${zip}')`;
     connection.query(insertQuery, (err, results) => {
         /* istanbul ignore if  */
         if(err){
@@ -273,17 +273,7 @@ app.post('/users/addRequest', checkAuth, (req, res) => {
         }
     });
 });
-/*
-app.post('/pricemodule', checkAuth, (req, res) => {
-    const username = req.userData.username;
-    const { GallonsRequested, DeliveryDate, st } = req.body;
 
-    const ppg = 10;
-    return res.json({
-        totalPrice: ppg*GallonsRequested
-    });
-});
-*/
 if(process.env.NODE_ENV !== 'test'){
     app.listen(4000, () => {
         //console.log(`Server listening on port 4000`)
