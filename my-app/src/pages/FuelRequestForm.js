@@ -169,7 +169,18 @@ class FuelRequestForm extends Component{
             DeliveryCity: Response.data[0].city, DeliveryState: Response.data[0].st, DeliveryZip: Response.data[0].zip}))
         .catch(err => console.log(err))
     }
-
+    getPricePerGallon() {
+        //FIND SOME WAY TO GET THE USERNAME
+        fetch(`https://api.fuelrequest.ga/pricepergallon/${this.state.GallonsRequested}`,{
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer "+ document.cookie.split('=')[1]
+            }
+        })
+        .then(res => res.json())
+        .then(res=> this.setState({SuggestedPrice:res.data[0]}))
+        .catch(err => console.log(err))
+    }
     createNewRequest() {
         fetch(`https://api.fuelrequest.ga/users/addRequest`,{
             method: "POST",
@@ -244,6 +255,7 @@ class FuelRequestForm extends Component{
                     ) : (
                         <React.Fragment>{this.state.step===1 ? (
                             <React.Fragment>
+                                {this.getPricePerGallon}
                                 <h5 className={classes.heading}>What day would you like the fuel delivered?</h5>
                                 <FormControl className={classes.PriceMargin}>
                                     <MuiThemeProvider theme={TealTheme}>

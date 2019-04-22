@@ -171,6 +171,23 @@ app.get('/users/check', (req, res) => {
     });
 });
 
+//method to get the priceperGallon for a user
+app.get('/pricepergallon/:gallonsWanted', checkAuth, (req, res) => {
+    const { gallonsWanted } = req.params;
+    const lookQuery = `SELECT sys.pricePerGallon('${req.userData.username}',${gallonsWanted})`;
+    connection.query(lookQuery, (err, results) => {
+        /* istanbul ignore if  */
+        if(err){
+            return res.send(err)
+        }
+        else{
+            return res.json({
+                data: results
+            })
+        }
+    });
+});
+
 //Method used to get the user's data for Acc_Mng page
 app.get('/users/data', checkAuth, (req, res) => {
     const username  = req.userData.username;
